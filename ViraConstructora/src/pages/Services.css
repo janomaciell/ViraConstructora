@@ -1,0 +1,518 @@
+.services-page {
+  width: 100%;
+  background: #fff;
+}
+
+/* Hero Section - Minimalista */
+.services-hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 120px 60px;
+}
+
+.services-hero-content {
+  text-align: center;
+  max-width: 900px;
+}
+
+.hero-label {
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 40px;
+}
+
+.services-hero-content h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 300;
+  color: #000;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* Intro Section */
+.services-intro {
+  background: #000;
+  padding: 300px 60px;
+}
+
+.intro-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro-lead {
+  font-family: "Open Sans", sans-serif;
+  font-size: clamp(26px, 3.2vw, 38px); /* más grande en todos los dispositivos */
+  line-height: 1.7; /* buena legibilidad */
+  color: #fff;
+  font-weight: 700; /* negrita */
+  letter-spacing: 0.05em; /* más espaciado entre letras */
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5); /* resalta sobre fondos oscuros o fotos */
+  text-align: center; /* opcional si querés centrarlo */
+  margin: 0 auto;
+  max-width: 900px; /* limita el ancho para que no se disperse */
+}
+
+
+/* Services List - Layout Vertical Premium */
+.services-list {
+  background: #fff;
+}
+
+.service-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  position: relative;
+}
+
+.service-item.reverse {
+  background: #f8f8f8;
+}
+
+.service-item.reverse .service-visual {
+  order: 2;
+}
+
+.service-item.reverse .service-info {
+  order: 1;
+}
+
+/* Service Visual */
+.service-visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-image-large {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.service-image-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-item:hover .service-image-large img {
+  transform: scale(1.05);
+}
+
+.service-number-display {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(6rem, 12vw, 12rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Service Info */
+.service-info {
+  display: flex;
+  align-items: center;
+  padding: 80px 60px;
+}
+
+.service-info-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.service-category {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.service-name {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  color: #000;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.service-brief {
+  font-family: "Open Sans", sans-serif;
+  font-size: clamp(15px, 1.8vw, 17px);
+  line-height: 1.8;
+  color: #666;
+  font-weight: 300;
+  margin-bottom: 50px;
+  letter-spacing: 0.01em;
+}
+
+/* Feature Tags */
+.service-features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.feature-tag {
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #000;
+  padding: 10px 18px;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.feature-tag:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* Process Section */
+.services-process {
+  background: #000;
+  padding: 120px 60px;
+  color: #fff;
+}
+
+.process-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.process-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 80px;
+  letter-spacing: 0.02em;
+}
+
+.process-flow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.process-flow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+}
+
+.process-step {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.step-line {
+  width: 2px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 auto 20px;
+}
+
+.step-content {
+  background: #000;
+  padding: 20px 0;
+}
+
+.step-num {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  display: block;
+  margin-bottom: 15px;
+  letter-spacing: 0.05em;
+}
+
+.step-content h3 {
+  font-family: "Open Sans", sans-serif;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  max-width: 150px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+/* Stats Section */
+.services-stats {
+  background: #f8f8f8;
+  padding: 100px 60px;
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 300;
+  color: #000;
+  margin-bottom: 15px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.stat-label {
+  font-family: "Open Sans", sans-serif;
+  font-size: clamp(14px, 1.5vw, 16px);
+  font-weight: 300;
+  color: #666;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.services-cta {
+  background: #fff;
+  padding: 120px 60px;
+  text-align: center;
+}
+
+.cta-wrapper h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #000;
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.cta-wrapper p {
+  font-family: "Open Sans", sans-serif;
+  font-size: clamp(16px, 1.8vw, 18px);
+  color: #666;
+  margin-bottom: 50px;
+  font-weight: 300;
+}
+
+.cta-link-service {
+  display: inline-block;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000;
+  text-decoration: none;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 15px 0;
+  border-bottom: 2px solid #000;
+  transition: all 0.3s ease;
+}
+
+.cta-link-service:hover {
+  padding-left: 20px;
+  opacity: 0.7;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .service-item {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .service-item.reverse .service-visual,
+  .service-item.reverse .service-info {
+    order: initial;
+  }
+
+  .service-visual {
+    min-height: 60vh;
+  }
+
+  .service-number-display {
+    top: 40px;
+    right: 40px;
+    font-size: 8rem;
+  }
+
+  .service-info {
+    padding: 60px 40px;
+  }
+
+  .process-flow {
+    flex-direction: column; /* los pone uno abajo del otro */
+    gap: 40px;
+  }
+
+  .process-flow::before {
+    display: none;
+  }
+
+  .step-line {
+    height: 40px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-hero {
+    padding: 100px 30px;
+    min-height: 60vh;
+  }
+
+  .services-intro {
+    padding: 80px 30px;
+  }
+
+  .service-visual {
+    min-height: 50vh;
+  }
+
+  .service-number-display {
+    top: 30px;
+    right: 30px;
+    font-size: 5rem;
+  }
+
+  .service-info {
+    padding: 50px 30px;
+  }
+
+  .service-features-grid {
+    gap: 10px;
+  }
+
+  .feature-tag {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+
+  .services-process {
+    padding: 80px 30px;
+  }
+
+  .process-title {
+    margin-bottom: 60px;
+  }
+
+  .process-flow {
+    gap: 35px;
+  }
+
+  .step-content h3 {
+    max-width: 200px;
+  }
+
+  .services-stats {
+    padding: 80px 30px;
+  }
+
+  .services-cta {
+    padding: 80px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-hero {
+    padding: 80px 20px;
+  }
+
+  .services-hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .services-intro {
+    padding: 60px 20px;
+  }
+
+  .intro-lead {
+    font-size: 17px;
+  }
+
+  .service-visual {
+    min-height: 40vh;
+  }
+
+  .service-number-display {
+    font-size: 4rem;
+  }
+
+  .service-info {
+    padding: 40px 20px;
+  }
+
+  .service-name {
+    font-size: 2rem;
+  }
+
+  .service-brief {
+    margin-bottom: 35px;
+  }
+
+  .services-process {
+    padding: 60px 20px;
+  }
+
+  .process-title {
+    font-size: 2rem;
+  }
+
+  .step-num {
+    font-size: 2rem;
+  }
+
+  .step-content h3 {
+    font-size: 13px;
+  }
+
+  .services-stats {
+    padding: 60px 20px;
+  }
+
+  .stat-value {
+    font-size: 3rem;
+  }
+
+  .services-cta {
+    padding: 60px 20px;
+  }
+}

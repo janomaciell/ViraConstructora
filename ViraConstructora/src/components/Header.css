@@ -1,0 +1,240 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: transparent;
+  backdrop-filter: none;
+  transition: all 0.4s ease;
+  padding: 25px 0;
+}
+
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  padding: 18px 0;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logo-image {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  filter: brightness(1) invert(0); /* Imagen original (colores normales) por defecto, para que se vea correctamente en header transparente */
+}
+
+.header.scrolled .logo-image {
+  filter: brightness(1) invert(0); /* Mantiene la imagen original en scrolled (ya se ve correctamente según tu descripción) */
+}
+
+.logo h1 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  margin: 0;
+  transition: color 0.3s ease;
+  font-family: "Playfair Display", serif;
+}
+
+.header.scrolled .logo h1 {
+  color: var(--black);
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  gap: 45px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--white);
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 5px;
+  text-decoration: none;
+}
+
+.header.scrolled .nav a {
+  color: var(--black);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--white);
+  transition: width 0.3s ease;
+}
+
+.header.scrolled .nav a::after {
+  background-color: var(--primary-color);
+}
+
+.nav a:hover::after,
+.nav a.active::after {
+  width: 100%;
+}
+
+.nav a:hover {
+  opacity: 0.8;
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none; /* transparente por defecto */
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-btn span {
+  width: 28px;
+  height: 2px;
+  background-color: var(--white); /* líneas blancas por defecto */
+  transition: all 0.3s ease;
+  display: block;
+}
+
+/* Cuando el header tiene la clase scrolled (global, pero con !important para override) */
+.header.scrolled .mobile-menu-btn {
+  background-color: #ffffff !important; /* Fondo blanco en scroll (usando hex directo por si var no está definida) */
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.header.scrolled .mobile-menu-btn span {
+  background-color: #000000 !important; /* Líneas negras en scroll (hex directo) */
+}
+
+/* Animación de apertura del menú (mantiene colores según estado scrolled) */
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* MOBILE - Estilos específicos para asegurar override en responsive */
+@media (max-width: 968px) {
+  .header-container {
+    padding: 0 25px;
+  }
+
+  .logo h1 {
+    font-size: 14px;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    background: none !important; /* transparente por defecto, con !important para consistencia */
+  }
+
+  /* Override específico para scrolled en mobile */
+  .header.scrolled .mobile-menu-btn {
+    background-color: #ffffff !important; /* Fondo blanco en scroll */
+    padding: 8px;
+    border-radius: 4px;
+  }
+
+  .header.scrolled .mobile-menu-btn span {
+    background-color: #000000 !important; /* Líneas negras en scroll */
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 350px;
+    height: 100vh;
+    background-color: var(--white);
+    transition: right 0.4s ease;
+    padding-top: 100px;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav.open {
+    right: 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+
+  .nav li {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .nav a {
+    display: block;
+    padding: 22px 30px;
+    font-size: 15px;
+    color: var(--black);
+  }
+
+  .nav a::after {
+    display: none;
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    background-color: #f5f5f5;
+    color: var(--primary-color);
+  }
+}
+
+@media (max-width: 480px) {
+  .logo h1 {
+    font-size: 12px;
+  }
+
+  .logo-image {
+    width: 38px;
+    height: 38px;
+  }
+}

@@ -1,0 +1,310 @@
+/* Contact Page - Diseño Moderno Minimalista */
+.contact-page-modern {
+  width: 100%;
+  background: #fff; /* Fondo blanco */
+  color: #000;      /* Texto negro por defecto */
+  min-height: 100vh;
+  padding-top: 80px;
+  font-family: "Playfair Display", serif; /* Asumiendo fuente elegante; ajusta si usas otra */
+}
+
+.container-wide {
+  max-width: 1200px; /* Reducido para más minimalismo */
+  margin: 0 auto;
+  padding: 0 20px; /* Padding sutil */
+}
+
+/* Hero Section - Minimalista */
+.contact-hero-modern {
+  padding: 80px 0 60px; /* Menos padding para elegancia */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Línea más sutil */
+  text-align: center;
+}
+
+.hero-title-modern {
+  font-size: clamp(2rem, 4vw, 3.5rem); /* Escalable y minimalista */
+  font-weight: 300; /* Más ligero */
+  color: #000; /* Negro */
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.hero-title-modern .italic {
+  font-style: italic;
+  font-weight: 200; /* Ultra-ligero para elegancia */
+}
+
+/* Main Contact Section */
+.contact-main-section {
+  padding: 60px 0 80px; /* Espaciado reducido */
+}
+
+.contact-split-modern {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* Columna izquierda más estrecha para minimalismo */
+  gap: 60px; /* Gap reducido */
+  border-left: 1px solid rgba(0, 0, 0, 0.05); /* Línea sutil */
+  padding-left: 40px; /* Padding izquierdo menor */
+}
+
+/* Left Side - Info Minimalista */
+.contact-left-side {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Gap más pequeño */
+  padding: 0; /* Sin padding extra */
+}
+
+.location-section,
+.talk-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Gap sutil */
+}
+
+.section-title {
+  font-size: 10px; /* Más pequeño para minimalismo */
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #000; /* Negro */
+  margin: 0;
+}
+
+.location-text {
+  font-size: 15px; /* Tamaño más elegante */
+  line-height: 1.6;
+  color: #000; /* Negro */
+  margin: 0;
+  font-weight: 300;
+}
+
+.phone-number {
+  font-size: 18px; /* Tamaño equilibrado */
+  color: #000; /* Negro */
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.phone-number:hover {
+  color: #4a90e2; /* Azul sutil para modernidad */
+}
+
+.hours-text {
+  font-size: 13px;
+  color: #999; /* Gris más claro */
+  margin: 0;
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Social Links - Minimalista (solo íconos pequeños) */
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px; /* Espacio sutil */
+}
+
+.social-icon {
+  color: #666;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.social-icon:hover {
+  color: #4a90e2; /* Hover consistente */
+}
+
+/* Right Side - Form */
+.contact-right-side {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Gap reducido */
+  padding-right: 40px; /* Padding sutil */
+}
+
+.form-intro {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Línea minimalista */
+}
+
+.form-intro-text {
+  font-size: 16px; /* Tamaño más compacto */
+  line-height: 1.6;
+  color: #000; /* Negro */
+  margin: 0;
+  font-weight: 300;
+}
+
+/* Form Styling - Moderno y Limpio */
+.contact-form-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Gap elegante */
+}
+
+.form-group-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Gap mínimo */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Línea sutil */
+  padding-bottom: 20px;
+}
+
+.form-label-modern {
+  font-size: 14px; /* Más pequeño y moderno */
+  color: #666;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.form-input-modern,
+.form-textarea-modern {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-family: inherit;
+  color: #000; /* Negro */
+  padding: 8px 0; /* Padding vertical sutil */
+  outline: none;
+  font-weight: 300;
+  resize: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Underline minimalista */
+  transition: border-color 0.3s ease;
+}
+
+.form-input-modern:focus,
+.form-textarea-modern:focus {
+  border-bottom-color: #4a90e2; /* Focus moderno */
+}
+
+.form-input-modern::placeholder,
+.form-textarea-modern::placeholder {
+  color: rgba(102, 102, 102, 0.5); /* Placeholder sutil */
+}
+
+.form-textarea-modern {
+  min-height: 80px; /* Altura ajustada */
+  line-height: 1.5;
+}
+
+/* Submit Button - Minimalista */
+.submit-button-modern {
+  align-self: flex-start; /* Alineado a la izquierda para asimetría elegante */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  color: #4a90e2; /* Azul para modernidad */
+  border: 1px solid #4a90e2;
+  border-radius: 30px; /* Pill shape sutil */
+  padding: 12px 24px; /* Padding más compacto */
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-button-modern:hover:not(:disabled) {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.submit-button-modern:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #ccc;
+}
+
+.submit-button-modern svg {
+  transition: transform 0.3s ease;
+}
+
+.submit-button-modern:hover:not(:disabled) svg {
+  transform: translateX(3px);
+}
+
+/* Form Messages - Minimalistas */
+.form-message-modern {
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: left;
+  margin-top: 15px;
+  font-weight: 300;
+}
+
+.form-message-modern.success {
+  background: rgba(74, 144, 226, 0.1);
+  color: #000;
+  border: 1px solid #4a90e2;
+}
+
+.form-message-modern.error {
+  background: rgba(0,0,0,0.05);
+  color: #000;
+  border: 1px solid #000;
+}
+
+/* Responsive Design - Optimizado para Móvil */
+@media (max-width: 1024px) {
+  .contact-split-modern {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .contact-left-side {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 40px;
+  }
+
+  .contact-right-side {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title-modern {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .contact-main-section {
+    padding: 40px 0 60px;
+  }
+
+  .contact-left-side,
+  .contact-right-side {
+    gap: 30px;
+  }
+
+  .form-group-modern {
+    padding-bottom: 15px;
+    gap: 6px;
+  }
+
+  .submit-button-modern {
+    padding: 10px 20px;
+    font-size: 11px;
+    gap: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .hero-title-modern {
+    font-size: clamp(1.2rem, 8vw, 2rem);
+  }
+}

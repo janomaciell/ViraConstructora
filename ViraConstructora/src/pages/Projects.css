@@ -1,0 +1,380 @@
+/* Projects.css */
+
+.projects-page {
+  width: 100%;
+  background: #000;
+}
+
+/* Hero Section */
+.projects-hero {
+  height: 70vh;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-background {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  text-align: center;
+  color: var(--white);
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: 8px;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.hero-content p {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  max-width: 700px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 1px;
+}
+
+/* Filter Section */
+.projects-filter-section {
+  background: #000;
+  padding: 60px 40px;
+  border-bottom: 1px solid #222;
+  text-align: center;
+  color: var(--white);
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 14px 35px;
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+.filter-btn:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-btn.active {
+  background: #fff;
+  border-color: #fff;
+  color: #000;
+}
+
+/* Projects Grid - 2 Columnas */
+.projects-grid-section {
+  background: #000;
+  padding: 0;
+}
+
+.projects-grid-two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.project-card-modern {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  cursor: pointer;
+    border-radius: 30px;
+
+}
+
+.project-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card-modern:hover .project-image-wrapper img {
+  transform: scale(1.08);
+}
+
+/* Overlay Gradient */
+.project-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 50px;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.project-overlay-text {
+  color: #fff;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.project-title-overlay {
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  font-weight: 300;
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.project-subtitle-overlay {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Arrow Button */
+.project-arrow-btn {
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  color: #fff;
+}
+
+.project-card-modern:hover .project-arrow-btn {
+  background: #fff;
+  color: #000;
+  transform: translateX(10px);
+}
+
+/* CTA Section */
+.projects-cta-section {
+  background: #000;
+  padding: 120px 40px;
+  text-align: center;
+  color: var(--white);
+  border-top: 1px solid #222;
+}
+
+.cta-content-project h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 25px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.cta-content-project p {
+  font-size: 18px;
+  margin-bottom: 50px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1px;
+}
+
+.cta-button-main {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  padding: 18px 55px;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 2px solid #fff;
+}
+
+.cta-button-main:hover {
+  background: transparent;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .projects-grid-two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card-modern {
+    height: 550px;
+  }
+
+  .project-overlay-gradient {
+    padding: 40px;
+  }
+
+  .project-arrow-btn {
+    bottom: 40px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-hero {
+    height: 60vh;
+    min-height: 400px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+  }
+
+  .projects-filter-section {
+    padding: 40px 25px;
+  }
+
+  .filter-buttons {
+    gap: 12px;
+  }
+
+  .filter-btn {
+    padding: 12px 25px;
+    font-size: 12px;
+  }
+
+  .project-card-modern {
+    height: 500px;
+  }
+
+  .project-overlay-gradient {
+    padding: 30px;
+  }
+
+  .project-title-overlay {
+    font-size: 2rem;
+  }
+
+  .project-subtitle-overlay {
+    font-size: 12px;
+  }
+
+  .project-arrow-btn {
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+  }
+
+  .projects-cta-section {
+    padding: 80px 25px;
+  }
+
+  .cta-content-project h2 {
+    font-size: 2rem;
+  }
+
+  .cta-content-project p {
+    font-size: 16px;
+  }
+
+  .cta-button-main {
+    padding: 16px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+
+  .project-card-modern {
+    height: 450px;
+  }
+
+  .project-overlay-gradient {
+    padding: 25px;
+  }
+
+  .project-title-overlay {
+    font-size: 1.75rem;
+  }
+
+  .project-arrow-btn {
+    width: 40px;
+    height: 40px;
+    bottom: 25px;
+    right: 25px;
+  }
+
+  .project-arrow-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
