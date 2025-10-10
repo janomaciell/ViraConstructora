@@ -3,19 +3,60 @@
   background: #fff;
 }
 
-/* Hero Section - Minimalista */
+/* Hero Section cubriendo toda la pantalla con video de fondo igual que Home */
 .services-hero {
-  min-height: 80vh;
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  padding: 120px 60px;
+  padding: 0;
+  background: transparent;
+}
+
+.services-hero-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.services-hero-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  will-change: transform;
+  transform-origin: center;
 }
 
 .services-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
   text-align: center;
-  max-width: 900px;
+  color: #fff;
+  padding: 0 clamp(20px, 5vw, 80px);
+}
+
+.services-hero-content h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 7vw, 6.5rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+    line-height: 1;
+    text-transform: uppercase;
+    animation: fadeIn 1.2s ease forwards;
 }
 
 .hero-label {
@@ -24,18 +65,8 @@
   font-weight: 400;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #999;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 40px;
-}
-
-.services-hero-content h1 {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 300;
-  color: #000;
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-  margin: 0;
 }
 
 /* Intro Section */
@@ -147,11 +178,13 @@
 }
 
 .service-name {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 400;
   color: #000;
   margin-bottom: 30px;
+  text-transform: uppercase;
+
   line-height: 1.2;
   letter-spacing: 0.01em;
 }
@@ -205,8 +238,10 @@
 }
 
 .process-title {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4rem);
+  text-transform: uppercase;
+
   font-weight: 300;
   text-align: center;
   margin-bottom: 80px;
@@ -287,7 +322,7 @@
 }
 
 .stat-value {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-display);
   font-size: clamp(3.5rem, 7vw, 6rem);
   font-weight: 300;
   color: #000;
@@ -313,7 +348,7 @@
 }
 
 .cta-wrapper h2 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
   color: #000;
@@ -395,8 +430,15 @@
 
 @media (max-width: 768px) {
   .services-hero {
-    padding: 100px 30px;
-    min-height: 60vh;
+    min-height: 100vh;
+    padding: 0;
+  }
+  .services-hero-content {
+    padding-top: 0;
+    justify-content: center;
+  }
+  .services-hero-content h1 {
+    font-size: 3rem;
   }
 
   .services-intro {

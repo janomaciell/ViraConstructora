@@ -1,5 +1,7 @@
+import { useEffect } from "react"
 import "./About.css"
 import WhatsAppButton from "../components/WhatsAppButton"
+import videohabitaciones from "../img/ANCLA/videohabitaciones.mp4"
 
 const About = () => {
   const teamMembers = [
@@ -8,15 +10,34 @@ const About = () => {
     { name: "CARLOS CONTI", role: "TESORERO" },
     { name: "DAFNE N. G. ALIMIR", role: "MCP. ADMINISTRATIVA" },
   ]
-
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector('.header')
+      if (window.scrollY > 10) {
+        header?.classList.add('scrolled')
+      } else {
+        header?.classList.remove('scrolled')
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   return (
     <div className="about-page">
-      {/* Hero Section con imagen */}
+      {/* Hero Section con video */}
       <section className="about-hero">
         <div className="hero-background">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920" alt="Hero" />
+          <video
+            src={videohabitaciones}
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
         </div>
-        <div className="hero-overlay">
+        <div className="hero-overlay-about">
           <div className="hero-text">
             <h1>SOBRE NOSOTROS</h1>
           </div>

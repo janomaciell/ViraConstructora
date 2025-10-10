@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import WhatsAppButton from "../components/WhatsAppButton"
 import './Home.css'
-
+import VideoAncla from '../img/ANCLA/VideoAncla.mp4'
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [expandedProject, setExpandedProject] = useState(0) // 🔹 Primer proyecto expandido por defecto
@@ -27,7 +27,6 @@ const Home = () => {
       observer.observe(el)
     })
 
-    // Parallax suave
     let ticking = false
     const handleScroll = () => {
       if (!ticking) {
@@ -55,7 +54,7 @@ const Home = () => {
 
     // Auto-slide para hero
     const slideInterval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % 5)
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length)
     }, 6000)
 
     return () => {
@@ -65,87 +64,91 @@ const Home = () => {
     }
   }, [])
 
+  //const heroSlides = [
+  //{
+  //    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80',
+  //    title: 'CONSTRUIMOS CONFIANZA,',
+  //    subtitle: 'DISEÑAMOS FUTURO.',
+  //    number: '01'
+  //  },
+  //  {
+  //   image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80',
+  //    title: 'ARQUITECTURA QUE',
+  //    subtitle: 'TRASCIENDE',
+  //    number: '02'
+  //  },
+  //  {
+  //    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80',
+  //    title: 'INNOVACIÓN Y',
+  //    subtitle: 'EXCELENCIA',
+  //    number: '03'
+  // },
+  //  {
+  //    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80',
+  //    title: 'CALIDAD EN',
+  //    subtitle: 'CADA DETALLE',
+  //    number: '04'
+  //  },
+  //  {
+  //    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80',
+  //    title: 'TU HOGAR',
+  //    subtitle: 'SOÑADO',
+  //    number: '05'
+  //  }
+  //]
   const heroSlides = [
-    {
-      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80',
-      title: 'CONSTRUIMOS CONFIANZA,',
-      subtitle: 'DISEÑAMOS FUTURO.',
-      number: '01'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80',
-      title: 'ARQUITECTURA QUE',
-      subtitle: 'TRASCIENDE',
-      number: '02'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80',
-      title: 'INNOVACIÓN Y',
-      subtitle: 'EXCELENCIA',
-      number: '03'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80',
-      title: 'CALIDAD EN',
-      subtitle: 'CADA DETALLE',
-      number: '04'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80',
-      title: 'TU HOGAR',
-      subtitle: 'SOÑADO',
-      number: '05'
-    }
-  ]
+  {
+    video: VideoAncla,
+    title: 'CONSTRUIMOS CONFIANZA,',
+    subtitle: 'DISEÑAMOS FUTURO.',
+    number: '01'
+  },
+  
+
+]
 
   const projects = [
     { 
       name: 'ANCLAI', 
       desc: 'CONSTRUCCION',
       specs: '180 M² · 4 DORM · 3 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop&q=80',
+      image: '/src/img/ANCLA/FACHADA 1.jpg',
     },
     { 
       name: 'VULCANO I', 
       desc: 'CONSTRUCCION',
       specs: '145 M² · 3 DORM · 2 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&h=800&fit=crop&q=80',
+      image: 'src/img/VULCANO/fachada vulcano.jpg',
     },
     { 
       name: 'CHAPE I', 
       desc: 'CONSTRUCCION',
       specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop&q=80',
+      image: '/src/img/CHAPE/CHAPE 1.jpg',
     },
     { 
       name: 'DAFNEAI',
       desc: 'PROYECTO Y DIRECCION',
       specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&q=80',
+      image: 'src/img/DAFNEA/DAFNEA.jpg',
     },
     { 
       name: 'DEDALO I', 
       desc: 'PROYECTO Y DIRECCION',
       specs: '140 M² · 3 DORM · 3 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop&q=80',
+      image: 'src/img/DEDALO1/DEDALO I.jpg',
     },
     { 
       name: 'POSITIVE HOUSE XII', 
       desc: 'CONSTRUCCION',
       specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&h=800&fit=crop&q=80',
-    },
-    { 
-      name: 'POSITIVE HOUSE XIII', 
-      desc: 'CONSTRUCCION',
-      specs: '130 M² · 3 DORM · 2 BAÑOS',
-      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop&q=80',
+      image: 'src/img/PH-XII/PH XII.jpg',
     },
     { 
       name: 'BARRIO COODOPIN', 
       desc: 'DIRECCION DE OBRA',
       specs: '1280 M² · 18 VIVIENDAS',
-      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&q=80',
+      image: 'src/img/COODOPIN/CODOOPIN.jpg',
     },
   ]
 
@@ -162,11 +165,22 @@ const Home = () => {
               className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
             >
               <div className="hero-background">
-                <img 
-                  src={slide.image}
-                  alt="VIRA Constructora"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
+                {slide.video ? (
+                  <video
+                    src={slide.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <img 
+                    src={slide.image}
+                    alt="VIRA Constructora"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
               </div>
             </div>
           ))}
@@ -182,11 +196,7 @@ const Home = () => {
               <p className="hero-tagline">VIRA CONSTRUCTORA</p>
             </div>
             
-            <div className="hero-slide-info">
-              <span className="slide-number">{heroSlides[currentSlide].number}</span>
-              <span className="slide-separator">—</span>
-              <span className="slide-total">05</span>
-            </div>
+
           </div>
 
           <Link to="/proyectos" className="hero-cta">
@@ -203,13 +213,30 @@ const Home = () => {
         </div>
 
         <div className="slide-indicators">
-          {heroSlides.map((_, index) => (
-            <button
+          {heroSlides.map((slide, index) => (
+            <div 
               key={index}
-              className={`slide-dot ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => setCurrentSlide(index)}
-              aria-label={`Ir a slide ${index + 1}`}
-            />
+              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
+            >
+              <div className="hero-background">
+                {slide.video ? (
+                  <video
+                    src={slide.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <img 
+                    src={slide.image}
+                    alt="VIRA Constructora"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -268,7 +295,7 @@ const Home = () => {
       <section className="philosophy-section">
         <div className="philosophy-image fade-in">
           <img 
-            src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=900&fit=crop&q=80"
+            src="src/img/CHAPE/CHAPE 1.jpg"
             alt="Filosofía VIRA"
           />
         </div>
@@ -364,13 +391,12 @@ const Home = () => {
           <div className="locations-map fade-in-up">
           <div className="locations-map">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55889.108190121406!2d-56.937740083375814!3d-37.098023888919755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4d2f40bc78e1e4fd%3A0xfc83c4f8b2f6341!2sVIRA%20CONSTRUCTORA!5e1!3m2!1ses-419!2sar!4v1759794953969!5m2!1ses-419!2sar"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3492.5346259039466!2d-56.874764888113255!3d-37.10961849400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959c9cdeede9c585%3A0x2b722ba9dd9ca00f!2sAv.%20Constituci%C3%B3n%201386%2C%20B7167%20Pinamar%2C%20Provincia%20de%20Buenos%20Aires!5e1!3m2!1ses-419!2sar!4v1760061274045!5m2!1ses-419!2sar"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
           </div>
-
 
           </div>
         </div>

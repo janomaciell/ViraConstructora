@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Services.css'
 import WhatsAppButton from '../components/WhatsAppButton'
+import videoexterior from '../img/ANCLA/videoexterior.mp4'
 
 const Services = () => {
   const [activeService, setActiveService] = useState(0)
@@ -88,13 +89,35 @@ const Services = () => {
     }
   ]
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector('.header')
+      if (window.scrollY > 10) {
+        header?.classList.add('scrolled')
+      } else {
+        header?.classList.remove('scrolled')
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // <-- Llama al efecto al montar el componente
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   return (
     <div className="services-page">
-      {/* Hero Section - Minimalista */}
       <section className="services-hero">
+        <div className="services-hero-background">
+          <video
+            src={videoexterior}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        </div>
         <div className="services-hero-content">
           <p className="hero-label">NUESTROS SERVICIOS</p>
           <h1>Excelencia en<br />cada detalle</h1>
+          <p className="hero-tagline">VIRA CONSTRUCTORA</p>
         </div>
       </section>
 

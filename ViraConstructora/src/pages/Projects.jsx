@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Projects.css'
 import WhatsAppButton from '../components/WhatsAppButton'
+import VideoAnclaInterior from '../img/ANCLA/VideoAnclaInterior.mp4'
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('todos')
@@ -14,7 +15,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '180 M2 · 4 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto completo de construcción con diseño contemporáneo y terminaciones de primera calidad.',
-      image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200',
+      image: '/src/img/ANCLA/FACHADA 1.jpg',
       featured: true
     },
     {
@@ -24,7 +25,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '145 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Desarrollo integral con arquitectura moderna y espacios optimizados.',
-      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1200'
+      image: 'src/img/VULCANO/fachada vulcano.jpg',
     },
     {
       id: 'chape-i',
@@ -33,7 +34,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto de construcción con diseño funcional y terminaciones premium.',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200'
+      image: '/src/img/CHAPE/CHAPE 1.jpg',
     },
     {
       id: 'dafna-i',
@@ -42,7 +43,7 @@ const Projects = () => {
       location: 'PROYECTO Y DIRECCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto de diseño y dirección con arquitectura contemporánea.',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200'
+      image: 'src/img/DAFNEA/DAFNEA.jpg'
     },
     {
       id: 'dedalo-i',
@@ -51,7 +52,7 @@ const Projects = () => {
       location: 'PROYECTO Y DIRECCION',
       status: '140 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Desarrollo de proyecto y dirección con enfoque en la funcionalidad.',
-      image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200'
+      image: 'src/img/DEDALO1/DEDALO I.jpg'
     },
     {
       id: 'dedalo-ii',
@@ -60,7 +61,7 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Construcción de vivienda con diseño moderno y espacios amplios.',
-      image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200'
+      image: 'src/img/DEDALO2/FAHCADA DEDALO II.jpg'
     },
     {
       id: 'positive-house-xii',
@@ -69,7 +70,7 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '150 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Construcción de vivienda con arquitectura sustentable y diseño innovador.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200'
+      image: 'src/img/PH-XII/PH XII.jpg'
     },
     {
       id: 'positive-house-xiii',
@@ -78,16 +79,16 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '130 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Construcción de vivienda con diseño contemporáneo y eficiencia energética.',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200'
+      image: ''
     },
     {
       id: 'barrio-coodopin',
-      title: 'BARRIO COODOPIN',
+      title: 'BARRIO CODOOPIN',
       category: 'direccion',
       location: 'DIRECCION DE OBRA',
       status: '1280 M2 · 18 VIVIENDAS',
       description: 'Dirección de obra para desarrollo de barrio con múltiples viviendas.',
-      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1200'
+      image: 'src/img/COODOPIN/CODOOPIN.jpg'
     },
     {
       id: 'niza-i',
@@ -96,7 +97,7 @@ const Projects = () => {
       location: 'PROYECTO',
       status: '350 M2 · 6 UNIDADES FUNCIONALES',
       description: 'Proyecto de desarrollo con múltiples unidades funcionales.',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200'
+      image: ''
     },
     {
       id: 'garzas-i',
@@ -105,7 +106,7 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '230 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Construcción de vivienda con diseño moderno y espacios amplios.',
-      image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200'
+      image: 'src/img/GARZAS/GARZAS.jpg'
     },
     {
       id: 'progreso-y-biarritz',
@@ -114,7 +115,7 @@ const Projects = () => {
       location: 'PROYECTO Y FINAL DE OBRA',
       status: '435 M2 · 7 UNIDADES FUNCIONALES',
       description: 'Proyecto completo con finalización de obra para desarrollo multifamiliar.',
-      image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200'
+      image: 'src/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg'
     },
     {
       id: 'espartillo-i',
@@ -123,7 +124,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '235 M2 · 4 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto integral con diseño contemporáneo y espacios amplios.',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200'
+      image: 'src/img/ESPARTILLO/ESPARTILLO.jpg'
     },
     {
       id: 'corbeta-agradable-i',
@@ -132,7 +133,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '90 M2 · 2 DORMITORIOS · 1 BAÑO',
       description: 'Proyecto compacto con diseño funcional y eficiente.',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200'
+      image: 'src/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg'
     },
     {
       id: 'silfides-i',
@@ -141,7 +142,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '150 M2 · 4 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto de vivienda con diseño moderno y espacios optimizados.',
-      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200'
+      image: ''
     },
     {
       id: 'zorzal-i',
@@ -150,7 +151,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '120 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Desarrollo de proyecto con arquitectura contemporánea.',
-      image: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200'
+      image: 'src/img/ZORZAL/ZORZAL.jpg'
     },
     {
       id: 'colon-i',
@@ -159,10 +160,19 @@ const Projects = () => {
       location: 'PROYECTO',
       status: '120 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Proyecto de diseño con enfoque en la funcionalidad y eficiencia.',
-      image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200'
+      image: 'src/img/COLON1/COLON.jpg'
     }
   ]
+  const heroSlides = [
+  {
+    video: VideoAnclaInterior,
+    title: 'CONSTRUIMOS CONFIANZA,',
+    subtitle: 'DISEÑAMOS FUTURO.',
+    number: '01'
+  },
+  
 
+]
   const filters = [
     { id: 'todos', label: 'Todos los proyectos' },
     { id: 'proyecto', label: 'Proyectos' },
@@ -174,19 +184,47 @@ const Projects = () => {
     ? projects 
     : projects.filter(p => p.category === activeFilter)
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector('.header')
+      if (window.scrollY > 10) {
+        header?.classList.add('scrolled')
+      } else {
+        header?.classList.remove('scrolled')
+      }
+    }
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // <-- Llama al efecto al montar el componente
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <div className="projects-page">
-      {/* Hero Section */}
-      <section className="projects-hero">
-        <div className="hero-background">
-          <img 
-            src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920" 
-            alt="Nuestros proyectos"
-          />
-          <div className="hero-overlay">
-            <div className="hero-content">
-              <h1>NUESTROS PROYECTOS</h1>
-              <p>Desarrollos inmobiliarios de calidad en las mejores ubicaciones de Pinamar</p>
+      {/* Hero Section con video de fondo igual que Home */}
+      <section className="hero-section">
+        <div className="hero-slides">
+          <div className="hero-slide active">
+            <div className="hero-background">
+              <video
+                src={VideoAnclaInterior}
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="hero-overlay">
+          <div className="hero-content">
+            <div className="hero-text-wrapper">
+              <h1 className="hero-title">
+                <span className="hero-label">NUESTROS PROYECTOS</span>
+                 
+                <span className="title-line">Desarrollos inmobiliarios de calidad</span>
+              </h1>
+              <p className="hero-tagline">VIRA CONSTRUCTORA</p>
             </div>
           </div>
         </div>

@@ -37,11 +37,18 @@ const ProjectDetail = () => {
         "Cochera cubierta"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/ANCLA/BAÑO.jpg",
+        "/src/img/ANCLA/COCINA Y LIVING.jpg",
+        "/src/img/ANCLA/COCINA.jpg",
+        "/src/img/ANCLA/CONTRA FACHADA.jpg",
+        "/src/img/ANCLA/DORMI 2.jpg",
+        "/src/img/ANCLA/DORMITORIO 1.jpg",
+        "/src/img/ANCLA/DORMITORIO 3.jpg",
+        "/src/img/ANCLA/FACHADA 1.jpg",
+        "/src/img/ANCLA/FACHADA 2.jpg",
+        "/src/img/ANCLA/GALERIA.jpg",
+        "/src/img/ANCLA/SALA DE ESTAR.jpg",
+
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -78,11 +85,15 @@ const ProjectDetail = () => {
         "Eficiencia energética"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/VULCANO/contra-fachada vulcano.jpg",
+        "/src/img/VULCANO/COCINA.jpg",
+        "/src/img/VULCANO/cuarto 1 vulcano.jpg",
+        "/src/img/VULCANO/cuarto 2 vulcano.jpg",
+        "/src/img/VULCANO/fachada vulcano 2.jpg",
+        "/src/img/VULCANO/fachada vulcano.jpg",
+        "/src/img/VULCANO/galeria vulcano.jpg",
+        "/src/img/VULCANO/interior vulcano.jpg",
+        "/src/img/VULCANO/Panorama.jpg"
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -116,12 +127,16 @@ const ProjectDetail = () => {
         "Domótica básica"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/CHAPE/CHAPE 1.jpg",
+        "/src/img/CHAPE/chape 2.jpg",
+        "/src/img/CHAPE/chape 3.jpg",
+        "/src/img/CHAPE/CHAPE BCOCINA.jpg",
+        "/src/img/CHAPE/chape dormi 2.jpg",
+        "/src/img/CHAPE/chape dormitorio.jpg",
+        "/src/img/CHAPE/chape living.jpg",
+        "/src/img/CHAPE/chape 5.jpg",
+        "/src/img/CHAPE/galeria chape.jpg",
+        "/src/img/CHAPE/planta chape 1.jpg"
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -133,7 +148,7 @@ const ProjectDetail = () => {
       ]
     },
     "dafna-i": {
-      title: "DAFNA I",
+      title: "DAFNEA I",
       subtitle: "Arquitectura contemporánea en evolución",
       type: "PROYECTO Y DIRECCION",
       location: "Pinamar, Buenos Aires",
@@ -146,7 +161,7 @@ const ProjectDetail = () => {
         garage: "1 auto",
         lot: "420 M²"
       },
-      description: "DAFNA I enfoca en proyecto y dirección de obra para una vivienda de 155 m² con diseño innovador. Prioriza la sostenibilidad y la integración ambiental.",
+      description: "DAFNEA I enfoca en proyecto y dirección de obra para una vivienda de 155 m² con diseño innovador. Prioriza la sostenibilidad y la integración ambiental.",
       features: [
         "3 dormitorios luminosos",
         "3 baños con hidromasaje",
@@ -157,10 +172,7 @@ const ProjectDetail = () => {
         "Iluminación LED eficiente"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/DAFNEA/DAFNEA.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -194,11 +206,7 @@ const ProjectDetail = () => {
         "Área de lavado integrada"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/DEDALO1/DEDALO I.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -232,12 +240,12 @@ const ProjectDetail = () => {
         "Acabados en madera natural"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/DEDALO2/DEDALO II.jpg",
+        "/src/img/DEDALO2/DEDALO II (1).jpg",
+        "/src/img/DEDALO2/COCINA-COMEDOR DEDALO II.jpg",
+        "/src/img/DEDALO2/FAHCADA DEDALO II.jpg",
+        "/src/img/DEDALO2/CONTRAFAHCADA DEDALO II.jpg",
+        "/src/img/DEDALO2/GALERIA DEDALO II.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -273,10 +281,7 @@ const ProjectDetail = () => {
         "Mobiliario reciclado"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/PH-XII/PH XII.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -312,10 +317,7 @@ const ProjectDetail = () => {
         "Diseño compacto y práctico"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80"
+
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -325,7 +327,7 @@ const ProjectDetail = () => {
       partners: []
     },
     "barrio-coodopin": {
-      title: "BARRIO COODOPIN",
+      title: "BARRIO CODOOPIN",
       subtitle: "Desarrollo comunitario con visión integral",
       type: "DIRECCION DE OBRA",
       location: "Pinamar, Buenos Aires",
@@ -338,7 +340,7 @@ const ProjectDetail = () => {
         garage: "variable",
         lot: "5000 M²"
       },
-      description: "BARRIO COODOPIN es un proyecto de dirección de obra para un desarrollo residencial de 18 viviendas,             fomentando la comunidad y el bienestar integral.",
+      description: "BARRIO CODOOPIN es un proyecto de dirección de obra para un desarrollo residencial de 18 viviendas,             fomentando la comunidad y el bienestar integral.",
       features: [
         "Variedad de tipologías habitacionales",
         "Áreas comunes diseñadas para socializar",
@@ -349,10 +351,7 @@ const ProjectDetail = () => {
         "Gestión eficiente de recursos"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-160  0596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/COODOPIN/CODOOPIN.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -389,12 +388,7 @@ const ProjectDetail = () => {
         "Acceso controlado"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80"
+
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -429,11 +423,7 @@ const ProjectDetail = () => {
         "Pisos de porcelanato en toda la casa"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/GARZAS/GARZAS.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -471,12 +461,7 @@ const ProjectDetail = () => {
         "Espacios verdes comunitarios"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -514,11 +499,7 @@ const ProjectDetail = () => {
         "Sistema de domótica integrado"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/ESPARTILLO/ESPARTILLO.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -557,10 +538,7 @@ const ProjectDetail = () => {
         "Bajo costo de mantenimiento"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -595,11 +573,7 @@ const ProjectDetail = () => {
         "Iluminación LED en toda la casa"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80"
+
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -636,10 +610,7 @@ const ProjectDetail = () => {
         "Materiales resistentes al clima costero"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/ZORZAL/ZORZAL.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -674,10 +645,7 @@ const ProjectDetail = () => {
         "Diseño de bajo consumo energético"
       ],
       gallery: [
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1920&h=1080&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80"
+        "/src/img/COLON1/COLON.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
