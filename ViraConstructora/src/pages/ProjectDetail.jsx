@@ -37,17 +37,17 @@ const ProjectDetail = () => {
         "Cochera cubierta"
       ],
       gallery: [
-        "/src/img/ANCLA/BAÑO.jpg",
-        "/src/img/ANCLA/COCINA Y LIVING.jpg",
-        "/src/img/ANCLA/COCINA.jpg",
-        "/src/img/ANCLA/CONTRA FACHADA.jpg",
-        "/src/img/ANCLA/DORMI 2.jpg",
-        "/src/img/ANCLA/DORMITORIO 1.jpg",
-        "/src/img/ANCLA/DORMITORIO 3.jpg",
-        "/src/img/ANCLA/FACHADA 1.jpg",
-        "/src/img/ANCLA/FACHADA 2.jpg",
-        "/src/img/ANCLA/GALERIA.jpg",
-        "/src/img/ANCLA/SALA DE ESTAR.jpg",
+        "/img/ANCLA/BAÑO.jpg",
+        "/img/ANCLA/COCINA Y LIVING.jpg",
+        "/img/ANCLA/COCINA.jpg",
+        "/img/ANCLA/CONTRA FACHADA.jpg",
+        "/img/ANCLA/DORMI 2.jpg",
+        "/img/ANCLA/DORMITORIO 1.jpg",
+        "/img/ANCLA/DORMITORIO 3.jpg",
+        "/img/ANCLA/FACHADA 1.jpg",
+        "/img/ANCLA/FACHADA 2.jpg",
+        "/img/ANCLA/GALERIA.jpg",
+        "/img/ANCLA/SALA DE ESTAR.jpg",
 
       ],
       team: {
@@ -85,15 +85,15 @@ const ProjectDetail = () => {
         "Eficiencia energética"
       ],
       gallery: [
-        "/src/img/VULCANO/contra-fachada vulcano.jpg",
-        "/src/img/VULCANO/COCINA.jpg",
-        "/src/img/VULCANO/cuarto 1 vulcano.jpg",
-        "/src/img/VULCANO/cuarto 2 vulcano.jpg",
-        "/src/img/VULCANO/fachada vulcano 2.jpg",
-        "/src/img/VULCANO/fachada vulcano.jpg",
-        "/src/img/VULCANO/galeria vulcano.jpg",
-        "/src/img/VULCANO/interior vulcano.jpg",
-        "/src/img/VULCANO/Panorama.jpg"
+        "/img/VULCANO/contra-fachada vulcano.jpg",
+        "/img/VULCANO/COCINA.jpg",
+        "/img/VULCANO/cuarto 1 vulcano.jpg",
+        "/img/VULCANO/cuarto 2 vulcano.jpg",
+        "/img/VULCANO/fachada vulcano 2.jpg",
+        "/img/VULCANO/fachada vulcano.jpg",
+        "/img/VULCANO/galeria vulcano.jpg",
+        "/img/VULCANO/interior vulcano.jpg",
+        "/img/VULCANO/Panorama.jpg"
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -127,16 +127,16 @@ const ProjectDetail = () => {
         "Domótica básica"
       ],
       gallery: [
-        "/src/img/CHAPE/CHAPE 1.jpg",
-        "/src/img/CHAPE/chape 2.jpg",
-        "/src/img/CHAPE/chape 3.jpg",
-        "/src/img/CHAPE/CHAPE BCOCINA.jpg",
-        "/src/img/CHAPE/chape dormi 2.jpg",
-        "/src/img/CHAPE/chape dormitorio.jpg",
-        "/src/img/CHAPE/chape living.jpg",
-        "/src/img/CHAPE/chape 5.jpg",
-        "/src/img/CHAPE/galeria chape.jpg",
-        "/src/img/CHAPE/planta chape 1.jpg"
+        "/img/CHAPE/CHAPE 1.jpg",
+        "/img/CHAPE/chape 2.jpg",
+        "/img/CHAPE/chape 3.jpg",
+        "/img/CHAPE/CHAPE BCOCINA.jpg",
+        "/img/CHAPE/chape dormi 2.jpg",
+        "/img/CHAPE/chape dormitorio.jpg",
+        "/img/CHAPE/chape living.jpg",
+        "/img/CHAPE/chape 5.jpg",
+        "/img/CHAPE/galeria chape.jpg",
+        "/img/CHAPE/planta chape 1.jpg"
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -172,7 +172,7 @@ const ProjectDetail = () => {
         "Iluminación LED eficiente"
       ],
       gallery: [
-        "/src/img/DAFNEA/DAFNEA.jpg",
+        "/img/DAFNEA/DAFNEA.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -206,7 +206,7 @@ const ProjectDetail = () => {
         "Área de lavado integrada"
       ],
       gallery: [
-        "/src/img/DEDALO1/DEDALO I.jpg",
+        "/img/DEDALO1/DEDALO I.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -240,12 +240,12 @@ const ProjectDetail = () => {
         "Acabados en madera natural"
       ],
       gallery: [
-        "/src/img/DEDALO2/DEDALO II.jpg",
-        "/src/img/DEDALO2/DEDALO II (1).jpg",
-        "/src/img/DEDALO2/COCINA-COMEDOR DEDALO II.jpg",
-        "/src/img/DEDALO2/FAHCADA DEDALO II.jpg",
-        "/src/img/DEDALO2/CONTRAFAHCADA DEDALO II.jpg",
-        "/src/img/DEDALO2/GALERIA DEDALO II.jpg",
+        "/img/DEDALO2/DEDALO II.jpg",
+        "/img/DEDALO2/DEDALO II (1).jpg",
+        "/img/DEDALO2/COCINA-COMEDOR DEDALO II.jpg",
+        "/img/DEDALO2/FAHCADA DEDALO II.jpg",
+        "/img/DEDALO2/CONTRAFAHCADA DEDALO II.jpg",
+        "/img/DEDALO2/GALERIA DEDALO II.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -281,7 +281,7 @@ const ProjectDetail = () => {
         "Mobiliario reciclado"
       ],
       gallery: [
-        "/src/img/PH-XII/PH XII.jpg",
+        "/img/PH-XII/PH XII.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -351,7 +351,7 @@ const ProjectDetail = () => {
         "Gestión eficiente de recursos"
       ],
       gallery: [
-        "/src/img/COODOPIN/CODOOPIN.jpg",
+        "/img/COODOPIN/CODOOPIN.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -423,7 +423,7 @@ const ProjectDetail = () => {
         "Pisos de porcelanato en toda la casa"
       ],
       gallery: [
-        "/src/img/GARZAS/GARZAS.jpg",
+        "/img/GARZAS/GARZAS.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -461,7 +461,7 @@ const ProjectDetail = () => {
         "Espacios verdes comunitarios"
       ],
       gallery: [
-        "/src/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg",
+        "/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -499,7 +499,7 @@ const ProjectDetail = () => {
         "Sistema de domótica integrado"
       ],
       gallery: [
-        "/src/img/ESPARTILLO/ESPARTILLO.jpg",
+        "/img/ESPARTILLO/ESPARTILLO.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -538,7 +538,7 @@ const ProjectDetail = () => {
         "Bajo costo de mantenimiento"
       ],
       gallery: [
-        "/src/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg",
+        "/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -610,7 +610,7 @@ const ProjectDetail = () => {
         "Materiales resistentes al clima costero"
       ],
       gallery: [
-        "/src/img/ZORZAL/ZORZAL.jpg",
+        "/img/ZORZAL/ZORZAL.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",
@@ -645,7 +645,7 @@ const ProjectDetail = () => {
         "Diseño de bajo consumo energético"
       ],
       gallery: [
-        "/src/img/COLON1/COLON.jpg",
+        "/img/COLON1/COLON.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",

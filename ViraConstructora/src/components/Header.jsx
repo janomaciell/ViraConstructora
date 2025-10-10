@@ -35,7 +35,7 @@ const Header = () => {
     <header className={`header ${(isScrolled || !isHome) ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link to="/" className="logo">
-          <img src="/src/img/logo.png" alt="VIRA Constructora" className="logo-image" />
+          <img src="/img/logo.png" alt="VIRA Constructora" className="logo-image" />
           <h1>VIRA CONSTRUCTORA</h1>
         </Link>
         

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Projects.css'
 import WhatsAppButton from '../components/WhatsAppButton'
-import VideoAnclaInterior from '../img/ANCLA/VideoAnclaInterior.mp4'
+// Video importado desde public
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('todos')
@@ -15,7 +15,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '180 M2 · 4 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto completo de construcción con diseño contemporáneo y terminaciones de primera calidad.',
-      image: '/src/img/ANCLA/FACHADA 1.jpg',
+      image: '/img/ANCLA/FACHADA 1.jpg',
       featured: true
     },
     {
@@ -25,7 +25,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '145 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Desarrollo integral con arquitectura moderna y espacios optimizados.',
-      image: 'src/img/VULCANO/fachada vulcano.jpg',
+      image: '/img/VULCANO/fachada vulcano.jpg',
     },
     {
       id: 'chape-i',
@@ -34,7 +34,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto de construcción con diseño funcional y terminaciones premium.',
-      image: '/src/img/CHAPE/CHAPE 1.jpg',
+      image: '/img/CHAPE/CHAPE 1.jpg',
     },
     {
       id: 'dafna-i',
@@ -43,7 +43,7 @@ const Projects = () => {
       location: 'PROYECTO Y DIRECCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto de diseño y dirección con arquitectura contemporánea.',
-      image: 'src/img/DAFNEA/DAFNEA.jpg'
+      image: '/img/DAFNEA/DAFNEA.jpg'
     },
     {
       id: 'dedalo-i',
@@ -52,7 +52,7 @@ const Projects = () => {
       location: 'PROYECTO Y DIRECCION',
       status: '140 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Desarrollo de proyecto y dirección con enfoque en la funcionalidad.',
-      image: 'src/img/DEDALO1/DEDALO I.jpg'
+      image: '/img/DEDALO1/DEDALO I.jpg'
     },
     {
       id: 'dedalo-ii',
@@ -61,7 +61,7 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Construcción de vivienda con diseño moderno y espacios amplios.',
-      image: 'src/img/DEDALO2/FAHCADA DEDALO II.jpg'
+      image: '/img/DEDALO2/FAHCADA DEDALO II.jpg'
     },
     {
       id: 'positive-house-xii',
@@ -70,7 +70,7 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '150 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Construcción de vivienda con arquitectura sustentable y diseño innovador.',
-      image: 'src/img/PH-XII/PH XII.jpg'
+      image: '/img/PH-XII/PH XII.jpg'
     },
     {
       id: 'positive-house-xiii',
@@ -88,7 +88,7 @@ const Projects = () => {
       location: 'DIRECCION DE OBRA',
       status: '1280 M2 · 18 VIVIENDAS',
       description: 'Dirección de obra para desarrollo de barrio con múltiples viviendas.',
-      image: 'src/img/COODOPIN/CODOOPIN.jpg'
+      image: '/img/COODOPIN/CODOOPIN.jpg'
     },
     {
       id: 'niza-i',
@@ -106,7 +106,7 @@ const Projects = () => {
       location: 'CONSTRUCCION',
       status: '230 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Construcción de vivienda con diseño moderno y espacios amplios.',
-      image: 'src/img/GARZAS/GARZAS.jpg'
+      image: '/img/GARZAS/GARZAS.jpg'
     },
     {
       id: 'progreso-y-biarritz',
@@ -115,7 +115,7 @@ const Projects = () => {
       location: 'PROYECTO Y FINAL DE OBRA',
       status: '435 M2 · 7 UNIDADES FUNCIONALES',
       description: 'Proyecto completo con finalización de obra para desarrollo multifamiliar.',
-      image: 'src/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg'
+      image: '/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg'
     },
     {
       id: 'espartillo-i',
@@ -124,7 +124,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '235 M2 · 4 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto integral con diseño contemporáneo y espacios amplios.',
-      image: 'src/img/ESPARTILLO/ESPARTILLO.jpg'
+      image: '/img/ESPARTILLO/ESPARTILLO.jpg'
     },
     {
       id: 'corbeta-agradable-i',
@@ -133,7 +133,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '90 M2 · 2 DORMITORIOS · 1 BAÑO',
       description: 'Proyecto compacto con diseño funcional y eficiente.',
-      image: 'src/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg'
+      image: '/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg'
     },
     {
       id: 'silfides-i',
@@ -151,7 +151,7 @@ const Projects = () => {
       location: 'PROYECTO, DIRECCION Y CONSTRUCCION',
       status: '120 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Desarrollo de proyecto con arquitectura contemporánea.',
-      image: 'src/img/ZORZAL/ZORZAL.jpg'
+      image: '/img/ZORZAL/ZORZAL.jpg'
     },
     {
       id: 'colon-i',
@@ -160,12 +160,12 @@ const Projects = () => {
       location: 'PROYECTO',
       status: '120 M2 · 3 DORMITORIOS · 2 BAÑOS',
       description: 'Proyecto de diseño con enfoque en la funcionalidad y eficiencia.',
-      image: 'src/img/COLON1/COLON.jpg'
+      image: '/img/COLON1/COLON.jpg'
     }
   ]
   const heroSlides = [
   {
-    video: VideoAnclaInterior,
+    video: '/img/ANCLA/VideoAnclaInterior.mp4',
     title: 'CONSTRUIMOS CONFIANZA,',
     subtitle: 'DISEÑAMOS FUTURO.',
     number: '01'
@@ -206,7 +206,7 @@ const Projects = () => {
           <div className="hero-slide active">
             <div className="hero-background">
               <video
-                src={VideoAnclaInterior}
+                src="/img/ANCLA/VideoAnclaInterior.mp4"
                 autoPlay
                 loop
                 muted

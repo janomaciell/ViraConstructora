@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import "./About.css"
 import WhatsAppButton from "../components/WhatsAppButton"
-import videohabitaciones from "../img/ANCLA/videohabitaciones.mp4"
+// Video importado desde public
 
 const About = () => {
   const teamMembers = [
@@ -29,7 +29,7 @@ const About = () => {
       <section className="about-hero">
         <div className="hero-background">
           <video
-            src={videohabitaciones}
+            src="/img/ANCLA/videohabitaciones.mp4"
             autoPlay
             loop
             muted

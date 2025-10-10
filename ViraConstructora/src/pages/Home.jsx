@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import WhatsAppButton from "../components/WhatsAppButton"
 import './Home.css'
-import VideoAncla from '../img/ANCLA/VideoAncla.mp4'
+// Video importado desde public
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [expandedProject, setExpandedProject] = useState(0) // 🔹 Primer proyecto expandido por defecto
@@ -98,7 +98,7 @@ const Home = () => {
   //]
   const heroSlides = [
   {
-    video: VideoAncla,
+    video: '/img/ANCLA/VideoAncla.mp4',
     title: 'CONSTRUIMOS CONFIANZA,',
     subtitle: 'DISEÑAMOS FUTURO.',
     number: '01'
@@ -112,43 +112,43 @@ const Home = () => {
       name: 'ANCLAI', 
       desc: 'CONSTRUCCION',
       specs: '180 M² · 4 DORM · 3 BAÑOS',
-      image: '/src/img/ANCLA/FACHADA 1.jpg',
+      image: '/img/ANCLA/FACHADA 1.jpg',
     },
     { 
       name: 'VULCANO I', 
       desc: 'CONSTRUCCION',
       specs: '145 M² · 3 DORM · 2 BAÑOS',
-      image: 'src/img/VULCANO/fachada vulcano.jpg',
+      image: '/img/VULCANO/fachada vulcano.jpg',
     },
     { 
       name: 'CHAPE I', 
       desc: 'CONSTRUCCION',
       specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: '/src/img/CHAPE/CHAPE 1.jpg',
+      image: '/img/CHAPE/CHAPE 1.jpg',
     },
     { 
       name: 'DAFNEAI',
       desc: 'PROYECTO Y DIRECCION',
       specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: 'src/img/DAFNEA/DAFNEA.jpg',
+      image: '/img/DAFNEA/DAFNEA.jpg',
     },
     { 
       name: 'DEDALO I', 
       desc: 'PROYECTO Y DIRECCION',
       specs: '140 M² · 3 DORM · 3 BAÑOS',
-      image: 'src/img/DEDALO1/DEDALO I.jpg',
+      image: '/img/DEDALO1/DEDALO I.jpg',
     },
     { 
       name: 'POSITIVE HOUSE XII', 
       desc: 'CONSTRUCCION',
       specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: 'src/img/PH-XII/PH XII.jpg',
+      image: '/img/PH-XII/PH XII.jpg',
     },
     { 
       name: 'BARRIO COODOPIN', 
       desc: 'DIRECCION DE OBRA',
       specs: '1280 M² · 18 VIVIENDAS',
-      image: 'src/img/COODOPIN/CODOOPIN.jpg',
+      image: '/img/COODOPIN/CODOOPIN.jpg',
     },
   ]
 
@@ -295,7 +295,7 @@ const Home = () => {
       <section className="philosophy-section">
         <div className="philosophy-image fade-in">
           <img 
-            src="src/img/CHAPE/CHAPE 1.jpg"
+            src="/img/CHAPE/CHAPE 1.jpg"
             alt="Filosofía VIRA"
           />
         </div>

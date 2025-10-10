@@ -282,7 +282,7 @@
      INTRO STATEMENT
      ======================================== */
   .intro-statement {
-    background: var(--color-bg-dark);
+    background: #000;
     color: #ffffff;
     padding: clamp(60px, 10vw, 120px) clamp(20px, 5vw, 60px);
     text-align: center;
@@ -436,7 +436,7 @@
     display: flex;
     align-items: center;
     padding: clamp(60px, 10vw, 120px) clamp(40px, 8vw, 100px);
-    background: var(--color-bg-dark);
+    background: #000;
     color: #ffffff;
   }
   
@@ -498,7 +498,7 @@
    ======================================== */
 .projects-section {
   padding: clamp(80px, 12vw, 160px) clamp(20px, 5vw, 80px);
-  background: var(--color-bg);
+  background: #000;
 }
 
 .section-header {
@@ -511,7 +511,7 @@
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 300;
   line-height: 1.2;
-  color: var(--color-text);
+  color: var(--color-border);
   margin-top: 1rem;
 }
 
@@ -668,7 +668,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
-  background: var(--color-text);
+  background: var(--color-bg);
   color: #000000;
   font-size: 0.875rem;
   font-weight: 600;
@@ -755,7 +755,8 @@
      LOCATIONS SECTION
      ======================================== */
   .locations-section {
-    background: var(--color-bg-dark);
+    padding: clamp(80px, 12vw, 160px) clamp(20px, 5vw, 80px);
+    background:#000;
     color: #ffffff;
   }
   

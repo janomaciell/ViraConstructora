@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Services.css'
 import WhatsAppButton from '../components/WhatsAppButton'
-import videoexterior from '../img/ANCLA/videoexterior.mp4'
+// Video importado desde public
 
 const Services = () => {
   const [activeService, setActiveService] = useState(0)
@@ -107,7 +107,7 @@ const Services = () => {
       <section className="services-hero">
         <div className="services-hero-background">
           <video
-            src={videoexterior}
+            src="/img/ANCLA/videoexterior.mp4"
             autoPlay
             loop
             muted
