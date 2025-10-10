@@ -755,14 +755,15 @@
      LOCATIONS SECTION
      ======================================== */
   .locations-section {
-    padding: clamp(80px, 12vw, 160px) clamp(20px, 5vw, 80px);
-    background:#000;
+    padding: clamp(80px, 12vw, 160px) 0; /* Sin padding horizontal para full width */
+    background: #000;
     color: #ffffff;
   }
   
   .locations-content {
-    max-width: 1400px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
+    padding: 0 clamp(20px, 5vw, 80px); /* Solo padding horizontal para el contenido */
   }
   
   .locations-content .section-label {
@@ -778,16 +779,19 @@
     line-height: 1.4;
     margin-bottom: 4rem;
     max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .locations-map {
-    width: 100%;
-    height: 100vh; /* Altura completa del viewport para "full screen" en desktop y móvil */
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
     position: relative;
-    margin: 0; /* Elimina márgenes para que sea de lado a lado */
-    padding: 0; /* Elimina padding para full width */
-    overflow: hidden; /* Evita scrollbars innecesarios en el mapa */
+    margin-left: calc(-50vw + 50%); /* Centra el elemento full-width */
+    margin-right: calc(-50vw + 50%); /* Centra el elemento full-width */
+    overflow: hidden;
   }
+  
   .locations-map iframe {
     position: absolute;
     top: 0;
@@ -795,7 +799,7 @@
     width: 100%;
     height: 100%;
     border: 0;
-    display: block; /* Asegura que no haya espacios extra */
+    display: block;
   }
   
   .locations-map img {
@@ -916,6 +920,19 @@
   /* ========================================
      RESPONSIVE
      ======================================== */
+  
+  /* Tablet Landscape */
+  @media (max-width: 1024px) {
+    .locations-map {
+      height: 80vh; /* Altura intermedia para tablets */
+    }
+    
+    .locations-content h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 3rem;
+    }
+  }
+  
   @media (max-width: 1200px) {
     .about-grid {
       grid-template-columns: 1fr;
@@ -1055,21 +1072,30 @@
       padding: 2rem;
     }
   
-    .locations-map {
-      height: 300px;
+    .locations-section {
+      padding: clamp(60px, 8vw, 120px) 0; /* Padding vertical reducido en móvil */
     }
-  
-    .locations-grid {
-      grid-template-columns: 1fr;
+    
+    .locations-content {
+      padding: 0 clamp(15px, 4vw, 40px); /* Padding horizontal reducido en móvil */
     }
+    
+    .locations-content h2 {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      margin-bottom: 2rem;
+      padding: 0;
+    }
+    
     .locations-map {
-      height: 100vh; /* Mantiene full height en móvil */
-      width: 100vw; /* Full width del viewport para "pantalla completa" */
+      width: 100vw;
+      height: 70vh; /* Altura reducida en móvil para mejor UX */
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
     }
     
     .locations-map iframe {
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
     }
   }
   
@@ -1145,8 +1171,24 @@
     .slide-dot.active {
       width: 45px;
     }
-  
-  
+    
+    .locations-section {
+      padding: clamp(40px, 6vw, 80px) 0; /* Padding aún más reducido en móviles pequeños */
+    }
+    
+    .locations-content {
+      padding: 0 1rem; /* Padding mínimo en móviles pequeños */
+    }
+    
+    .locations-content h2 {
+      font-size: clamp(1.2rem, 6vw, 2rem);
+      margin-bottom: 1.5rem;
+    }
+    
+    .locations-map {
+      height: 60vh; /* Altura aún más reducida en móviles pequeños */
+    }
+
     .btn-primary {
       width: 100%;
       justify-content: center;
