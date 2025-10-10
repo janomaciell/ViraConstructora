@@ -112,6 +112,11 @@ const Services = () => {
             loop
             muted
             playsInline
+            preload="metadata"
+            onLoadStart={() => console.log('Services video loading')}
+            onCanPlay={() => console.log('Services video can play')}
+            onError={(e) => console.error('Services video error:', e)}
+            onPlay={() => console.log('Services video playing')}
           />
         </div>
         <div className="services-hero-content">

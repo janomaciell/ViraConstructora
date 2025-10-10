@@ -211,7 +211,12 @@ const Projects = () => {
                 loop
                 muted
                 playsInline
+                preload="metadata"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                onLoadStart={() => console.log('Projects video loading')}
+                onCanPlay={() => console.log('Projects video can play')}
+                onError={(e) => console.error('Projects video error:', e)}
+                onPlay={() => console.log('Projects video playing')}
               />
             </div>
           </div>

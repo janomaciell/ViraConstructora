@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import WhatsAppButton from "../components/WhatsAppButton"
+// import VideoPlayer from "../components/VideoPlayer"
 import './Home.css'
 // Video importado desde public
 const Home = () => {
@@ -172,7 +173,12 @@ const Home = () => {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onLoadStart={() => console.log('Video loading:', slide.video)}
+                    onCanPlay={() => console.log('Video can play:', slide.video)}
+                    onError={(e) => console.error('Video error:', e, slide.video)}
+                    onPlay={() => console.log('Video playing:', slide.video)}
                   />
                 ) : (
                   <img 
@@ -226,7 +232,12 @@ const Home = () => {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    onLoadStart={() => console.log('Video loading:', slide.video)}
+                    onCanPlay={() => console.log('Video can play:', slide.video)}
+                    onError={(e) => console.error('Video error:', e, slide.video)}
+                    onPlay={() => console.log('Video playing:', slide.video)}
                   />
                 ) : (
                   <img 

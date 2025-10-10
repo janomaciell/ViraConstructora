@@ -34,7 +34,12 @@ const About = () => {
             loop
             muted
             playsInline
+            preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            onLoadStart={() => console.log('About video loading')}
+            onCanPlay={() => console.log('About video can play')}
+            onError={(e) => console.error('About video error:', e)}
+            onPlay={() => console.log('About video playing')}
           />
         </div>
         <div className="hero-overlay-about">

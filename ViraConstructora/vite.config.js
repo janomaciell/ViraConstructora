@@ -16,5 +16,11 @@ export default defineConfig({
       }
     }
   },
-  base: '/'
+  base: '/',
+  server: {
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'cross-origin',
+      'Cross-Origin-Opener-Policy': 'cross-origin'
+    }
+  }
 })
