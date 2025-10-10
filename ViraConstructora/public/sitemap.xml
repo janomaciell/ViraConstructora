@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página Principal -->
+  <url>
+    <loc>https://www.viraconstructora.com/</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/ANCLA/FACHADA%201.jpg</image:loc>
+      <image:title>VIRA Constructora - Proyecto ANCLA I</image:title>
+      <image:caption>Proyecto ANCLA I - Construcción moderna en Pinamar</image:caption>
+    </image:image>
+  </url>
+  
+  <!-- Páginas Principales -->
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/servicios</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/nosotros</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/contacto</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Proyectos Individuales -->
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/ancla-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/ANCLA/FACHADA%201.jpg</image:loc>
+      <image:title>ANCLA I - Proyecto Integral</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/vulcano-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/VULCANO/fachada%20vulcano.jpg</image:loc>
+      <image:title>VULCANO I - Desarrollo Moderno</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/chape-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/CHAPE/CHAPE%201.jpg</image:loc>
+      <image:title>CHAPE I - Construcción Premium</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/dafna-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/DAFNEA/DAFNEA.jpg</image:loc>
+      <image:title>DAFNEA I - Arquitectura Contemporánea</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/dedalo-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/DEDALO1/DEDALO%20I.jpg</image:loc>
+      <image:title>DEDALO I - Diseño Funcional</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/dedalo-ii</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/DEDALO2/FAHCADA%20DEDALO%20II.jpg</image:loc>
+      <image:title>DEDALO II - Construcción de Calidad</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/positive-house-xii</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/PH-XII/PH%20XII.jpg</image:loc>
+      <image:title>POSITIVE HOUSE XII - Sustentabilidad</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/barrio-coodopin</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/COODOPIN/CODOOPIN.jpg</image:loc>
+      <image:title>BARRIO CODOOPIN - Desarrollo Comunitario</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/garzas-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/GARZAS/GARZAS.jpg</image:loc>
+      <image:title>GARZAS I - Amplitud y Confort</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/progreso-y-biarritz</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg</image:loc>
+      <image:title>PROGRESO Y BIARRITZ - Desarrollo Multifamiliar</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/espartillo-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/ESPARTILLO/ESPARTILLO.jpg</image:loc>
+      <image:title>ESPARTILLO I - Elegancia Costera</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/corbeta-agradable-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/CORBETA-AGRADABLE1/CORBETA%20AGRADABLE%20.jpg</image:loc>
+      <image:title>CORBETA AGRADABLE I - Diseño Compacto</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/zorzal-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/ZORZAL/ZORZAL.jpg</image:loc>
+      <image:title>ZORZAL I - Arquitectura Contemporánea</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://www.viraconstructora.com/proyectos/colon-i</loc>
+    <lastmod>2024-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.viraconstructora.com/img/COLON1/COLON.jpg</image:loc>
+      <image:title>COLON I - Funcionalidad y Eficiencia</image:title>
+    </image:image>
+  </url>
+  
+</urlset>

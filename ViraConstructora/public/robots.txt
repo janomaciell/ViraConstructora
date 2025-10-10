@@ -1,0 +1,47 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.viraconstructora.com/sitemap.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 1
+
+# Permitir acceso a recursos importantes
+Allow: /img/
+Allow: /favicon.png
+Allow: /_headers
+
+# Bloquear archivos innecesarios
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /vite.config.js
+Disallow: /vercel.json
+Disallow: /.vercelignore
+Disallow: /eslint.config.js
+
+# Específicos para bots principales
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Bloquear bots maliciosos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
