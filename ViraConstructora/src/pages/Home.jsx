@@ -382,12 +382,9 @@ const Home = () => {
             </p>
           </blockquote>
           <div className="quote-author">
-            <div className="author-image">
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&q=80" alt="Fundador" />
-            </div>
             <div className="author-info">
-              <div className="author-name">Juan Pérez</div>
-              <div className="author-title">CEO & FUNDADOR</div>
+              <div className="author-name">Alejandro Racca</div>
+              <div className="author-title">FUNDADOR</div>
             </div>
           </div>
         </div>
