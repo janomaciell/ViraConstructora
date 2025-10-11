@@ -52,11 +52,9 @@
 .hero-content {
   text-align: center;
   color: var(--white);
-  padding: 0 20px;
 }
 
 .hero-content h1 {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 300;
   color: #fff;
   letter-spacing: 8px;

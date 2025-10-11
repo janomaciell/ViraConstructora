@@ -10,7 +10,11 @@ const Footer = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <div className="footer-logo">
-              <h3>VIRA CONSTRUCTORA</h3>
+              <img 
+                src="/img/ViraBlanco.png" 
+                alt="VIRA Constructora" 
+                className="footer-logo-img"
+              />
               <p>Construyendo futuro en Buenos Aires y la costa atlántica</p>
             </div>
             

@@ -45,8 +45,8 @@ body:has(.contact-page-modern) .header {
 }
 
 .logo-image {
-  width: 180px;
-  height: 60px;
+  width: 300px;
+  height: 130px;
   object-fit: contain;
   flex-shrink: 0;
   transition: all 0.3s ease;
@@ -237,7 +237,9 @@ body:has(.contact-page-modern) .header .mobile-menu-btn span {
 @media (max-width: 480px) {
 
   .logo-image {
-    width: 140px;
-    height: 50px;
+    width: 100px;
+    height: 65px;
   }
+  
 }
+

@@ -193,16 +193,41 @@
     animation: fadeIn 1.2s ease forwards;
   }
   
-  .hero-logo {
-    width: clamp(120px, 15vw, 200px);
+  .hero-logo-main {
+    width: clamp(1200px, 120vw, 1200px);
     height: auto;
-    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
     display: block;
-    animation: fadeIn 1.4s 0.3s ease forwards;
+    animation: fadeIn 1.2s ease forwards;
     opacity: 0;
     filter: brightness(1) invert(0);
+  }
+
+  .hero-subtitle-brand {
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    animation: fadeIn 1.3s 0.2s ease forwards;
+    opacity: 0;
+    text-align: center;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .hero-title-small {
+    font-size: clamp(24px, 3vw, 48px);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    animation: fadeIn 1.4s 0.4s ease forwards;
+    opacity: 0;
+    text-align: center;
+    margin: 0;
+    line-height: 1.1;
   }
   
   .hero-slide-info {
@@ -995,9 +1020,19 @@
       white-space: normal;
     }
   
-    .hero-logo {
-      width: clamp(100px, 20vw, 150px);
-      margin-top: 1rem;
+    .hero-logo-main {
+      width: clamp(1200px, 150vw, 1500px) !important;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-subtitle-brand {
+      font-size: clamp(12px, 2vw, 16px);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title-small {
+      font-size: clamp(18px, 4vw, 32px);
+      margin-top: 0.5rem;
     }
   
     /* 🔹 CAMBIO CLAVE: El botón CTA ahora va abajo, separado del contenido principal */
@@ -1139,9 +1174,19 @@
       hyphens: none;
     }
   
-    .hero-logo {
-      width: clamp(80px, 25vw, 120px);
-      margin-top: 0.75rem;
+    .hero-logo-main {
+      width: clamp(1200px, 150vw, 1500px) !important;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-subtitle-brand {
+      font-size: clamp(10px, 2.5vw, 14px);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title-small {
+      font-size: clamp(16px, 5vw, 28px);
+      margin-top: 0.3rem;
     }
   
     .hero-slide-info {

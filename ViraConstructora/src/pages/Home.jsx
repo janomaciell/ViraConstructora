@@ -195,15 +195,17 @@ const Home = () => {
         <div className="hero-overlay">
           <div className="hero-content">
             <div className="hero-text-wrapper">
-              <h1 className="hero-title">
-                <span className="title-line">{heroSlides[currentSlide].title}</span>
-                <span className="title-line">{heroSlides[currentSlide].subtitle}</span>
-              </h1>
               <img 
                 src="/img/ViraBlanco.png" 
                 alt="VIRA Constructora" 
-                className="hero-logo"
+                className="hero-logo-main"
               />
+
+              <h1 className="hero-title-small">
+                <span className="hero-subtitle-brand">{heroSlides[currentSlide].title}</span>
+                
+                <span className="hero-subtitle-brand">{heroSlides[currentSlide].subtitle}</span>
+              </h1>
             </div>
             
 
