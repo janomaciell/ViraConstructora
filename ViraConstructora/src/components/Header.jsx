@@ -8,6 +8,7 @@ const Header = () => {
   const location = useLocation()
 
   const isHome = location.pathname === '/'
+  const isContact = location.pathname === '/contacto'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,11 +33,14 @@ const Header = () => {
   ]
 
   return (
-    <header className={`header ${(isScrolled || !isHome) ? 'scrolled' : ''}`}>
+    <header className={`header ${(isScrolled || !isHome || isContact) ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link to="/" className="logo">
-          <img src="/img/logo.png" alt="VIRA Constructora" className="logo-image" />
-          <h1>VIRA CONSTRUCTORA</h1>
+          <img 
+            src={isContact ? "/img/ViraColor.png" : "/img/ViraBlanco.png"}
+            alt="VIRA Constructora" 
+            className={`logo-image ${(isScrolled || !isHome || isContact) ? 'scrolled' : ''}`}
+          />
         </Link>
         
         <button 

@@ -45,6 +45,11 @@ const About = () => {
         <div className="hero-overlay-about">
           <div className="hero-text">
             <h1>SOBRE NOSOTROS</h1>
+            <img 
+              src="/img/ViraBlanco.png" 
+              alt="VIRA Constructora" 
+              className="hero-logo"
+            />
           </div>
         </div>
       </section>

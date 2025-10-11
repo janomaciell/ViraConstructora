@@ -122,7 +122,11 @@ const Services = () => {
         <div className="services-hero-content">
           <p className="hero-label">NUESTROS SERVICIOS</p>
           <h1>Excelencia en<br />cada detalle</h1>
-          <p className="hero-tagline">VIRA CONSTRUCTORA</p>
+          <img 
+            src="/img/ViraBlanco.png" 
+            alt="VIRA Constructora" 
+            className="hero-logo"
+          />
         </div>
       </section>
 

@@ -59,6 +59,18 @@
     animation: fadeIn 1.2s ease forwards;
 }
 
+.hero-logo {
+  width: clamp(120px, 15vw, 200px);
+  height: auto;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  animation: fadeIn 1.4s 0.3s ease forwards;
+  opacity: 0;
+  filter: brightness(1) invert(0);
+}
+
 .hero-label {
   font-family: "Open Sans", sans-serif;
   font-size: 13px;

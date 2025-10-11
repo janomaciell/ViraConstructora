@@ -199,7 +199,11 @@ const Home = () => {
                 <span className="title-line">{heroSlides[currentSlide].title}</span>
                 <span className="title-line">{heroSlides[currentSlide].subtitle}</span>
               </h1>
-              <p className="hero-tagline">VIRA CONSTRUCTORA</p>
+              <img 
+                src="/img/ViraBlanco.png" 
+                alt="VIRA Constructora" 
+                className="hero-logo"
+              />
             </div>
             
 

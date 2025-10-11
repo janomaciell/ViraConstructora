@@ -193,14 +193,16 @@
     animation: fadeIn 1.2s ease forwards;
   }
   
-  .hero-tagline {
-    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.9);
-    text-transform: uppercase;
+  .hero-logo {
+    width: clamp(120px, 15vw, 200px);
+    height: auto;
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
     animation: fadeIn 1.4s 0.3s ease forwards;
     opacity: 0;
+    filter: brightness(1) invert(0);
   }
   
   .hero-slide-info {
@@ -993,8 +995,8 @@
       white-space: normal;
     }
   
-    .hero-tagline {
-      font-size: clamp(0.8rem, 3vw, 1rem);
+    .hero-logo {
+      width: clamp(100px, 20vw, 150px);
       margin-top: 1rem;
     }
   
@@ -1137,8 +1139,8 @@
       hyphens: none;
     }
   
-    .hero-tagline {
-      font-size: clamp(0.7rem, 4vw, 0.9rem);
+    .hero-logo {
+      width: clamp(80px, 25vw, 120px);
       margin-top: 0.75rem;
     }
   

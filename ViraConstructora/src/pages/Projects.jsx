@@ -229,7 +229,11 @@ const Projects = () => {
                  
                 <span className="title-line">Desarrollos inmobiliarios de calidad</span>
               </h1>
-              <p className="hero-tagline">VIRA CONSTRUCTORA</p>
+              <img 
+                src="/img/ViraBlanco.png" 
+                alt="VIRA Constructora" 
+                className="hero-logo"
+              />
             </div>
           </div>
         </div>
