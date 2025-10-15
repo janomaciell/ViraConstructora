@@ -73,7 +73,7 @@ const About = () => {
       {/* Values Section - Fondo Blanco */}
       <section className="about-values-section">
         <div className="values-container">
-          <h2 className="section-title">
+          <h2 className="section-title-about">
             Construimos con <span className="title-light">valores</span>
           </h2>
           <p className="section-intro">
@@ -123,7 +123,7 @@ const About = () => {
       <section className="about-stats-section">
         <div className="stats-wrapper">
           <div className="stat-block">
-            <div className="stat-number">+4</div>
+            <div className="stat-number">+9</div>
             <p className="stat-label">Años de trayectoria</p>
           </div>
           <div className="stat-block">

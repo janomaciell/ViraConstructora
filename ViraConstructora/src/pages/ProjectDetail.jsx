@@ -54,11 +54,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "Durlock", category: "Construcción en seco" },
-        { name: "FV", category: "Sanitarios" }
-      ]
+      }
     },
     "vulcano-i": {
       title: "VULCANO I",
@@ -99,8 +95,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
+      }
     },
     "chape-i": {
       title: "CHAPE I",
@@ -142,10 +137,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "Johnson", category: "Revestimientos" }
-      ]
+      }
     },
     "dafna-i": {
       title: "DAFNEA I",
@@ -178,8 +170,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
+      }
     },
     "dedalo-i": {
       title: "DEDALO I",
@@ -251,10 +242,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "Cementos Avellaneda", category: "Materiales base" }
-      ]
+      }
     },
     "positive-house-xii": {
       title: "POSITIVE HOUSE XII",
@@ -287,10 +275,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "EcoTech", category: "Sistemas sustentables" }
-      ]
+      }
     },
     "positive-house-xiii": {
       title: "POSITIVE HOUSE XIII",
@@ -323,8 +308,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
+      }
     },
     "barrio-coodopin": {
       title: "BARRIO CODOOPIN",
@@ -429,11 +413,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "FV", category: "Sanitarios" },
-        { name: "Johnson", category: "Revestimientos" }
-      ]
+      }
     },
     "progreso-y-biarritz": {
       title: "PROGRESO Y BIARRITZ",
@@ -467,11 +447,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "Durlock", category: "Construcción en seco" },
-        { name: "FV", category: "Sanitarios" }
-      ]
+      }
     },
     "espartillo-i": {
       title: "ESPARTILLO I",
@@ -505,12 +481,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "FV", category: "Sanitarios" },
-        { name: "Johnson", category: "Revestimientos" },
-        { name: "Durlock", category: "Construcción en seco" }
-      ]
+      }
     },
     "corbeta-agradable-i": {
       title: "CORBETA AGRADABLE I",
@@ -544,8 +515,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
+      }
     },
     "silfides-i": {
       title: "SILFIDES I",
@@ -616,8 +586,7 @@ const ProjectDetail = () => {
         architect: "Estudio VIRA Arquitectos",
         builder: "VIRA Constructora",
         landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
+      }
     },
     "colon-i": {
       title: "COLON I",
@@ -764,16 +733,7 @@ const ProjectDetail = () => {
         <p><strong>Diseño de Paisajismo:</strong> {project.team.landscape}</p>
       </section>
 
-      {project.partners.length > 0 && (
-        <section className="project-partners-section">
-          <h2>Socios y Proveedores</h2>
-          <ul>
-            {project.partners.map((partner, index) => (
-              <li key={index}>{partner.name} - {partner.category}</li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {/* Sección de Socios y Proveedores eliminada según requerimiento */}
 
       <WhatsAppButton />
     </div>

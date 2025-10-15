@@ -134,9 +134,8 @@
   margin: 0 auto;
 }
 
-.section-title {
+.section-title-about {
   font-family: "Playfair Display", serif;
-  font-size: clamp(8rem, 20vw, 20rem); /* más grande en todos los dispositivos */
   font-weight: 400;
   color: #000;
   margin-bottom: 80px; /* más espacio debajo para que respire */

@@ -5,7 +5,6 @@ import WhatsAppButton from '../components/WhatsAppButton'
 // Video importado desde public
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('todos')
 
   const projects = [
     {
@@ -171,18 +170,8 @@ const Projects = () => {
     number: '01'
   },
   
-
-]
-  const filters = [
-    { id: 'todos', label: 'Todos los proyectos' },
-    { id: 'proyecto', label: 'Proyectos' },
-    { id: 'construccion', label: 'Construcción' },
-    { id: 'direccion', label: 'Dirección' }
+  
   ]
-
-  const filteredProjects = activeFilter === 'todos' 
-    ? projects 
-    : projects.filter(p => p.category === activeFilter)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -239,20 +228,10 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Filter Section */}
+      {/* Título de proyectos (reemplazo de filtros) */}
       <section className="projects-filter-section">
         <div className="container-wide">
-          <div className="filter-buttons">
-            {filters.map(filter => (
-              <button
-                key={filter.id}
-                className={`filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
-                onClick={() => setActiveFilter(filter.id)}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+          <h2 style={{ margin: 0 }}>Nuestros proyectos</h2>
         </div>
       </section>
 
@@ -260,7 +239,7 @@ const Projects = () => {
       <section className="projects-grid-section">
         <div className="container-wide">
           <div className="projects-grid-two-columns">
-            {filteredProjects.map((project) => (
+            {projects.map((project) => (
               <Link 
                 key={project.id} 
                 to={`/proyectos/${project.id}`}
@@ -272,7 +251,6 @@ const Projects = () => {
                     <div className="project-overlay-gradient">
                       <div className="project-overlay-text">
                         <h3 className="project-title-overlay">{project.title}</h3>
-                        <p className="project-subtitle-overlay">{project.location}</p>
                       </div>
                       <button className="project-arrow-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

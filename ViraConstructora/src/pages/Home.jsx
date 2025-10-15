@@ -284,7 +284,7 @@ const Home = () => {
               Nuestro objetivo es dejar una huella en tus momentos de <strong>desconexión, contemplación y descanso</strong>.
             </p>
             <p className="fade-in-up stagger-item">
-              Con 4 años de trayectoria, hemos desarrollado <strong>47 viviendas y unidades funcionales</strong>, sumando <strong>4.370 m² construidos y proyectados</strong>.
+              Con +9 años de trayectoria y +4 años en la costa atlántica en Pinamar, hemos desarrollado <strong>47 viviendas y unidades funcionales</strong>, sumando <strong>4.370 m² construidos y proyectados</strong>.
             </p>
             <p className="fade-in-up stagger-item">
               Somos un equipo de <strong>profesionales dedicados y comprometidos</strong>, listos para ayudarte a construir un futuro más lento, pausado y conectado con lo que realmente importa.
@@ -301,8 +301,8 @@ const Home = () => {
               <div className="stat-label">M² construidos</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number">4+</div>
-              <div className="stat-label">Años de experiencia</div>
+              <div className="stat-number">9+</div>
+              <div className="stat-label">Años de trayectoria</div>
             </div>
           </div>
         </div>
@@ -390,7 +390,7 @@ const Home = () => {
           <div className="quote-author">
             <div className="author-info">
               <div className="author-name">Alejandro Racca</div>
-              <div className="author-title">FUNDADOR</div>
+              <div className="author-title">Maestro Mayor de Obra · FUNDADOR</div>
             </div>
           </div>
         </div>
@@ -399,8 +399,10 @@ const Home = () => {
       {/* Locations Section */}
       <section className="locations-section">
         <div className="locations-content">
-          <div className="section-label fade-in-up">UBICACIONES</div>
+          <div className="section-label fade-in-up">Ubicación</div>
           <h2 className="fade-in-up">Creando hogares en los entornos más deseables de Pinamar y la costa atlántica</h2>
+          <h3 className="fade-in-up">Nos encontramos en la zona de Constitución 1386 y Totoras, en el corazón de Pinamar, donde nos esforzamos por crear espacios que sean verdaderos hogares, no solo edificios.</h3>
+
           
           <div className="locations-map fade-in-up">
           <div className="locations-map">
@@ -410,6 +412,9 @@ const Home = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+            <div className="map-address" style={{ marginTop: '12px', fontSize: '14px' }}>
+              Constitución 1386 y Totoras — Pinamar, Buenos Aires, Argentina
+            </div>
           </div>
 
           </div>
