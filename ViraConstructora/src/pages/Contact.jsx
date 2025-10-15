@@ -525,7 +525,14 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
       {/* Mapa debajo del formulario */}
       <section className="map-section-modern">
+          <h2 className="section-title-contact">
+            Ubicación
+          </h2>
+          <h3 className="section-title-contact">
+            Constitución 1386 y Totoras — Pinamar, Buenos Aires, Argentina
+          </h3>
         <div className="locations-map-contact">
+
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3492.5346259039466!2d-56.874764888113255!3d-37.10961849400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959c9cdeede9c585%3A0x2b722ba9dd9ca00f!2sAv.%20Constituci%C3%B3n%201386%2C%20B7167%20Pinamar%2C%20Provincia%20de%20Buenos%20Aires!5e1!3m2!1ses-419!2sar!4v1760061274045!5m2!1ses-419!2sar"
             allowFullScreen
