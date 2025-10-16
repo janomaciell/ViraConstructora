@@ -3,6 +3,9 @@ import emailjs from '@emailjs/browser'
 import WhatsAppButton from '../components/WhatsAppButton'
 import './Contact.css'
 
+// 🔥 INICIALIZAR EmailJS con tu Public Key
+emailjs.init('aq7CBtsGS1ChR6Fuu') // 👈 Tu Public Key
+
 const Contact = () => {
   const form = useRef()
   const videoRef = useRef(null)
@@ -41,7 +44,6 @@ const Contact = () => {
     })
   }
 
-  // Generar horarios disponibles (9 AM a 6 PM cada hora)
   const generateTimeSlots = () => {
     const slots = []
     for (let hour = 9; hour <= 18; hour++) {
@@ -54,14 +56,12 @@ const Contact = () => {
 
   const timeSlots = generateTimeSlots()
 
-  // Obtener fecha mínima (mañana)
   const getMinDate = () => {
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
     return tomorrow.toISOString().split('T')[0]
   }
 
-  // Obtener fecha máxima (30 días desde hoy)
   const getMaxDate = () => {
     const maxDate = new Date()
     maxDate.setDate(maxDate.getDate() + 30)
@@ -71,7 +71,6 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     
-    // Validar fecha y hora SOLO si tiene terreno
     if (formData.hasLand === 'si') {
       if (!formData.meetingDate || !formData.meetingTime) {
         alert('Por favor, selecciona una fecha y hora para la videollamada.')
@@ -83,7 +82,6 @@ const Contact = () => {
     setSubmitStatus(null)
 
     try {
-      // Formatear fecha y hora para el email
       const meetingDateTime = formData.meetingDate && formData.meetingTime
         ? new Date(`${formData.meetingDate}T${formData.meetingTime}`)
         : null
@@ -109,9 +107,7 @@ const Contact = () => {
         minute: '2-digit'
       })
 
-      // Preparar parámetros para EmailJS
       const templateParams = {
-        to_email: 'viraconstructora@gmail.com',
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
@@ -121,21 +117,29 @@ const Contact = () => {
         request_date: currentDate
       }
 
-      // 🔥 ENVIAR EMAIL AUTOMÁTICAMENTE con EmailJS
-      const response = await emailjs.send(
-        'viraconstructora1',      // 👈 Reemplaza con tu Service ID de EmailJS
-        'template_13du8u8',     // 👈 Reemplaza con tu Template ID de EmailJS
-        templateParams,
-        'Yaq7CBtsGS1ChR6Fuu'       // 👈 Reemplaza con tu Public Key de EmailJS
+      // 🔥 ENVIAR EMAIL 1: Confirmación al CLIENTE
+      await emailjs.send(
+        'service_hyhlgf5',           // Service ID
+        'template_13du8u8',         // 👈 Reemplaza con el Template ID del email al cliente
+        templateParams
       )
 
-      console.log('✅ Email enviado exitosamente:', response.status, response.text)
+      console.log('✅ Email de confirmación enviado al cliente')
+
+      // 🔥 ENVIAR EMAIL 2: Notificación a la CONSTRUCTORA
+      await emailjs.send(
+        'service_hyhlgf5',           // Service ID
+        'template_f9iwgld',
+        templateParams
+      )
+
+      console.log('✅ Email de notificación enviado a la constructora')
 
       // Si tiene terreno, abrir Google Calendar
       if (formData.hasLand === 'si') {
         const startDateTime = new Date(`${formData.meetingDate}T${formData.meetingTime}:00`)
         const endDateTime = new Date(startDateTime)
-        endDateTime.setHours(endDateTime.getHours() + 1) // Duración de 1 hora
+        endDateTime.setHours(endDateTime.getHours() + 1)
 
         const formatDateForCalendar = (date) => {
           const year = date.getFullYear()
@@ -149,56 +153,33 @@ const Contact = () => {
         const startTime = formatDateForCalendar(startDateTime)
         const endTime = formatDateForCalendar(endDateTime)
 
-        // Crear descripción detallada para el evento
         const eventTitle = '🏗️ Videollamada con Vira Constructora'
         const eventDetails = `
 VIDEOLLAMADA AGENDADA CON VIRA CONSTRUCTORA
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📋 TUS DATOS:
 Nombre: ${formData.name}
 Email: ${formData.email}
 Teléfono: ${formData.phone}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏡 DETALLES DE TU PROYECTO:
 Terreno: Sí tengo terreno
 Superficie deseada: ${formData.squareMeters || 'A definir'}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📞 Recibirás un enlace de Google Meet por email antes de la reunión.
 
-📞 INFORMACIÓN DE LA VIDEOLLAMADA:
-- Recibirás un enlace de Google Meet por email antes de la reunión
-- Duración estimada: 1 hora
-- Por favor, ten a mano cualquier documento o foto relevante de tu terreno
-
-📝 TEMAS A TRATAR:
-- Presentación de Vira Constructora
-- Tus necesidades y expectativas
-- Opciones de construcción y diseño
-- Presupuesto inicial
-- Próximos pasos
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📍 Vira Constructora
 📧 viraconstructora@gmail.com
-🌐 www.viraconstructora.com
-
-¡Esperamos poder ayudarte a construir el hogar de tus sueños!
         `.trim()
 
         const eventLocation = 'Google Meet (el enlace será enviado por email)'
-
-        // URL de Google Calendar con todos los parámetros
         const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}&dates=${startTime}/${endTime}`
 
-        // Abrir Google Calendar en nueva pestaña
         window.open(calendarUrl, '_blank')
       }
 
       setSubmitStatus('success')
 
-      // Reset form después de 4 segundos
       setTimeout(() => {
         setFormData({
           hasLand: null,
@@ -251,7 +232,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
   return (
     <div className="contact-page-modern">
-      {/* Hero Title */}
       <section className="contact-hero-modern">
         <div className="container-wide">
           <h1 className="hero-title-modern">
@@ -261,11 +241,9 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
         </div>
       </section>
 
-      {/* Main Contact Section */}
       <section className="contact-main-section">
         <div className="container-wide">
           <div className="contact-split-modern">
-            {/* Left Side - Video */}
             <div className="contact-left-side">
               <div className="video-container-modern">
                 <video
@@ -297,7 +275,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
               </div>
             </div>
 
-            {/* Right Side - Form */}
             <div className="contact-right-side">
               <div className="form-intro">
                 <p className="form-intro-text">
@@ -306,11 +283,9 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
               </div>
 
               <form ref={form} onSubmit={handleSubmit} className="contact-form-modern">
-                {/* Hidden fields */}
                 <input type="hidden" name="hasLand" value={formData.hasLand || ''} />
                 <input type="hidden" name="squareMeters" value={formData.squareMeters || ''} />
 
-                {/* Pregunta 1: ¿Tenés un terreno? */}
                 <div className="form-group-modern">
                   <label className="form-label-modern">¿Tenés un terreno?</label>
                   <div className="options-container">
@@ -331,7 +306,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
                   </div>
                 </div>
 
-                {/* Pregunta 2: ¿Cuántos metros cuadrados? */}
                 {step >= 2 && formData.hasLand === 'si' && (
                   <div className="form-group-modern slide-in">
                     <label className="form-label-modern">¿Cuántos metros cuadrados te gustaría construir?</label>
@@ -361,7 +335,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
                   </div>
                 )}
 
-                 {/* Datos de contacto */}
                  {step >= 3 && (
                    <>
                     <div className="form-group-modern slide-in">
@@ -409,7 +382,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
                       />
                     </div>
 
-                     {/* Selección de fecha y hora y envío: solo si tiene terreno */}
                      {formData.hasLand === 'si' && (
                        <>
                          <div className="form-group-modern slide-in">
@@ -468,19 +440,18 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
                          {submitStatus === 'success' && (
                            <div className="form-message-modern success">
-                             ✅ ¡Email enviado exitosamente! Se abrió Google Calendar para que guardes el evento.
+                             ✅ ¡Solicitud enviada! Revisá tu email para la confirmación.
                            </div>
                          )}
 
                          {submitStatus === 'error' && (
                            <div className="form-message-modern error">
-                             ❌ Hubo un error al enviar el email. Por favor, intentá nuevamente o contactanos por WhatsApp.
+                             ❌ Hubo un error. Por favor, intentá nuevamente o contactanos por WhatsApp.
                            </div>
                          )}
                        </>
                      )}
 
-                     {/* Botón de envío SOLO consulta si NO tiene terreno */}
                      {formData.hasLand === 'no' && (
                        <>
                          <button 
@@ -496,13 +467,13 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
                          {submitStatus === 'success' && (
                            <div className="form-message-modern success">
-                             ✅ ¡Consulta enviada exitosamente! Te contactaremos pronto.
+                             ✅ ¡Consulta enviada! Revisá tu email para la confirmación.
                            </div>
                          )}
 
                          {submitStatus === 'error' && (
                            <div className="form-message-modern error">
-                             ❌ Hubo un error al enviar la consulta. Por favor, intentá nuevamente o contactanos por WhatsApp.
+                             ❌ Hubo un error. Por favor, intentá nuevamente o contactanos por WhatsApp.
                            </div>
                          )}
                        </>
@@ -515,7 +486,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
         </div>
       </section>
 
-      {/* Mapa debajo del formulario */}
       <section className="map-section-modern">
           <h2 className="section-title-contact">
             Ubicación
@@ -525,11 +495,12 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
           </h3>
         <div className="locations-map-contact">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3492.5346259039466!2d-56.874764888113255!3d-37.10961849400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959c9cdeede9c585%3A0x2b722ba9dd9ca00f!2sAv.%20Constituci%C3%B3n%201386%2C%20B7167%20Pinamar%2C%20Provincia%20de%20Buenos%20Aires!5e1!3m2!1ses-419!2sar!4v1760061274045!5m2!1ses-419!2sar"
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3492.5346259039466!2d-56.874764888113255!3d-37.10961849400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959c9cdeede9c585%3A0x2b722ba9dd9ca00f!2sAv.%20Constituci%C3%B3n%201386%2C%20B7167%20Pinamar%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1760061274045!5m2!1ses-419!2sar"
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
+
         </div>
       </section>
 
