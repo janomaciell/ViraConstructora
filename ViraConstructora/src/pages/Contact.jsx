@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import emailjs from '@emailjs/browser'
 import WhatsAppButton from '../components/WhatsAppButton'
 import './Contact.css'
 
@@ -67,7 +68,7 @@ const Contact = () => {
     return maxDate.toISOString().split('T')[0]
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     
     // Validar fecha y hora SOLO si tiene terreno
@@ -81,104 +82,76 @@ const Contact = () => {
     setIsSubmitting(true)
     setSubmitStatus(null)
 
-    // 1. Preparar datos para el email con formato profesional
-    const mailToAddress = 'viraconstructora@gmail.com'
-    const subject = '📞 Nueva Solicitud de Videollamada - Vira Constructora'
-    
-    // Formatear fecha y hora para el email (si aplica)
-    const meetingDateTime = formData.meetingDate && formData.meetingTime
-      ? new Date(`${formData.meetingDate}T${formData.meetingTime}`)
-      : null
-    const formattedDateTime = meetingDateTime
-      ? (meetingDateTime.toLocaleDateString('es-AR', { 
-          weekday: 'long', 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric'
-        }) + ' a las ' + meetingDateTime.toLocaleTimeString('es-AR', {
-          hour: '2-digit',
-          minute: '2-digit'
-        }))
-      : null
+    try {
+      // Formatear fecha y hora para el email
+      const meetingDateTime = formData.meetingDate && formData.meetingTime
+        ? new Date(`${formData.meetingDate}T${formData.meetingTime}`)
+        : null
+      
+      const formattedDateTime = meetingDateTime
+        ? (meetingDateTime.toLocaleDateString('es-AR', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+          }) + ' a las ' + meetingDateTime.toLocaleTimeString('es-AR', {
+            hour: '2-digit',
+            minute: '2-digit'
+          }))
+        : 'No aplica'
 
-    const emailBody = `
-═══════════════════════════════════════════════════
-           NUEVA SOLICITUD DE VIDEOLLAMADA
-═══════════════════════════════════════════════════
+      const currentDate = new Date().toLocaleDateString('es-AR', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
 
-INFORMACIÓN DEL CLIENTE
-──────────────────────────────────────────────────
-👤 Nombre:           ${formData.name}
-📧 Email:            ${formData.email}
-📱 Teléfono:         ${formData.phone}
-
-INFORMACIÓN DEL PROYECTO
-──────────────────────────────────────────────────
-🏡 Posee terreno:    ${formData.hasLand === 'si' ? 'Sí' : 'No'}
-📏 Superficie:       ${formData.squareMeters || 'No especificado'}
-
- ${formattedDateTime ? `FECHA Y HORA SOLICITADA
- ──────────────────────────────────────────────────
- 📅 ${formattedDateTime}` : ''}
-
-──────────────────────────────────────────────────
-Fecha de solicitud: ${new Date().toLocaleDateString('es-AR', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    })}
-
-⚠️ IMPORTANTE: Confirmar disponibilidad y enviar enlace de Google Meet al cliente.
-    `.trim()
-
-    const mailtoUrl = `mailto:${encodeURIComponent(mailToAddress)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`
-
-    // Abrir cliente de correo
-    window.location.href = mailtoUrl
-
-     // 2. Crear evento de Google Calendar SOLO si tiene terreno
-     setTimeout(() => {
-       if (formData.hasLand !== 'si') {
-         setSubmitStatus('success')
-         // Reset si no hay agenda
-         setTimeout(() => {
-           setFormData({
-             hasLand: null,
-             squareMeters: '',
-             name: '',
-             email: '',
-             phone: '',
-             meetingDate: '',
-             meetingTime: ''
-           })
-           setStep(1)
-           setSubmitStatus(null)
-         }, 3000)
-         return
-       }
-      // Formatear fechas para Google Calendar (formato: YYYYMMDDTHHmmss)
-      const startDateTime = new Date(`${formData.meetingDate}T${formData.meetingTime}:00`)
-      const endDateTime = new Date(startDateTime)
-      endDateTime.setHours(endDateTime.getHours() + 1) // Duración de 1 hora
-
-      const formatDateForCalendar = (date) => {
-        const year = date.getFullYear()
-        const month = String(date.getMonth() + 1).padStart(2, '0')
-        const day = String(date.getDate()).padStart(2, '0')
-        const hours = String(date.getHours()).padStart(2, '0')
-        const minutes = String(date.getMinutes()).padStart(2, '0')
-        return `${year}${month}${day}T${hours}${minutes}00`
+      // Preparar parámetros para EmailJS
+      const templateParams = {
+        to_email: 'viraconstructora@gmail.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        has_land: formData.hasLand === 'si' ? 'Sí' : 'No',
+        square_meters: formData.squareMeters || 'No especificado',
+        meeting_datetime: formattedDateTime,
+        request_date: currentDate
       }
 
-      const startTime = formatDateForCalendar(startDateTime)
-      const endTime = formatDateForCalendar(endDateTime)
+      // 🔥 ENVIAR EMAIL AUTOMÁTICAMENTE con EmailJS
+      const response = await emailjs.send(
+        'viraconstructora1',      // 👈 Reemplaza con tu Service ID de EmailJS
+        'template_13du8u8',     // 👈 Reemplaza con tu Template ID de EmailJS
+        templateParams,
+        'Yaq7CBtsGS1ChR6Fuu'       // 👈 Reemplaza con tu Public Key de EmailJS
+      )
 
-      // Crear descripción detallada para el evento
-      const eventTitle = '🏗️ Videollamada con Vira Constructora'
-      const eventDetails = `
+      console.log('✅ Email enviado exitosamente:', response.status, response.text)
+
+      // Si tiene terreno, abrir Google Calendar
+      if (formData.hasLand === 'si') {
+        const startDateTime = new Date(`${formData.meetingDate}T${formData.meetingTime}:00`)
+        const endDateTime = new Date(startDateTime)
+        endDateTime.setHours(endDateTime.getHours() + 1) // Duración de 1 hora
+
+        const formatDateForCalendar = (date) => {
+          const year = date.getFullYear()
+          const month = String(date.getMonth() + 1).padStart(2, '0')
+          const day = String(date.getDate()).padStart(2, '0')
+          const hours = String(date.getHours()).padStart(2, '0')
+          const minutes = String(date.getMinutes()).padStart(2, '0')
+          return `${year}${month}${day}T${hours}${minutes}00`
+        }
+
+        const startTime = formatDateForCalendar(startDateTime)
+        const endTime = formatDateForCalendar(endDateTime)
+
+        // Crear descripción detallada para el evento
+        const eventTitle = '🏗️ Videollamada con Vira Constructora'
+        const eventDetails = `
 VIDEOLLAMADA AGENDADA CON VIRA CONSTRUCTORA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -189,7 +162,7 @@ Teléfono: ${formData.phone}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏡 DETALLES DE TU PROYECTO:
-Terreno: ${formData.hasLand === 'si' ? 'Sí tengo terreno' : 'Busco terreno'}
+Terreno: Sí tengo terreno
 Superficie deseada: ${formData.squareMeters || 'A definir'}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -208,23 +181,24 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📍 Vira Constructora
-📧 janomaciel1@gmail.com
-🌐 www.viraconstructora.com (ajusta según tu sitio)
+📧 viraconstructora@gmail.com
+🌐 www.viraconstructora.com
 
 ¡Esperamos poder ayudarte a construir el hogar de tus sueños!
-      `.trim()
+        `.trim()
 
-      const eventLocation = 'Google Meet (el enlace será enviado por email)'
+        const eventLocation = 'Google Meet (el enlace será enviado por email)'
 
-      // URL de Google Calendar con todos los parámetros
-      const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}&dates=${startTime}/${endTime}`
+        // URL de Google Calendar con todos los parámetros
+        const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}&dates=${startTime}/${endTime}`
 
-       // Abrir Google Calendar
-       window.open(calendarUrl, '_blank')
- 
-       setSubmitStatus('success')
+        // Abrir Google Calendar en nueva pestaña
+        window.open(calendarUrl, '_blank')
+      }
 
-      // Reset form después de 3 segundos
+      setSubmitStatus('success')
+
+      // Reset form después de 4 segundos
       setTimeout(() => {
         setFormData({
           hasLand: null,
@@ -238,9 +212,13 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
         setStep(1)
         setSubmitStatus(null)
       }, 4000)
-    }, 800)
 
-    setIsSubmitting(false)
+    } catch (error) {
+      console.error('❌ Error al enviar email:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   useEffect(() => {
@@ -482,7 +460,7 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
                            className="submit-button-modern"
                            disabled={isSubmitting}
                          >
-                           <span>{isSubmitting ? 'PROCESANDO...' : 'CONFIRMAR VIDEOLLAMADA'}</span>
+                           <span>{isSubmitting ? 'ENVIANDO...' : 'CONFIRMAR VIDEOLLAMADA'}</span>
                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                              <path d="M5 12h14M12 5l7 7-7 7"/>
                            </svg>
@@ -490,13 +468,13 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
                          {submitStatus === 'success' && (
                            <div className="form-message-modern success">
-                             ✅ ¡Videollamada agendada! Se abrirá Google Calendar para guardar el evento.
+                             ✅ ¡Email enviado exitosamente! Se abrió Google Calendar para que guardes el evento.
                            </div>
                          )}
 
                          {submitStatus === 'error' && (
                            <div className="form-message-modern error">
-                             Hubo un error al procesar tu solicitud. Por favor, intentá nuevamente.
+                             ❌ Hubo un error al enviar el email. Por favor, intentá nuevamente o contactanos por WhatsApp.
                            </div>
                          )}
                        </>
@@ -504,16 +482,30 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
 
                      {/* Botón de envío SOLO consulta si NO tiene terreno */}
                      {formData.hasLand === 'no' && (
-                       <button 
-                         type="submit" 
-                         className="submit-button-modern"
-                         disabled={isSubmitting}
-                       >
-                         <span>{isSubmitting ? 'PROCESANDO...' : 'ENVIAR CONSULTA'}</span>
-                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                           <path d="M5 12h14M12 5l7 7-7 7"/>
-                         </svg>
-                       </button>
+                       <>
+                         <button 
+                           type="submit" 
+                           className="submit-button-modern"
+                           disabled={isSubmitting}
+                         >
+                           <span>{isSubmitting ? 'ENVIANDO...' : 'ENVIAR CONSULTA'}</span>
+                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                             <path d="M5 12h14M12 5l7 7-7 7"/>
+                           </svg>
+                         </button>
+
+                         {submitStatus === 'success' && (
+                           <div className="form-message-modern success">
+                             ✅ ¡Consulta enviada exitosamente! Te contactaremos pronto.
+                           </div>
+                         )}
+
+                         {submitStatus === 'error' && (
+                           <div className="form-message-modern error">
+                             ❌ Hubo un error al enviar la consulta. Por favor, intentá nuevamente o contactanos por WhatsApp.
+                           </div>
+                         )}
+                       </>
                      )}
                   </>
                 )}
@@ -532,7 +524,6 @@ Superficie deseada: ${formData.squareMeters || 'A definir'}
             Constitución 1386 y Totoras — Pinamar, Buenos Aires, Argentina
           </h3>
         <div className="locations-map-contact">
-
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3492.5346259039466!2d-56.874764888113255!3d-37.10961849400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959c9cdeede9c585%3A0x2b722ba9dd9ca00f!2sAv.%20Constituci%C3%B3n%201386%2C%20B7167%20Pinamar%2C%20Provincia%20de%20Buenos%20Aires!5e1!3m2!1ses-419!2sar!4v1760061274045!5m2!1ses-419!2sar"
             allowFullScreen
