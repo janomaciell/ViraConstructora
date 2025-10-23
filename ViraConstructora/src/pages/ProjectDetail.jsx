@@ -139,7 +139,7 @@ const ProjectDetail = () => {
         landscape: "Verde Diseño Paisajístico"
       }
     },
-    "dafna-i": {
+    "dafnea-i": {
       title: "DAFNEA I",
       subtitle: "Arquitectura contemporánea en evolución",
       type: "PROYECTO Y DIRECCION",
@@ -164,7 +164,7 @@ const ProjectDetail = () => {
         "Iluminación LED eficiente"
       ],
       gallery: [
-        "/img/DAFNEA/DAFNEA.jpg",
+        "/img/DAFNEA/Dafnea1.jpg",
       ],
       team: {
         architect: "Estudio VIRA Arquitectos",

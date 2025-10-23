@@ -36,13 +36,13 @@ const Projects = () => {
       image: '/img/CHAPE/CHAPE 1.jpg',
     },
     {
-      id: 'dafna-i',
-      title: 'DAFNA I',
+      id: 'dafnea-i',
+      title: 'DAFNEA I',
       category: 'proyecto',
       location: 'PROYECTO Y DIRECCION',
       status: '155 M2 · 3 DORMITORIOS · 3 BAÑOS',
       description: 'Proyecto de diseño y dirección con arquitectura contemporánea.',
-      image: '/img/DAFNEA/DAFNEA.jpg'
+      image: '/img/DAFNEA/Dafnea1.jpg'
     },
     {
       id: 'dedalo-i',
