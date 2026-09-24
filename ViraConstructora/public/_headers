@@ -1,11 +1,22 @@
+# Cabeceras para Cloudflare Pages / Netlify.
+# En Vercel manda vercel.json; este archivo queda para cuando los
+# assets se sirvan desde Cloudflare.
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
 /img/*.mp4
   Content-Type: video/mp4
-  Cache-Control: public, max-age=31536000
+  Cache-Control: public, max-age=31536000, immutable
 
 /img/*.webm
   Content-Type: video/webm
-  Cache-Control: public, max-age=31536000
+  Cache-Control: public, max-age=31536000, immutable
 
-/img/*.ogg
-  Content-Type: video/ogg
-  Cache-Control: public, max-age=31536000
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vira-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "ViraConstructora", "run", "dev", "--", "--port", "5183", "--strictPort"],
+      "port": 5183
+    }
+  ]
+}

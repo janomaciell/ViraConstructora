@@ -1,0 +1,231 @@
+/* ============================================================
+   VIRA — DESIGN SYSTEM / TOKENS
+   Única fuente de verdad para color, tipografía, espacio,
+   bordes, sombras, motion y breakpoints.
+   ============================================================ */
+
+:root {
+  /* ---- MARCA -------------------------------------------- */
+  --vira-blue: #7AA6D0;
+  --vira-blue-100: #EDF3F9;
+  --vira-blue-200: #D6E4F1;
+  --vira-blue-300: #B3CDE5;
+  --vira-blue-400: #7AA6D0;
+  --vira-blue-500: #5C8CBC;
+  --vira-blue-600: #43709E;
+  --vira-blue-700: #2F5578;
+  --vira-blue-900: #16293C;
+
+  --vira-ink: #0E1116;
+  --vira-paper: #FBFBF9;
+
+  /* ---- TIPOGRAFÍA --------------------------------------- */
+  --font-display: 'Anton', 'Arial Narrow', 'Haettenschweiler', Impact, sans-serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Escala fluida — display (Anton) */
+  --fs-d1: clamp(3.25rem, 11vw, 10.5rem);
+  --fs-d2: clamp(2.75rem, 7.5vw, 6.5rem);
+  --fs-d3: clamp(2.125rem, 5vw, 4.25rem);
+  --fs-d4: clamp(1.75rem, 3.4vw, 2.875rem);
+  --fs-d5: clamp(1.375rem, 2.2vw, 1.875rem);
+
+  /* Escala texto (Montserrat) */
+  --fs-lead: clamp(1.125rem, 1.9vw, 1.625rem);
+  --fs-body: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.75rem;
+  --fs-label: 0.6875rem;
+
+  --lh-display: 0.92;
+  --lh-tight: 1.12;
+  --lh-body: 1.65;
+
+  --ls-display: -0.015em;
+  --ls-label: 0.22em;
+  --ls-nav: 0.14em;
+
+  /* ---- ESPACIADO (escala 4px) --------------------------- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+  --sp-10: 8rem;
+  --sp-11: 12rem;
+
+  /* Aire vertical de sección — generoso, editorial */
+  --section-y: clamp(5rem, 11vw, 11rem);
+  --section-y-sm: clamp(3.5rem, 7vw, 6rem);
+
+  /* ---- LAYOUT ------------------------------------------- */
+  --gutter: clamp(1.25rem, 4.5vw, 4.5rem);
+  --maxw: 1440px;
+  --maxw-text: 68ch;
+  --header-h: 84px;
+  --header-h-sm: 68px;
+
+  /* ---- BORDES / RADIOS ---------------------------------- */
+  --bw: 1px;
+  --bw-strong: 2px;
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-pill: 999px;
+
+  /* ---- SOMBRAS (mínimas, arquitectónicas) --------------- */
+  --shadow-1: 0 1px 2px rgba(14, 17, 22, 0.06);
+  --shadow-2: 0 12px 32px -18px rgba(14, 17, 22, 0.30);
+  --shadow-3: 0 32px 80px -40px rgba(14, 17, 22, 0.45);
+
+  /* ---- MOTION ------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-emph: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --dur-1: 160ms;   /* micro: hover, focus */
+  --dur-2: 320ms;   /* estado: botones, nav */
+  --dur-3: 620ms;   /* reveal de contenido */
+  --dur-4: 950ms;   /* reveal de bloque grande */
+
+  --stagger: 90ms;
+
+  --t-micro: var(--dur-1) var(--ease-out);
+  --t-state: var(--dur-2) var(--ease-out);
+  --t-reveal: var(--dur-3) var(--ease-out);
+  --t-theme: 420ms var(--ease-in-out);
+
+  /* ---- Z-INDEX ------------------------------------------ */
+  --z-base: 1;
+  --z-sticky: 100;
+  --z-header: 900;
+  --z-overlay: 950;
+  --z-float: 800;
+  --z-modal: 1000;
+}
+
+/* ============================================================
+   TEMA CLARO — editorial, limpio, mucho papel
+   ============================================================ */
+:root,
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --background: var(--vira-paper);
+  --surface: #FFFFFF;
+  --surface-2: #F2F4F7;
+  --surface-inverse: #0E1116;
+
+  --foreground: #0E1116;
+  --foreground-strong: #000000;
+  --muted: #5C6672;
+  --muted-2: #8C959F;
+  --on-inverse: #F4F6F8;
+  --on-inverse-muted: #A7B0BA;
+
+  --border: #E3E6EA;
+  --border-strong: #C9CFD6;
+  --border-inverse: rgba(255, 255, 255, 0.16);
+
+  --primary: #5C8CBC;
+  --primary-hover: #43709E;
+  --primary-soft: var(--vira-blue-100);
+  --primary-block: #7AA6D0;
+  --on-brand: #08111A;
+  --on-primary: #FFFFFF;
+  --accent-line: #7AA6D0;
+
+  --overlay-scrim: rgba(10, 13, 17, 0.42);
+  --overlay-media: linear-gradient(180deg, rgba(10,13,17,0) 30%, rgba(10,13,17,0.72) 100%);
+
+  --field-bg: #FFFFFF;
+  --field-border: #D8DDE3;
+  --focus-ring: #43709E;
+}
+
+/* ============================================================
+   TEMA OSCURO — serio, arquitectónico, hormigón nocturno
+   ============================================================ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --background: #0B0D10;
+  --surface: #121519;
+  --surface-2: #191D23;
+  /* En oscuro el bloque de tinta NO se invierte a blanco: baja un tono más
+     que el fondo, para seguir leyéndose como un bloque pesado y serio. */
+  --surface-inverse: #05070A;
+
+  --foreground: #ECEFF3;
+  --foreground-strong: #FFFFFF;
+  --muted: #98A2AE;
+  --muted-2: #6E7884;
+  --on-inverse: #ECEFF3;
+  --on-inverse-muted: #98A2AE;
+
+  --border: #232830;
+  --border-strong: #333A44;
+  --border-inverse: rgba(255, 255, 255, 0.12);
+
+  --primary: #7AA6D0;
+  --primary-hover: #9CBFE0;
+  --primary-soft: rgba(122, 166, 208, 0.12);
+  /* En oscuro el bloque de marca baja a un azul profundo con texto
+     claro: mantiene la identidad sin encandilar y conserva contraste AA. */
+  --primary-block: #2F5578;
+  --on-brand: #EAF2FA;
+  --on-primary: #06090C;
+  --accent-line: #7AA6D0;
+
+  --overlay-scrim: rgba(4, 6, 9, 0.55);
+  --overlay-media: linear-gradient(180deg, rgba(4,6,9,0) 30%, rgba(4,6,9,0.82) 100%);
+
+  --field-bg: #14181D;
+  --field-border: #2C333C;
+  --focus-ring: #7AA6D0;
+}
+
+/* Preferencia del sistema cuando el usuario no eligió tema */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --background: #0B0D10;
+    --surface: #121519;
+    --surface-2: #191D23;
+    --surface-inverse: #05070A;
+
+    --foreground: #ECEFF3;
+    --foreground-strong: #FFFFFF;
+    --muted: #98A2AE;
+    --muted-2: #6E7884;
+    --on-inverse: #ECEFF3;
+    --on-inverse-muted: #98A2AE;
+
+    --border: #232830;
+    --border-strong: #333A44;
+    --border-inverse: rgba(255, 255, 255, 0.12);
+
+    --primary: #7AA6D0;
+    --primary-hover: #9CBFE0;
+    --primary-soft: rgba(122, 166, 208, 0.12);
+    --primary-block: #2F5578;
+    --on-brand: #EAF2FA;
+    --on-primary: #06090C;
+    --accent-line: #7AA6D0;
+
+    --overlay-scrim: rgba(4, 6, 9, 0.55);
+    --overlay-media: linear-gradient(180deg, rgba(4,6,9,0) 30%, rgba(4,6,9,0.82) 100%);
+
+    --field-bg: #14181D;
+    --field-border: #2C333C;
+    --focus-ring: #7AA6D0;
+  }
+}

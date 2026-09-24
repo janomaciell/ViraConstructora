@@ -1,227 +1,196 @@
-import { useState, useEffect } from 'react'
+import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
+
+import SmartVideo from '../components/ui/SmartVideo'
+import SmartImage from '../components/ui/SmartImage'
+import ArrowIcon from '../components/ui/ArrowIcon'
+import Isotype from '../components/ui/Isotype'
+import { useLanguage } from '../i18n/language-context'
+import useScrollReveal from '../hooks/useScrollReveal'
+import { services as allServices, localizeService } from '../data/services'
+import { SIZES } from '../lib/media'
 import './Services.css'
-import WhatsAppButton from '../components/WhatsAppButton'
-// Video importado desde public
 
 const Services = () => {
-  const [activeService, setActiveService] = useState(0)
+  const { t, lang } = useLanguage()
 
-  const services = [
-    {
-      id: 1,
-      number: '01',
-      title: 'Arquitectura y Diseño',
-      subtitle: 'NUESTRA MARCA PERSONAL',
-      description: 'A lo largo de los años ha sido poner el valor cada uno de los vecindarios donde implantamos nuestros proyectos. Las viviendas que proyectamos en nuestro estudio siguen las tendencias de arquitectura más actuales y cuentan con detalles de diseño que logran sorprender positivamente a nuestros clientes.',
-      features: [
-        'Diseño 3D',
-        'Videos de presentación en HD',
-        'Renders realistas',
-        'Recorrido con realidad virtual',
-        'Planos y detalles constructivos',
-        'Cálculos estructurales'
-      ],
-      image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200'
-    },
-    {
-      id: 2,
-      number: '02',
-      title: 'Gestoría',
-      subtitle: 'TRÁMITES Y PERMISOS',
-      description: 'Nuestro equipo de profesionales matriculados se encarga de todas las diligencias y presentaciones necesarias para la ejecución de la obra.',
-      features: [
-        'Permiso municipal',
-        'Gas natural',
-        'Servicio eléctrico',
-        'Agua corriente',
-        'Servicio sanitario',
-        'Documentación completa'
-      ],
-      image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200'
-    },
-    {
-      id: 3,
-      number: '03',
-      title: 'Administración de Obra',
-      subtitle: 'CONTROL TOTAL',
-      description: 'Llevamos un control digital y analógico de todos los comprobantes de pagos a proveedores, facturas emitidas y recibidas. Esto nos permite llevar un control minucioso de los gastos de las obras.',
-      features: [
-        'Control de pagos',
-        'Gestión de facturas',
-        'Reportes detallados',
-        'Seguimiento en tiempo real',
-        'Transparencia total',
-        'Informes mensuales'
-      ],
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200'
-    },
-    {
-      id: 4,
-      number: '04',
-      title: 'Seguridad en Obra',
-      subtitle: 'PROTECCIÓN INTEGRAL',
-      description: 'Todo el personal que esté afectado a la obra se encuentra contratado y cubierto por cualquier tipo de accidente producto del trabajo que se encuentre realizando.',
-      features: [
-        'Personal asegurado',
-        'Planes de seguridad e higiene',
-        'Botiquines de primeros auxilios',
-        'Charlas semanales de seguridad',
-        'Elementos de protección',
-        'Cumplimiento normativo'
-      ],
-      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200'
-    },
-    {
-      id: 5,
-      number: '05',
-      title: 'Construcción',
-      subtitle: 'EJECUCIÓN PROFESIONAL',
-      description: 'Ofrecemos las opciones de construcción mediante las modalidades llave en mano, mano de obra o mixtas. Toda la construcción se realiza con nuestro staff permanente de albañiles, plomeros, electricistas y contratistas.',
-      features: [
-        'Llave en mano',
-        'Mano de obra especializada',
-        'Modalidades mixtas',
-        'Staff permanente',
-        'Seguimiento continuo',
-        'Garantía de calidad'
-      ],
-      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200'
-    }
-  ]
+  const services = useMemo(
+    () => allServices.map((service) => localizeService(service, lang)),
+    [lang],
+  )
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const header = document.querySelector('.header')
-      if (window.scrollY > 10) {
-        header?.classList.add('scrolled')
-      } else {
-        header?.classList.remove('scrolled')
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    handleScroll() // <-- Llama al efecto al montar el componente
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  useScrollReveal([lang])
+
   return (
     <div className="services-page">
-      <section className="services-hero">
-        <div className="services-hero-background">
-          <video
-            src="/img/ANCLA/videoexterior.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            onLoadStart={() => console.log('Services video loading')}
-            onCanPlay={() => console.log('Services video can play')}
-            onError={(e) => console.error('Services video error:', e)}
-            onPlay={() => console.log('Services video playing')}
-          />
+      <section className="page-hero">
+        <div className="page-hero__media">
+          <SmartVideo src="img/ANCLA/videoexterior.mp4" />
         </div>
-        <div className="services-hero-content">
-          <p className="hero-label">NUESTROS SERVICIOS</p>
-          <h1>Excelencia en<br />cada detalle</h1>
-          <img 
-            src="/img/ViraBlanco.png" 
-            alt="VIRA Constructora" 
-            className="hero-logo"
-          />
+        <span className="page-hero__scrim" aria-hidden="true" />
+
+        <div className="shell shell--wide page-hero__inner">
+          <span className="eyebrow">{t.services.heroLabel}</span>
+          <h1 className="page-hero__title">
+            {t.services.heroTitleLine1}
+            <br />
+            {t.services.heroTitleLine2}
+          </h1>
         </div>
+        <span className="page-hero__bar" aria-hidden="true" />
       </section>
 
-      {/* Intro Section */}
-      <section className="services-intro">
-        <div className="intro-wrapper">
-          <p className="intro-lead">
-            Ofrecemos soluciones integrales para el desarrollo de proyectos inmobiliarios, 
-            desde el diseño inicial hasta la entrega final, con el más alto estándar de calidad.
+      {/* Declaración de apertura: una sola idea, mucho aire */}
+      <section className="section services-intro">
+        <div className="shell services-intro__grid">
+          <Isotype size={72} className="services-intro__mark" data-reveal="fade" />
+          <p className="services-intro__lead" data-reveal="up">
+            {t.services.introLead}
           </p>
         </div>
       </section>
 
-      {/* Services List - Vertical con imágenes grandes */}
-      <section className="services-list">
-        {services.map((service, index) => (
-          <div 
-            key={service.id} 
-            className={`service-item ${index % 2 === 0 ? 'reverse' : ''}`}
-            onClick={() => setActiveService(index)}
-          >
-            <div className="service-visual">
-              <div className="service-image-large">
-                <img src={service.image} alt={service.title} />
-              </div>
-              <div className="service-number-display">{service.number}</div>
-            </div>
-            
-            <div className="service-info">
-              <div className="service-info-content">
-                <p className="service-category">{service.subtitle}</p>
-                <h2 className="service-name">{service.title}</h2>
-                <p className="service-brief">{service.description}</p>
-                
-                <div className="service-features-grid">
-                  {service.features.map((feature, idx) => (
-                    <div key={idx} className="feature-tag">
-                      {feature}
-                    </div>
-                  ))}
+      {/* Índice + bloques de servicio */}
+      <section className="services-body">
+        <div className="shell shell--wide services-body__grid">
+          {/* Índice pegajoso: en todo momento se sabe dónde se está */}
+          <aside className="services-index">
+            <span className="eyebrow">{t.services.indexLabel}</span>
+            <ol className="services-index__list">
+              {services.map((service) => (
+                <li key={service.id}>
+                  <a href={`#${service.id}`} className="services-index__link">
+                    <span className="services-index__num">{service.number}</span>
+                    <span>{service.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </aside>
+
+          <div className="services-list">
+            {services.map((service, index) => (
+              <article
+                key={service.id}
+                id={service.id}
+                className="service-block"
+                data-align={index % 2 === 0 ? 'start' : 'end'}
+              >
+                <div className="service-block__head">
+                  <span className="service-block__number" data-reveal="up">
+                    {service.number}
+                  </span>
+                  <div>
+                    <span className="service-block__category" data-reveal="up">
+                      {service.subtitle}
+                    </span>
+                    <h2 className="service-block__title" data-reveal="up" style={{ '--reveal-delay': '70ms' }}>
+                      {service.title}
+                    </h2>
+                  </div>
                 </div>
-              </div>
-            </div>
+
+                <SmartImage
+                  src={service.image}
+                  alt={service.title}
+                  className="service-block__media"
+                  sizes={SIZES.half}
+                  ratio="4 / 3"
+                  data-reveal="curtain"
+                  zoom
+                />
+
+                <div className="service-block__content">
+                  <p className="service-block__text body-text" data-reveal="up">
+                    {service.description}
+                  </p>
+
+                  <div className="service-block__features">
+                    <span className="eyebrow eyebrow--plain service-block__features-label">
+                      {t.services.includesLabel}
+                    </span>
+                    <ul>
+                      {service.features.map((feature, featureIndex) => (
+                        <li
+                          key={feature}
+                          data-reveal="up"
+                          style={{ '--reveal-delay': `${featureIndex * 50}ms` }}
+                        >
+                          <Isotype size={12} />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <span className="service-block__rule" data-reveal="line" aria-hidden="true" />
+              </article>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
 
-      {/* Process Section - Minimalista */}
-      <section className="services-process">
-        <div className="process-container">
-          <h2 className="process-title">Del concepto a la realidad</h2>
-          <div className="process-flow">
+      {/* Proceso */}
+      <section className="section section--ink services-process">
+        <div className="shell shell--wide">
+          <header className="services-process__head">
+            <span className="eyebrow" data-reveal="up">{t.services.processLabel}</span>
+            <h2 className="services-process__title" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+              {t.services.processTitle}
+            </h2>
+          </header>
+
+          <ol className="services-process__flow">
             {services.map((service, index) => (
-              <div key={service.id} className="process-step">
-                <div className="step-line"></div>
-                <div className="step-content">
-                  <span className="step-num">{service.number}</span>
-                  <h3>{service.title}</h3>
-                </div>
+              <li
+                key={service.id}
+                className="process-step"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 80}ms` }}
+              >
+                <span className="process-step__num">{service.number}</span>
+                <h3 className="process-step__title">{service.title}</h3>
+                <span className="process-step__line" aria-hidden="true" />
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Cifras */}
+      <section className="section section--tight">
+        <div className="shell shell--wide">
+          <div className="stats">
+            {t.services.stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className="stat"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 90}ms` }}
+              >
+                <span className="stat__value">{stat.value}</span>
+                <span className="stat__label">{stat.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="services-stats">
-        <div className="stats-grid">
-          <div className="stat-box">
-            <div className="stat-value">100%</div>
-            <p className="stat-label">Compromiso con la calidad</p>
-          </div>
-          <div className="stat-box">
-            <div className="stat-value">24/7</div>
-            <p className="stat-label">Seguimiento de obra</p>
-          </div>
-          <div className="stat-box">
-            <div className="stat-value">5+</div>
-            <p className="stat-label">Servicios integrales</p>
+      <section className="section section--brand">
+        <div className="shell cta-block">
+          <h2 className="cta-block__title" data-reveal="up">{t.services.ctaTitle}</h2>
+          <p className="cta-block__text" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+            {t.services.ctaText}
+          </p>
+          <div data-reveal="up" style={{ '--reveal-delay': '160ms' }}>
+            <Link to="/contacto" className="btn btn--ink">
+              <span>{t.services.ctaButton}</span>
+              <ArrowIcon />
+            </Link>
           </div>
         </div>
       </section>
-
-      {/* CTA Section - Elegante */}
-      <section className="services-cta">
-        <div className="cta-wrapper">
-          <h2>Iniciá tu proyecto</h2>
-          <p>Transformamos tus ideas en espacios extraordinarios</p>
-          <a href="/contacto" className="cta-link-service">
-            Contactar
-          </a>
-        </div>
-      </section>
-
-      <WhatsAppButton />
     </div>
   )
 }

@@ -1,173 +1,153 @@
-import { useEffect } from "react"
-import "./About.css"
-import WhatsAppButton from "../components/WhatsAppButton"
-// Video importado desde public
+import { Link } from 'react-router-dom'
+
+import SmartVideo from '../components/ui/SmartVideo'
+import SmartImage from '../components/ui/SmartImage'
+import ArrowIcon from '../components/ui/ArrowIcon'
+import Isotype from '../components/ui/Isotype'
+import { useLanguage } from '../i18n/language-context'
+import useScrollReveal from '../hooks/useScrollReveal'
+import { SIZES } from '../lib/media'
+import './About.css'
 
 const About = () => {
-  const teamMembers = [
-    { name: "ALEJANDRO RACCA", role: "MMO. LÍDER" },
-    { name: "VICTORIA RAIGADA", role: "MMO. OFICINA TÉCNICA" },
-    { name: "CARLOS CONTI", role: "TESORERO" },
-    { name: "DAFNE N. G. ALIMIR", role: "MCP. ADMINISTRATIVA" },
-  ]
-  useEffect(() => {
-    const handleScroll = () => {
-      const header = document.querySelector('.header')
-      if (window.scrollY > 10) {
-        header?.classList.add('scrolled')
-      } else {
-        header?.classList.remove('scrolled')
-      }
-    }
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const { t, lang } = useLanguage()
+  useScrollReveal([lang])
+
   return (
     <div className="about-page">
-      {/* Hero Section con video */}
-      <section className="about-hero">
-        <div className="hero-background">
-          <video
-            src="/img/ANCLA/videohabitaciones.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            onLoadStart={() => console.log('About video loading')}
-            onCanPlay={() => console.log('About video can play')}
-            onError={(e) => console.error('About video error:', e)}
-            onPlay={() => console.log('About video playing')}
-          />
+      <section className="page-hero">
+        <div className="page-hero__media">
+          <SmartVideo src="img/ANCLA/videohabitaciones.mp4" />
         </div>
-        <div className="hero-overlay-about">
-          <div className="hero-text">
-            <h1>SOBRE NOSOTROS</h1>
-            <img 
-              src="/img/ViraBlanco.png" 
-              alt="VIRA Constructora" 
-              className="hero-logo"
-            />
-          </div>
+        <span className="page-hero__scrim" aria-hidden="true" />
+
+        <div className="shell shell--wide page-hero__inner">
+          <span className="eyebrow">{t.about.introLabel}</span>
+          <h1 className="page-hero__title">{t.about.heroTitle}</h1>
         </div>
+        <span className="page-hero__bar" aria-hidden="true" />
       </section>
 
-      {/* Intro Section - Fondo Negro */}
-      <section className="about-intro-section">
-        <div className="intro-container">
-          <p className="intro-label">PRESENTACIÓN</p>
-          <div className="intro-content">
-            <p className="intro-text">
-              Somos un equipo interdisciplinario de profesionales abocados a la construcción y desarrollo de viviendas
-              y unidades funcionales en todo el partido de Pinamar y alrededores.
+      {/* 1 · QUIÉNES SOMOS — la respuesta llega primero */}
+      <section className="section section--ink about-intro">
+        <div className="shell about-intro__grid">
+          <Isotype size={80} className="about-intro__mark" data-reveal="fade" />
+          <div className="about-intro__text">
+            <p className="about-intro__lead" data-reveal="up">
+              {t.about.introText}
             </p>
-            <p className="intro-text secondary">
-              Nos especializamos en construcciones privadas, así como desarrollos en pozo propios y de terceros.
+            <p className="about-intro__detail" data-reveal="up" style={{ '--reveal-delay': '90ms' }}>
+              {t.about.introTextSecondary}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Values Section - Fondo Blanco */}
-      <section className="about-values-section">
-        <div className="values-container">
-          <h2 className="section-title-about">
-            Construimos con <span className="title-light">valores</span>
-          </h2>
-          <p className="section-intro">
-            Los 3 grandes valores que nos caracterizan y guían en todos los procesos son:
-          </p>
-        </div>
-      </section>
-
-      {/* Individual Values - Alternating backgrounds */}
-      <section className="value-detail transparency">
-        <div className="value-content-wrapper">
-          <div className="value-text-side">
-            <h3>La Transparencia</h3>
-            <p>
-              Mantenemos una comunicación clara y honesta en todos los procesos, informando constantemente sobre el
-              avance y estado de cada proyecto.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="value-detail honesty">
-        <div className="value-content-wrapper">
-          <div className="value-text-side">
-            <h3>La Honestidad</h3>
-            <p>
-              Actuamos con integridad en todas nuestras relaciones, cumpliendo con los compromisos adquiridos y
-              manteniendo la confianza de nuestros clientes.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="value-detail innovation">
-        <div className="value-content-wrapper">
-          <div className="value-text-side">
-            <h3>La Innovación</h3>
-            <p>
-              Incorporamos las últimas tendencias en diseño y construcción, siempre buscando la excelencia
-              arquitectónica y tecnológica.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="about-stats-section">
-        <div className="stats-wrapper">
-          <div className="stat-block">
-            <div className="stat-number">+9</div>
-            <p className="stat-label">Años de trayectoria</p>
-          </div>
-          <div className="stat-block">
-            <div className="stat-number">47</div>
-            <p className="stat-label">Viviendas y unidades funcionales</p>
-          </div>
-          <div className="stat-block">
-            <div className="stat-number">4.370</div>
-            <p className="stat-label">M² construidos y proyectados</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="about-team-section">
-        <div className="team-container">
-          <p className="section-label">ORGANIGRAMA</p>
-          <h2 className="team-title">Nuestro equipo</h2>
-          <p className="team-intro">
-            Nuestro equipo interdisciplinario está compuesto por profesionales especializados en diferentes áreas
-          </p>
-          <div className="team-list">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="team-member-item">
-                <h3>{member.name}</h3>
-                <p>{member.role}</p>
+      {/* 2 · CIFRAS — la prueba, inmediatamente después */}
+      <section className="section section--tight">
+        <div className="shell shell--wide">
+          <div className="stats">
+            {t.about.stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className="stat"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 90}ms` }}
+              >
+                <span className="stat__value">{stat.value}</span>
+                <span className="stat__label">{stat.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="about-cta-section">
-        <div className="cta-content">
-          <h2>¿Listo para tu próximo proyecto?</h2>
-          <p>Estamos aquí para ayudarte a hacerlo realidad</p>
-          <a href="/contacto" className="cta-link">
-            Contactanos
-          </a>
+      {/* 3 · CÓMO TRABAJAMOS — los tres valores, en paralelo y no apilados */}
+      <section className="section about-values">
+        <div className="shell shell--wide">
+          <header className="about-values__head">
+            <span className="eyebrow" data-reveal="up">{t.about.valuesLabel}</span>
+            <h2 className="about-values__title" data-reveal="up" style={{ '--reveal-delay': '70ms' }}>
+              {t.about.valuesTitlePrefix}
+              <em>{t.about.valuesTitleAccent}</em>
+            </h2>
+            <p className="about-values__intro body-text" data-reveal="up" style={{ '--reveal-delay': '140ms' }}>
+              {t.about.valuesIntro}
+            </p>
+          </header>
+
+          <div className="about-values__grid">
+            {t.about.values.map((value, index) => (
+              <article
+                key={value.title}
+                className="value-card"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 110}ms` }}
+              >
+                <span className="value-card__num">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="value-card__title">{value.title}</h3>
+                <p className="value-card__text">{value.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <WhatsAppButton />
+      {/* 4 · LA OBRA — una imagen que sostiene todo lo anterior */}
+      <section className="about-showcase">
+        <SmartImage
+          src="img/ANCLA/12.jpg"
+          alt={t.about.heroTitle}
+          className="about-showcase__media"
+          sizes={SIZES.full}
+        />
+        <span className="about-showcase__bar" aria-hidden="true" />
+      </section>
+
+      {/* 5 · QUIÉNES LO HACEN */}
+      <section className="section about-team">
+        <div className="shell shell--wide about-team__grid">
+          <header className="about-team__head">
+            <span className="eyebrow" data-reveal="up">{t.about.teamLabel}</span>
+            <h2 className="about-team__title" data-reveal="up" style={{ '--reveal-delay': '70ms' }}>
+              {t.about.teamTitle}
+            </h2>
+            <p className="about-team__intro body-text" data-reveal="up" style={{ '--reveal-delay': '140ms' }}>
+              {t.about.teamIntro}
+            </p>
+          </header>
+
+          <ul className="about-team__list">
+            {t.about.team.map((member, index) => (
+              <li
+                key={member.name}
+                className="team-row"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 70}ms` }}
+              >
+                <span className="team-row__index">{String(index + 1).padStart(2, '0')}</span>
+                <h3 className="team-row__name">{member.name}</h3>
+                <span className="team-row__role">{member.role}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section--brand">
+        <div className="shell cta-block">
+          <h2 className="cta-block__title" data-reveal="up">{t.about.ctaTitle}</h2>
+          <p className="cta-block__text" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+            {t.about.ctaText}
+          </p>
+          <div data-reveal="up" style={{ '--reveal-delay': '160ms' }}>
+            <Link to="/contacto" className="btn btn--ink">
+              <span>{t.about.ctaButton}</span>
+              <ArrowIcon />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

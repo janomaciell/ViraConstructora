@@ -1,449 +1,422 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
-import WhatsAppButton from "../components/WhatsAppButton"
-// import VideoPlayer from "../components/VideoPlayer"
+
+import Logo from '../components/ui/Logo'
+import Isotype from '../components/ui/Isotype'
+import SmartImage from '../components/ui/SmartImage'
+import SmartVideo from '../components/ui/SmartVideo'
+import RichText from '../components/ui/RichText'
+import ArrowIcon from '../components/ui/ArrowIcon'
+import WorkGrid from '../components/WorkGrid'
+
+import { useLanguage } from '../i18n/language-context'
+import useScrollReveal from '../hooks/useScrollReveal'
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
+import { featuredProjects, localizeProject } from '../data/projects'
+import { SIZES } from '../lib/media'
 import './Home.css'
-// Video importado desde public
+
+const HERO_VIDEO = 'img/ANCLA/VideoAncla.mp4'
+
+/* Seis destacados: dos filas completas de la grilla de 3 columnas */
+const FEATURED_COUNT = 6
+
 const Home = () => {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [expandedProject, setExpandedProject] = useState(0) // 🔹 Primer proyecto expandido por defecto
+  const { t, lang } = useLanguage()
+  const reducedMotion = usePrefersReducedMotion()
+
   const heroRef = useRef(null)
+  const logoLayerRef = useRef(null)
+  const logoRef = useRef(null)
+  const bgRef = useRef(null)
+  const veilRef = useRef(null)
+  const statementRef = useRef(null)
+  const line1Ref = useRef(null)
+  const line2Ref = useRef(null)
+  const ctaRef = useRef(null)
+  const cueRef = useRef(null)
 
+  useScrollReveal([lang])
+
+  /* ----------------------------------------------------------
+     HERO — el scroll dibuja la página.
+     El logo entra centrado y, al scrollear, viaja hasta el hueco
+     del header y se queda ahí: hay un solo logo en pantalla.
+     Después el fondo se oscurece y la frase sube desde abajo.
+
+     El estado inicial es CSS, así la primera pintura no espera a
+     ningún script; GSAP se carga en diferido y sólo toma el control
+     del scroll.
+     ---------------------------------------------------------- */
   useEffect(() => {
-    // Intersection Observer para animaciones
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
-    }
+    const hero = heroRef.current
+    const logo = logoRef.current
+    const root = document.documentElement
+    if (!hero || !logo || reducedMotion) return undefined
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in')
+    // Mientras el hero tenga el logo, el header oculta el suyo.
+    root.dataset.heroLogo = 'hero'
+
+    let ctx
+    let cancelled = false
+
+    const load = async () => {
+      try {
+        const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+          import('gsap'),
+          import('gsap/ScrollTrigger'),
+        ])
+        if (cancelled) return
+
+        gsap.registerPlugin(ScrollTrigger)
+
+        ctx = gsap.context(() => {
+          /* Destino del logo: el hueco real del header. Se mide sobre él
+             para que el aterrizaje sea exacto en cualquier viewport. */
+          const logoTarget = () => {
+            const brand = document.querySelector('.site-header__brand img')
+            if (!brand || !logo.offsetWidth) return { x: 0, y: 0, scale: 1 }
+
+            const box = brand.getBoundingClientRect()
+            return {
+              scale: box.width / logo.offsetWidth,
+              x: box.left + box.width / 2 - window.innerWidth / 2,
+              y: box.top + box.height / 2 - window.innerHeight / 2,
+            }
+          }
+
+          /* TIEMPOS: los porcentajes son del alto total del hero. La pantalla
+             fija se suelta en (alto - 100vh) / alto: 69% con 320vh y 61,5%
+             con 260vh (mobile). Todo tiene que terminar antes (hoy, al 56%),
+             si no el final de la animación ocurre con el hero ya yéndose. */
+          const scrub = (start, end, extra = {}) => ({
+            trigger: hero,
+            start,
+            end,
+            scrub: 0.6,
+            invalidateOnRefresh: true,
+            ...extra,
+          })
+
+          /* FASE A — el logo viaja al header */
+          gsap.to(logo, {
+            ease: 'none',
+            scrollTrigger: scrub('top top', '20% top'),
+            x: () => logoTarget().x,
+            y: () => logoTarget().y,
+            scale: () => logoTarget().scale,
+          })
+
+          /* Relevo: a partir de acá el logo que se ve es el del header */
+          const handoff = (owner) => {
+            root.dataset.heroLogo = owner
+            if (logoLayerRef.current) logoLayerRef.current.dataset.handoff = String(owner === 'header')
+          }
+
+          ScrollTrigger.create({
+            trigger: hero,
+            start: '19% top',
+            end: 'bottom top',
+            invalidateOnRefresh: true,
+            onEnter: () => handoff('header'),
+            onLeaveBack: () => handoff('hero'),
+          })
+
+          gsap.to(cueRef.current, {
+            autoAlpha: 0,
+            ease: 'none',
+            scrollTrigger: scrub('top top', '7% top', { scrub: 0.3 }),
+          })
+
+          /* El fondo respira: un acercamiento lento durante todo el hero */
+          gsap.fromTo(
+            bgRef.current,
+            { scale: 1.14 },
+            { scale: 1, ease: 'none', scrollTrigger: scrub('top top', 'bottom top', { scrub: 1 }) },
+          )
+
+          /* El velo se cierra para que la frase tenga sobre qué apoyarse */
+          gsap.fromTo(
+            veilRef.current,
+            { opacity: 0.42 },
+            { opacity: 0.82, ease: 'none', scrollTrigger: scrub('14% top', '40% top') },
+          )
+
+          /* FASE C — la frase sube desde abajo, saliendo de la pantalla */
+          gsap.to(statementRef.current, {
+            autoAlpha: 1,
+            ease: 'none',
+            scrollTrigger: scrub('24% top', '28% top', { scrub: 0.3 }),
+          })
+
+          /* fromTo con `y: 0` explícito: el estado inicial en CSS
+             (translate3d(0, 115%, 0)) GSAP lo lee como píxeles en `y`,
+             y animar sólo `yPercent` dejaba el texto escondido bajo la máscara. */
+          gsap.fromTo(
+            line1Ref.current,
+            { y: 0, yPercent: 115 },
+            { yPercent: 0, ease: 'none', scrollTrigger: scrub('26% top', '42% top') },
+          )
+
+          gsap.fromTo(
+            line2Ref.current,
+            { y: 0, yPercent: 115 },
+            { yPercent: 0, ease: 'none', scrollTrigger: scrub('34% top', '50% top', { scrub: 0.8 }) },
+          )
+
+          gsap.to(ctaRef.current, {
+            autoAlpha: 1,
+            ease: 'none',
+            scrollTrigger: scrub('46% top', '56% top'),
+          })
+        }, hero)
+      } catch (error) {
+        // Si el motor de scroll no carga, el hero se muestra completo.
+        console.warn('[hero] no se pudo cargar el motor de scroll', error)
+        if (!cancelled) {
+          hero.dataset.motion = 'fallback'
+          root.dataset.heroLogo = 'header'
         }
-      })
-    }, observerOptions)
-
-    document.querySelectorAll('.fade-in-up, .fade-in, .stagger-item').forEach(el => {
-      observer.observe(el)
-    })
-
-    let ticking = false
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrolled = window.pageYOffset
-          const heroImg = document.querySelector('.hero-background img')
-          const heroContent = document.querySelector('.hero-content')
-          
-          if (heroImg && scrolled < window.innerHeight) {
-            heroImg.style.transform = `translateY(${scrolled * 0.4}px) scale(${1 + scrolled * 0.0002})`
-          }
-          
-          if (heroContent && scrolled < window.innerHeight) {
-            heroContent.style.opacity = Math.max(0, 1 - scrolled / 600)
-            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`
-          }
-          
-          ticking = false
-        })
-        ticking = true
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    // Auto-slide para hero
-    const slideInterval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % heroSlides.length)
-    }, 6000)
+    load()
 
     return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', handleScroll)
-      clearInterval(slideInterval)
+      cancelled = true
+      ctx?.revert()
+      delete root.dataset.heroLogo
+      delete hero.dataset.motion
     }
-  }, [])
+  }, [reducedMotion, lang])
 
-  //const heroSlides = [
-  //{
-  //    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&h=1080&fit=crop&q=80',
-  //    title: 'CONSTRUIMOS CONFIANZA,',
-  //    subtitle: 'DISEÑAMOS FUTURO.',
-  //    number: '01'
-  //  },
-  //  {
-  //   image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&h=1080&fit=crop&q=80',
-  //    title: 'ARQUITECTURA QUE',
-  //    subtitle: 'TRASCIENDE',
-  //    number: '02'
-  //  },
-  //  {
-  //    image: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&h=1080&fit=crop&q=80',
-  //    title: 'INNOVACIÓN Y',
-  //    subtitle: 'EXCELENCIA',
-  //    number: '03'
-  // },
-  //  {
-  //    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&h=1080&fit=crop&q=80',
-  //    title: 'CALIDAD EN',
-  //    subtitle: 'CADA DETALLE',
-  //    number: '04'
-  //  },
-  //  {
-  //    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop&q=80',
-  //    title: 'TU HOGAR',
-  //    subtitle: 'SOÑADO',
-  //    number: '05'
-  //  }
-  //]
-  const heroSlides = [
-  {
-    video: '/img/ANCLA/VideoAncla.mp4',
-    title: 'CONSTRUIMOS CONFIANZA,',
-    subtitle: 'DISEÑAMOS FUTURO.',
-    number: '01'
-  },
-  
-
-]
-
-  const projects = [
-    { 
-      name: 'ANCLAI', 
-      desc: 'CONSTRUCCION',
-      specs: '180 M² · 4 DORM · 3 BAÑOS',
-      image: '/img/ANCLA/FACHADA 1.jpg',
-    },
-    { 
-      name: 'VULCANO I', 
-      desc: 'CONSTRUCCION',
-      specs: '145 M² · 3 DORM · 2 BAÑOS',
-      image: '/img/VULCANO/fachada vulcano.jpg',
-    },
-    { 
-      name: 'CHAPE I', 
-      desc: 'CONSTRUCCION',
-      specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: '/img/CHAPE/CHAPE 1.jpg',
-    },
-    { 
-      name: 'DAFNEAI',
-      desc: 'PROYECTO Y DIRECCION',
-      specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: '/img/DAFNEA/DAFNEA.jpg',
-    },
-    { 
-      name: 'DEDALO I', 
-      desc: 'PROYECTO Y DIRECCION',
-      specs: '140 M² · 3 DORM · 3 BAÑOS',
-      image: '/img/DEDALO1/DEDALO I.jpg',
-    },
-    { 
-      name: 'POSITIVE HOUSE XII', 
-      desc: 'CONSTRUCCION',
-      specs: '155 M² · 3 DORM · 3 BAÑOS',
-      image: '/img/PH-XII/PH XII.jpg',
-    },
-    { 
-      name: 'BARRIO COODOPIN', 
-      desc: 'DIRECCION DE OBRA',
-      specs: '1280 M² · 18 VIVIENDAS',
-      image: '/img/COODOPIN/CODOOPIN.jpg',
-    },
-  ]
-
-
+  const projects = featuredProjects
+    .slice(0, FEATURED_COUNT)
+    .map((project) => localizeProject(project, lang))
 
   return (
     <div className="home">
-      {/* Hero Section con Slider */}
-      <section className="hero-section" ref={heroRef}>
-        <div className="hero-slides">
-          {heroSlides.map((slide, index) => (
-            <div 
-              key={index}
-              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-            >
-              <div className="hero-background">
-                {slide.video ? (
-                  <video
-                    src={slide.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onLoadStart={() => console.log('Video loading:', slide.video)}
-                    onCanPlay={() => console.log('Video can play:', slide.video)}
-                    onError={(e) => console.error('Video error:', e, slide.video)}
-                    onPlay={() => console.log('Video playing:', slide.video)}
-                  />
-                ) : (
-                  <img 
-                    src={slide.image}
-                    alt="VIRA Constructora"
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                )}
+      {/* ==================================================
+          HERO
+          ================================================== */}
+      <section className="hero" ref={heroRef} data-reduced={reducedMotion ? 'true' : 'false'}>
+        <div className="hero__sticky">
+          <div className="hero__bg" ref={bgRef}>
+            {/* Video de fondo: el poster (FACHADA 1) pinta al instante y el
+                video se descarga recién cuando el hero está en pantalla */}
+            <SmartVideo src={HERO_VIDEO} className="hero__bg-media" ratio="auto" />
+          </div>
+          <span className="hero__veil" ref={veilRef} aria-hidden="true" />
+
+          {/* Logo único: nace centrado y termina en el header */}
+          {!reducedMotion && (
+            <div className="hero__logo-layer" ref={logoLayerRef} data-handoff="false">
+              <div className="hero__logo" ref={logoRef}>
+                <Logo tone="dark" width={520} priority />
               </div>
             </div>
-          ))}
-        </div>
-        
-        <div className="hero-overlay">
-          <div className="hero-content">
-            <div className="hero-text-wrapper">
-              <img 
-                src="/img/ViraBlanco.png" 
-                alt="VIRA Constructora" 
-                className="hero-logo-main"
-              />
+          )}
 
-              <h1 className="hero-title-small">
-                <span className="hero-subtitle-brand">{heroSlides[currentSlide].title}</span>
-                
-                <span className="hero-subtitle-brand">{heroSlides[currentSlide].subtitle}</span>
-              </h1>
+          {/* La frase, centrada y apoyada abajo */}
+          <div className="hero__statement" ref={statementRef}>
+            <h1 className="hero__headline">
+              <span className="hero__mask">
+                <span ref={line1Ref}>{t.home.heroStatement}</span>
+              </span>
+            </h1>
+
+            <p className="hero__subline">
+              <span className="hero__mask">
+                <span ref={line2Ref}>{t.home.heroStatementSecondary}</span>
+              </span>
+            </p>
+
+            <div className="hero__cta" ref={ctaRef}>
+              <Link to="/proyectos" className="btn btn--inverse">
+                <span>{t.home.heroCta}</span>
+                <ArrowIcon />
+              </Link>
             </div>
-            
-
           </div>
 
-          <Link to="/proyectos" className="hero-cta">
-          <span>EXPLORAR PROYECTOS</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M5 12H19M19 12L12 5M19 12L12 19"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </Link>
-        </div>
-
-        <div className="slide-indicators">
-          {heroSlides.map((slide, index) => (
-            <div 
-              key={index}
-              className={`hero-slide ${index === currentSlide ? 'active' : ''}`}
-            >
-              <div className="hero-background">
-                {slide.video ? (
-                  <video
-                    src={slide.video}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    onLoadStart={() => console.log('Video loading:', slide.video)}
-                    onCanPlay={() => console.log('Video can play:', slide.video)}
-                    onError={(e) => console.error('Video error:', e, slide.video)}
-                    onPlay={() => console.log('Video playing:', slide.video)}
-                  />
-                ) : (
-                  <img 
-                    src={slide.image}
-                    alt="VIRA Constructora"
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Intro Statement Section */}
-      <section className="intro-statement">
-        <div className="intro-divider"></div>
-        <div className="intro-content fade-in-up">
-        <p className="intro-lead">
-          Creamos <span className="highlight">inversiones seguras, modernas y con visión de futuro</span> en una zona estratégica de constante crecimiento.
-        </p>
-        <p className="intro-detail">
-          Combinamos diseño, tecnología y calidad constructiva para ofrecer proyectos que <span className="emphasis">trascienden en el tiempo</span> y generan valor real para nuestros clientes e inversores.
-        </p>
-
-        </div>
-      </section>
-
-      {/* About Section Mejorado */}
-      <section className="about-section">
-        <div className="about-grid">
-          <div className="about-text">
-            <div className="section-label fade-in-up">SOBRE NOSOTROS</div>
-            <p className="fade-in-up stagger-item">
-              En <strong>VIRA Constructora</strong>, queremos que eleves tu calidad de vida con <strong>inversiones confiables y rentables</strong> en una zona privilegiada de Pinamar, rodeada de naturaleza, mar, bosques y dunas.
-            </p>
-            <p className="fade-in-up stagger-item">
-              Nuestro objetivo es dejar una huella en tus momentos de <strong>desconexión, contemplación y descanso</strong>.
-            </p>
-            <p className="fade-in-up stagger-item">
-              Con +9 años de trayectoria y +4 años en la costa atlántica en Pinamar, hemos desarrollado <strong>47 viviendas y unidades funcionales</strong>, sumando <strong>4.370 m² construidos y proyectados</strong>.
-            </p>
-            <p className="fade-in-up stagger-item">
-              Somos un equipo de <strong>profesionales dedicados y comprometidos</strong>, listos para ayudarte a construir un futuro más lento, pausado y conectado con lo que realmente importa.
-            </p>
-          </div>
-          
-          <div className="about-stats fade-in-up">
-            <div className="stat-item">
-              <div className="stat-number">47</div>
-              <div className="stat-label">Viviendas desarrolladas</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">4,370</div>
-              <div className="stat-label">M² construidos</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">9+</div>
-              <div className="stat-label">Años de trayectoria</div>
-            </div>
+          <div className="hero__cue" ref={cueRef} aria-hidden="true">
+            <span>{t.meta.scroll}</span>
+            <span className="hero__cue-line" />
           </div>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="philosophy-section">
-        <div className="philosophy-image fade-in">
-          <img 
-            src="/img/CHAPE/CHAPE 1.jpg"
-            alt="Filosofía VIRA"
+      {/* ==================================================
+          DECLARACIÓN — bloque pleno de identidad
+          ================================================== */}
+      <section className="section section--brand intro">
+        <div className="shell intro__grid">
+          <div className="intro__main">
+            <Isotype size={56} className="intro__mark" data-reveal="fade" />
+            <RichText text={t.home.introLead} className="intro__lead" data-reveal="up" />
+          </div>
+          <RichText
+            text={t.home.introDetail}
+            className="intro__detail"
+            data-reveal="up"
+            style={{ '--reveal-delay': '120ms' }}
           />
         </div>
-        <div className="philosophy-content">
-          <div className="philosophy-text fade-in-up">
-            <span className="philosophy-label">NUESTRA FILOSOFÍA</span>
-            <h2>Descubre qué hace especial a una casa VIRA</h2>
-            <Link to="/nosotros" className="philosophy-cta">
-              <span>NUESTRA FILOSOFÍA</span>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
+      </section>
+
+      {/* ==================================================
+          NOSOTROS
+          ================================================== */}
+      <section className="section about">
+        <div className="shell about__grid">
+          <div className="about__text">
+            <span className="eyebrow" data-reveal="up">{t.home.aboutLabel}</span>
+            {t.home.aboutParagraphs.map((paragraph, index) => (
+              <RichText
+                key={index}
+                text={paragraph}
+                className="about__paragraph body-text"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 70}ms` }}
+              />
+            ))}
+          </div>
+
+          <div className="about__stats">
+            {t.home.stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className="about__stat"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 90}ms` }}
+              >
+                <span className="about__stat-value">{stat.value}</span>
+                <span className="about__stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ==================================================
+          FILOSOFÍA
+          ================================================== */}
+      <section className="philosophy">
+        <SmartImage
+          src="img/CHAPE/01.jpg"
+          alt={t.home.philosophyTitle}
+          className="philosophy__media"
+          sizes={SIZES.full}
+          objectPosition="center 55%"
+        />
+        <span className="philosophy__scrim" aria-hidden="true" />
+
+        <div className="shell philosophy__content">
+          <span className="eyebrow" data-reveal="up">{t.home.philosophyLabel}</span>
+          <h2 className="philosophy__title" data-reveal="up" style={{ '--reveal-delay': '90ms' }}>
+            {t.home.philosophyTitle}
+          </h2>
+          <div data-reveal="up" style={{ '--reveal-delay': '180ms' }}>
+            <Link to="/nosotros" className="btn btn--inverse">
+              <span>{t.home.philosophyCta}</span>
+              <ArrowIcon />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Projects Section con Accordion */}
-      <section className="projects-section">
-        <div className="section-header fade-in-up">
-          <div className="section-label">NUESTRO TRABAJO</div>
-          <h2>Proyectos destacados</h2>
-        </div>
-        
-        <div className="projects-masonry">
-          {projects.map((project, index) => (
-            <div 
-              key={index} 
-              className={`project-card ${expandedProject === index ? 'expanded' : ''}`}
-              onClick={() => setExpandedProject(index)}
-            >
-              <div className="project-image-wrapper">
-                <img 
-                  src={project.image} 
-                  alt={project.name}
-                  loading="lazy"
-                />
-                <div className="project-overlay"></div>
-              </div>
-              
-              {/* 🔹 Label vertical cuando está colapsado */}
-              <div className="project-label">{project.name}</div>
-              
-              {/* 🔹 Info completa cuando está expandido */}
-              <div className="project-info">
-                <div className="project-meta">
-                  <span className="project-type">{project.desc}</span>
-                </div>
-                <h3>{project.name}</h3>
-                <p className="project-specs">{project.specs}</p>
-
-              </div>
+      {/* ==================================================
+          PROYECTOS DESTACADOS
+          ================================================== */}
+      <section className="section section--tight work">
+        <div className="shell shell--wide">
+          <header className="work__head">
+            <div>
+              <span className="eyebrow" data-reveal="up">{t.home.projectsLabel}</span>
+              <h2 className="work__title" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+                {t.home.projectsTitle}
+              </h2>
             </div>
-          ))}
+            <Link to="/proyectos" className="link-underline work__head-link">
+              {t.home.projectsCta}
+            </Link>
+          </header>
         </div>
 
-        <div className="projects-cta fade-in-up">
-          <Link to="/proyectos" className="btn-primary">
-            <span>VER TODOS LOS PROYECTOS</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-          </Link>
-        </div>
+        <WorkGrid projects={projects} viewLabel={t.projects.viewProject} />
       </section>
 
-      {/* Testimonial/Quote Section */}
-      <section className="quote-section">
-        <div className="quote-container fade-in-up">
-          <blockquote>
-            <p className="quote-text">
-              "En VIRA, creemos que son los detalles más finos los que dan forma a la belleza, funcionalidad y calidad duradera de un hogar. Es por eso que cada casa que construimos está diseñada cuidadosamente, diseñada con precisión y elaborada para brindar fortaleza, comodidad y elegancia duradera para quienes no esperan nada menos que excepcional."
-            </p>
+      {/* ==================================================
+          CITA
+          ================================================== */}
+      <section className="section section--ink quote">
+        <div className="shell shell--narrow">
+          <Isotype size={56} className="quote__mark" data-reveal="fade" />
+          <blockquote className="quote__text" data-reveal="up">
+            {t.home.quote}
           </blockquote>
-          <div className="quote-author">
-            <div className="author-info">
-              <div className="author-name">Alejandro Racca</div>
-              <div className="author-title">Maestro Mayor de Obra · FUNDADOR</div>
+          <footer className="quote__author" data-reveal="up" style={{ '--reveal-delay': '120ms' }}>
+            <span className="quote__rule" aria-hidden="true" />
+            <div>
+              <span className="quote__name">{t.home.quoteAuthor}</span>
+              <span className="quote__role">{t.home.quoteRole}</span>
             </div>
-          </div>
+          </footer>
         </div>
       </section>
 
-      {/* Locations Section */}
-      <section className="locations-section">
-        <div className="locations-content">
-          <div className="section-label fade-in-up">Ubicación</div>
-          <h2 className="fade-in-up">Creando hogares en los entornos más deseables de Pinamar y la costa atlántica</h2>
-          <h3 className="fade-in-up">Nos encontramos en la zona de Constitución 1386 y Totoras, en el corazón de Pinamar, donde nos esforzamos por crear espacios que sean verdaderos hogares, no solo edificios.</h3>
+      {/* ==================================================
+          UBICACIÓN
+          ================================================== */}
+      <section className="section location">
+        <div className="shell shell--wide location__grid">
+          <div className="location__text">
+            <span className="eyebrow" data-reveal="up">{t.home.locationLabel}</span>
+            <h2 className="location__title" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+              {t.home.locationTitle}
+            </h2>
+            <p className="location__lead body-text" data-reveal="up" style={{ '--reveal-delay': '160ms' }}>
+              {t.home.locationText}
+            </p>
+            <p className="location__address" data-reveal="up" style={{ '--reveal-delay': '220ms' }}>
+              {t.home.locationAddress}
+            </p>
+          </div>
 
-          
-          <div className="locations-map fade-in-up">
-          <div className="locations-map">
+          <div className="location__map" data-reveal="fade">
             <iframe
+              title={t.home.mapTitle}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3492.5346259039466!2d-56.874764888113255!3d-37.10961849400916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x959c9cdeede9c585%3A0x2b722ba9dd9ca00f!2sAv.%20Constituci%C3%B3n%201386%2C%20B7167%20Pinamar%2C%20Provincia%20de%20Buenos%20Aires!5e1!3m2!1ses-419!2sar!4v1760061274045!5m2!1ses-419!2sar"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-            <div className="map-address" style={{ marginTop: '12px', fontSize: '14px' }}>
-              Constitución 1386 y Totoras — Pinamar, Buenos Aires, Argentina
-            </div>
+            />
           </div>
-
-          </div>
-        </div>
-
-          
-      </section>
-
-      {/* Instagram Section Mejorado */}
-      <section className="instagram-section">
-        <div className="instagram-header fade-in-up">
-          <div className="section-label">SÍGUENOS</div>
-          <h2>@viraconstructora</h2>
-        </div>
-
-        <div className="instagram-embed fade-in-up">
-          <iframe
-            src="https://www.instagram.com/viraconstructora/embed"
-            width="100%"
-            height="600"
-            frameBorder="0"
-            scrolling="no"
-            allowTransparency="true"
-            title="Instagram VIRA Constructora"
-          ></iframe>
         </div>
       </section>
 
-      <WhatsAppButton />
+      {/* ==================================================
+          INSTAGRAM
+          ================================================== */}
+      <section className="section section--tight social">
+        <div className="shell shell--narrow">
+          <header className="social__head">
+            <span className="eyebrow" data-reveal="up">{t.home.instagramLabel}</span>
+            <h2 className="social__title" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+              {t.home.instagramTitle}
+            </h2>
+          </header>
+
+          <div className="social__embed" data-reveal="fade">
+            <iframe
+              src="https://www.instagram.com/viraconstructora/embed"
+              title={t.home.instagramFrameTitle}
+              loading="lazy"
+              scrolling="no"
+            />
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

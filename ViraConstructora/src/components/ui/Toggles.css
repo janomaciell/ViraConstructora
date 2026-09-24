@@ -1,0 +1,81 @@
+/* ---- Botón de icono (tema) --------------------------------- */
+.toggle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: var(--bw) solid var(--header-line, var(--border));
+  border-radius: var(--radius-1);
+  color: inherit;
+  overflow: hidden;
+  transition: border-color var(--t-state), background-color var(--t-state), color var(--t-state);
+}
+
+.toggle:hover {
+  border-color: var(--vira-blue);
+  color: var(--vira-blue);
+}
+
+.toggle__icon {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  transition: transform var(--dur-2) var(--ease-emph), opacity var(--dur-2) var(--ease-out);
+}
+
+.toggle__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.toggle__icon.is-hidden {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+/* ---- Selector de idioma ------------------------------------ */
+.lang-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  height: 40px;
+  border: var(--bw) solid var(--header-line, var(--border));
+  border-radius: var(--radius-1);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.lang-toggle__thumb {
+  position: absolute;
+  z-index: -1;
+  inset: 0 50% 0 0;
+  background: var(--vira-blue);
+  transition: transform var(--dur-2) var(--ease-emph);
+}
+
+.lang-toggle__thumb[data-lang='en'] {
+  transform: translateX(100%);
+}
+
+.lang-toggle__option {
+  min-width: 42px;
+  padding-inline: var(--sp-2);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.1em;
+  color: inherit;
+  opacity: 0.55;
+  transition: opacity var(--t-state), color var(--t-state);
+}
+
+.lang-toggle__option.is-active {
+  opacity: 1;
+  color: #08111A;
+}
+
+.lang-toggle__option:not(.is-active):hover {
+  opacity: 0.9;
+}

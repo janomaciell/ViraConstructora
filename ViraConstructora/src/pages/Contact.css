@@ -1,1072 +1,418 @@
-/* Contact Page - Diseño Moderno Minimalista */
-.contact-page-modern {
-  width: 100%;
-  background: #ffffff;
-  color: #000000;
-  min-height: 100vh;
-  padding-top: 120px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+/* ============================================================
+   CONTACTO
+   La lógica del formulario es la misma de siempre (EmailJS +
+   Google Calendar). Lo que cambia es cómo se lee: encabezado
+   editorial, progreso visible y campos con más aire.
+   ============================================================ */
+
+.contact-page {
+  overflow-x: clip;
 }
 
-.container-wide {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Hero Section - Minimalista */
-.contact-hero-modern {
-  padding: clamp(60px, 10vw, 120px) 0 clamp(30px, 6vw, 60px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-.hero-title-modern {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 300;
-  color: #000000;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.hero-title-modern .italic {
-  font-style: italic;
-  font-weight: 200;
-}
-
-/* Main Contact Section */
-.contact-main-section {
-  padding: clamp(40px, 8vw, 120px) 0 clamp(60px, 10vw, 160px);
-}
-
-.contact-split-modern {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-/* Left Side - Video */
-.contact-left-side {
-  position: sticky;
-  top: 20vh; /* keep video centered relative to viewport on desktop */
-}
-
-.video-container-modern {
+/* ---- Encabezado ------------------------------------------ */
+.contact-hero {
   position: relative;
+  padding: calc(var(--header-h) + var(--sp-9)) 0 var(--sp-8);
+  background: var(--surface-2);
+}
+
+.contact-hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.contact-hero__title {
+  font-size: var(--fs-d2);
+  line-height: 0.9;
+}
+
+.contact-hero__accent > span {
+  color: var(--primary);
+}
+
+.contact-hero__bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-  background: #000;
-  border-radius: 8px;
+  height: 6px;
+  background: var(--primary-block);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: page-hero-bar var(--dur-4) var(--ease-emph) 200ms forwards;
+}
+
+/* ---- Video: horizontal, a ancho de contenedor -------------- */
+.contact-video {
+  padding-top: var(--sp-8);
+}
+
+.contact-video__frame {
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  background: #0B0D10;
+  border: var(--bw) solid var(--border);
 }
 
-.video-container-modern iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.contact-video__frame video {
+  display: block;
   width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* Ensure the replacement <video> fills the container like the iframe */
-.video-container-modern video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border: 0;
-}
-
-/* Overlay to prompt user interaction if autoplay with sound is blocked */
-.video-overlay-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #000000;
-  background: rgba(0, 0, 0, 0.25);
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.video-container-modern:hover .video-overlay-play {
-  opacity: 1;
-}
-
-/* Button to unmute and enable sound */
-.video-unmute-button {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
-  padding: 10px 14px;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.video-unmute-button:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* Right Side - Form */
-.contact-right-side {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  text-align: center;
-}
-
-.form-intro {
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.form-intro-text {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #000;
-  margin: 0;
-  font-weight: 400;
-  text-align: center;
-}
-
-/* Form Styling - Moderno y Limpio */
-.contact-form-modern {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  text-align: center;
-}
-
-.form-group-modern {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Animación de aparición */
-.slide-in {
-  animation: slideIn 0.4s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-label-modern {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-/* Options Container - Horizontal */
-.options-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-/* Options Container - Vertical */
-.options-container-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Option Box - Estilo minimalista */
-.option-box {
-  padding: 14px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #000000;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: inherit;
-  text-align: center;
-}
-
-.option-box:hover {
-  border-color: rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.option-box.selected {
-  border-color: #000000;
-  background: rgba(0, 0, 0, 0.05);
-  color: #000000;
-  font-weight: 600;
-}
-
-/* Input Fields */
-.form-input-modern {
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  font-family: inherit;
-  color: #000000;
-  padding: 10px 0;
-  outline: none;
-  font-weight: 400;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease, color 0.3s ease;
-}
-
-.form-input-modern:focus {
-  border-bottom-color: #4a90e2;
-}
-
-.form-input-modern::placeholder {
-  color: rgba(102, 102, 102, 0.5);
-}
-
-/* DateTime Selection Styling - Consistent with form style */
-.datetime-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-top: 12px;
-}
-
-.date-time-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: left;
-}
-
-.datetime-label {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.datetime-input {
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  font-family: inherit;
-  color: #000000;
-  padding: 10px 0;
-  outline: none;
-  font-weight: 400;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease, color 0.3s ease;
-  width: 100%;
-}
-
-.datetime-input:focus {
-  border-bottom-color: #4a90e2;
-}
-
-.datetime-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Calendar picker icon styling */
-.datetime-input::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.datetime-input::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-}
-
-/* Remove spinner buttons */
-.datetime-input::-webkit-outer-spin-button,
-.datetime-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Style select dropdown to match text inputs */
-select.datetime-input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0px center;
-  padding-right: 24px;
-  cursor: pointer;
-}
-
-select.datetime-input option {
-  background: #fff;
-  color: #000;
-  padding: 10px;
-}
-
-.datetime-help {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 12px;
-  font-style: italic;
-  text-align: center;
-  font-weight: 300;
-}
-.datetime-help {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 12px;
-  font-style: italic;
-  text-align: center;
-  font-weight: 300;
-}
-
-/* Location Section Titles */
-.section-title-contact {
-  text-align: center;
-  color: #000000;
-  font-weight: 300;
-  line-height: 1.3;
-  margin: 0 0 1rem 0;
-  position: relative;
-  z-index: 10;
-  background: #ffffff;
-  padding: 20px 0;
-}
-
-.section-title-contact:first-of-type {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: 1.5rem;
-  padding-top: 20px;
-}
-
-.section-title-contact:last-of-type {
-  padding-top: 20px;
-  background: #000000;  
-  color: #ffffff;
-  
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  font-weight: 400;
-  margin-bottom: 2rem;
-}
-.hero-title-modern {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 300;
-  color: #000000;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.hero-title-modern .italic {
-  font-style: italic;
-  font-weight: 200;
-}
-
-/* Main Contact Section */
-.contact-main-section {
-  padding: clamp(40px, 8vw, 120px) 0 clamp(60px, 10vw, 160px);
-}
-
-.contact-split-modern {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-}
-
-/* Left Side - Video */
-.contact-left-side {
-  position: sticky;
-  top: 20vh; /* keep video centered relative to viewport on desktop */
-}
-
-.video-container-modern {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
   background: #000;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-.video-container-modern iframe {
+.contact-video__unmute {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* Ensure the replacement <video> fills the container like the iframe */
-.video-container-modern video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border: 0;
-}
-
-/* Overlay to prompt user interaction if autoplay with sound is blocked */
-.video-overlay-play {
-  position: absolute;
-  inset: 0;
-  display: flex;
+  left: var(--sp-5);
+  top: var(--sp-5);
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  color: #000000;
-  background: rgba(0, 0, 0, 0.25);
-  font-size: 14px;
-  letter-spacing: 1px;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--vira-blue);
+  color: #08111A;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: transform var(--t-micro), background-color var(--t-state);
 }
 
-.video-container-modern:hover .video-overlay-play {
-  opacity: 1;
-}
-
-/* Button to unmute and enable sound */
-.video-unmute-button {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
-  padding: 10px 14px;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.video-unmute-button:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-/* Right Side - Form */
-.contact-right-side {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  text-align: center;
-}
-
-.form-intro {
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.form-intro-text {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #000;
-  margin: 0;
-  font-weight: 400;
-  text-align: center;
-}
-
-/* Form Styling - Moderno y Limpio */
-.contact-form-modern {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  text-align: center;
-}
-
-.form-group-modern {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Animación de aparición */
-.slide-in {
-  animation: slideIn 0.4s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-label-modern {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-/* Options Container - Horizontal */
-.options-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-/* Options Container - Vertical */
-.options-container-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Option Box - Estilo minimalista */
-.option-box {
-  padding: 14px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #000000;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: inherit;
-  text-align: center;
-}
-
-.option-box:hover {
-  border-color: rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.option-box.selected {
-  border-color: #000000;
-  background: rgba(0, 0, 0, 0.05);
-  color: #000000;
-  font-weight: 600;
-}
-
-/* Input Fields */
-.form-input-modern {
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  font-family: inherit;
-  color: #000000;
-  padding: 10px 0;
-  outline: none;
-  font-weight: 400;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease, color 0.3s ease;
-}
-
-.form-input-modern:focus {
-  border-bottom-color: #4a90e2;
-}
-
-.form-input-modern::placeholder {
-  color: rgba(102, 102, 102, 0.5);
-}
-
-/* DateTime Selection Styling - Consistent with form style */
-.datetime-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  margin-top: 12px;
-}
-
-.date-time-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: left;
-}
-
-.datetime-label {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.datetime-input {
-  border: none;
-  background: transparent;
-  font-size: 16px;
-  font-family: inherit;
-  color: #000000;
-  padding: 10px 0;
-  outline: none;
-  font-weight: 400;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease, color 0.3s ease;
-  width: 100%;
-}
-
-.datetime-input:focus {
-  border-bottom-color: #4a90e2;
-}
-
-.datetime-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Calendar picker icon styling */
-.datetime-input::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.datetime-input::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-}
-
-/* Remove spinner buttons */
-.datetime-input::-webkit-outer-spin-button,
-.datetime-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Style select dropdown to match text inputs */
-select.datetime-input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0px center;
-  padding-right: 24px;
-  cursor: pointer;
-}
-
-select.datetime-input option {
-  background: #fff;
-  color: #000;
-  padding: 10px;
-}
-
-.datetime-help {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.5);
-  margin-top: 12px;
-  font-style: italic;
-  text-align: center;
-  font-weight: 300;
-}
-
-/* Location Section Titles */
-.section-title-contact {
-  text-align: center;
-  color: #000000;
-  font-weight: 300;
-  line-height: 1.3;
-  margin: 0 0 1rem 0;
-  position: relative;
-  z-index: 10;
+.contact-video__unmute:hover {
+  transform: translateY(-2px);
   background: #ffffff;
-  padding: 20px 0;
 }
 
-.section-title-contact:first-of-type {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: 1.5rem;
+/* ---- Cuerpo ---------------------------------------------- */
+.contact-main__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(var(--sp-6), 5vw, var(--sp-9));
+  align-items: start;
 }
 
-.section-title-contact:last-of-type {
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  font-weight: 400;
-  margin-bottom: 2rem;
-  padding-bottom: 30px;
-  position: relative;
-  z-index: 10;
-}
-
-/* Submit Button - Minimalista */
-.submit-button-modern {
-  align-self: center;
+/* ---- Columna de contexto ---------------------------------- */
+.contact-aside {
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-5));
   display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #4a90e2;
-  border: 1px solid #4a90e2;
-  border-radius: 50px;
-  padding: 14px 28px;
-  font-size: 12px;
-  font-weight: 600;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.contact-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.contact-steps__label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.14em;
+  color: var(--primary);
+}
+
+.contact-steps__bars {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.contact-steps__bar {
+  height: 3px;
+  background: var(--border-strong);
+  transition: background-color var(--dur-2) var(--ease-out);
+}
+
+.contact-steps__bar.is-done {
+  background: var(--primary-block);
+}
+
+.contact-aside__intro {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-semibold);
+  line-height: 1.45;
+  color: var(--foreground);
+  max-width: 26ch;
+}
+
+.contact-direct {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  border-top: 2px solid var(--accent-line);
+}
+
+.contact-direct__label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.contact-direct .link-underline {
+  padding-block: 6px;
+  color: var(--primary);
+}
+
+/* ---- Formulario ------------------------------------------ */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  border: 0;
+}
+
+/* Cada paso nuevo entra: el usuario ve que el formulario avanzó */
+.field--enter {
+  animation: field-enter var(--dur-3) var(--ease-out) both;
+}
+
+@keyframes field-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.field__label {
+  display: block;
+  padding: 0;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field__sublabel {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
+  color: var(--muted-2);
 }
 
-.submit-button-modern:hover:not(:disabled) {
-  background: #4a90e2;
-  color: #fff;
+.field__input {
+  width: 100%;
+  padding: 1rem 1.1rem;
+  background: var(--field-bg);
+  border: var(--bw) solid var(--field-border);
+  border-radius: var(--radius-1);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--foreground);
+  transition:
+    border-color var(--t-state),
+    box-shadow var(--t-state),
+    background-color var(--t-state);
 }
 
-.submit-button-modern:disabled {
-  opacity: 0.5;
+.field__input::placeholder {
+  color: var(--muted-2);
+  font-weight: var(--fw-semibold);
+}
+
+.field__input:hover:not(:disabled) {
+  border-color: var(--border-strong);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.field__input:disabled {
+  opacity: 0.55;
   cursor: not-allowed;
-  border-color: #ccc;
-  color: #ccc;
 }
 
-.submit-button-modern svg {
-  transition: transform 0.3s ease;
+.field__help {
+  font-size: var(--fs-xs);
+  color: var(--muted);
 }
 
-.submit-button-modern:hover:not(:disabled) svg {
-  transform: translateX(3px);
+/* Selectores de opción */
+.option-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-3);
 }
 
-/* Form Messages - Minimalistas */
-.form-message-modern {
-  padding: 12px 16px;
-  border-radius: 6px;
-  font-size: 13px;
+.option-row--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Dos campos por fila cuando el dato es corto */
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+.option {
+  position: relative;
+  padding: 1.05rem 1.2rem;
   text-align: left;
-  margin-top: 15px;
-  font-weight: 300;
-}
-
-.form-message-modern.success {
-  background: rgba(74, 144, 226, 0.1);
-  color: #000;
-  border: 1px solid #4a90e2;
-}
-
-.form-message-modern.error {
-  background: rgba(0,0,0,0.05);
-  color: #000;
-  border: 1px solid #000;
-}
-.section-title-contact {
-  text-align: center;
-  padding-top: 20px;
-  background: #000000;
-  color: #ffffff;
-  padding: 20px 0;
-  position: relative;
-  z-index: 10;
-  font-weight: 300;
-  line-height: 1.3;
-  margin: 0 0 1rem 0;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-}
-
-/* Map Section - Debajo del formulario */
-.map-section-modern {
-  width: 100%;
-  margin-top: 60px;
-  background: #000000;
-}
-
-.locations-map-contact {
-  width: 100vw;
-  height: 70vh;
-  position: relative;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  background: var(--field-bg);
+  border: var(--bw) solid var(--field-border);
+  border-radius: var(--radius-1);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--foreground);
   overflow: hidden;
-  z-index: 1;
-  margin-top: 20px;
-  background: #000000;
+  isolation: isolate;
+  transition: border-color var(--t-state), color var(--t-state);
 }
 
-.locations-map-contact iframe {
+.option::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-  padding-top: 3rem;
+  inset: 0;
+  z-index: -1;
+  background: var(--primary-block);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-2) var(--ease-emph);
 }
 
-/* Responsive Design - Optimizado para Móvil */
-@media (max-width: 1024px) {
-  .contact-split-modern {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-
-  .contact-left-side {
-    position: relative;
-    top: 0; /* reset on tablet/mobile */
-  }
-
-  .locations-map-contact {
-    height: 60vh;
-  }
+.option:hover {
+  border-color: var(--primary);
 }
 
-@media (max-width: 768px) {
-  .hero-title-modern {
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
-  }
-
-  .contact-main-section {
-    padding: 40px 0 60px;
-  }
-
-  .contact-right-side {
-    gap: 30px;
-  }
-
-  .form-group-modern {
-    gap: 10px;
-  }
-
-  .submit-button-modern {
-    padding: 10px 20px;
-    font-size: 11px;
-    gap: 8px;
-  }
-
-  .options-container {
-    grid-template-columns: 1fr;
-  }
-
-  .datetime-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .locations-map-contact {
-    height: 50vh;
-  }
+.option.is-selected {
+  border-color: var(--primary-block);
+  color: var(--on-brand);
 }
 
-@media (max-width: 480px) {
-  .hero-title-modern {
-    font-size: clamp(1.2rem, 8vw, 2rem);
-  }
-
-  .option-box {
-    padding: 14px 16px;
-    font-size: 14px;
-  }
-
-  .datetime-input {
-    font-size: 14px;
-  }
-  
-  .datetime-help {
-    font-size: 12px;
-  }
-
-  .locations-map-contact {
-    height: 40vh;
-  }
+.option.is-selected::before {
+  transform: scaleX(1);
 }
-/* Submit Button - Minimalista */
-.submit-button-modern {
-  align-self: center;
+
+.contact-submit {
+  align-self: flex-start;
+  margin-top: var(--sp-2);
+}
+
+.contact-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-message {
+  padding: var(--sp-4) var(--sp-5);
+  border-left: 3px solid;
+  background: var(--surface-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+  animation: field-enter var(--dur-3) var(--ease-out) both;
+}
+
+.form-message--success {
+  border-left-color: var(--primary-block);
+  color: var(--foreground);
+}
+
+.form-message--error {
+  border-left-color: #C0392B;
+  color: var(--foreground);
+}
+
+/* ---- Mapa ------------------------------------------------ */
+.contact-map {
+  padding-top: var(--section-y-sm);
+}
+
+.contact-map__head {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #4a90e2;
-  border: 1px solid #4a90e2;
-  border-radius: 50px;
-  padding: 14px 28px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-6);
+}
+
+.contact-map__title {
+  font-size: var(--fs-d4);
+}
+
+.contact-map__address {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
+  color: var(--primary);
 }
 
-.submit-button-modern:hover:not(:disabled) {
-  background: #4a90e2;
-  color: #fff;
+.contact-map__frame {
+  height: clamp(280px, 52svh, 540px);
+  border-top: 2px solid var(--accent-line);
+  background: var(--surface-2);
 }
 
-.submit-button-modern:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  border-color: #ccc;
-  color: #ccc;
-}
-
-.submit-button-modern svg {
-  transition: transform 0.3s ease;
-}
-
-.submit-button-modern:hover:not(:disabled) svg {
-  transform: translateX(3px);
-}
-
-/* Form Messages - Minimalistas */
-.form-message-modern {
-  padding: 12px 16px;
-  border-radius: 6px;
-  font-size: 13px;
-  text-align: left;
-  margin-top: 15px;
-  font-weight: 300;
-}
-
-.form-message-modern.success {
-  background: rgba(74, 144, 226, 0.1);
-  color: #000;
-  border: 1px solid #4a90e2;
-}
-
-.form-message-modern.error {
-  background: rgba(0,0,0,0.05);
-  color: #000;
-  border: 1px solid #000;
-}
-
-/* Map Section - Debajo del formulario */
-.map-section-modern {
-  width: 100%;
-  margin-top: 60px;
-}
-
-.locations-map-contact {
-  width: 100vw;
-  height: 70vh;
-  position: relative;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  overflow: hidden;
-  z-index: 1;
-  margin-top: 20px;
-}
-
-.locations-map-contact iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.contact-map__frame iframe {
   width: 100%;
   height: 100%;
   border: 0;
-  display: block;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter var(--dur-3) var(--ease-out);
 }
 
-/* Responsive Design - Optimizado para Móvil */
-@media (max-width: 1024px) {
-  .contact-split-modern {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-
-  .contact-left-side {
-    position: relative;
-    top: 0; /* reset on tablet/mobile */
-  }
-
-  .locations-map-contact {
-    height: 60vh;
-  }
+.contact-map__frame:hover iframe {
+  filter: none;
 }
 
-@media (max-width: 768px) {
-  .hero-title-modern {
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
+:root[data-theme='dark'] .contact-map__frame iframe {
+  filter: grayscale(1) invert(0.92) contrast(0.86);
+}
+
+:root[data-theme='dark'] .contact-map__frame:hover iframe {
+  filter: invert(0.92) contrast(0.86);
+}
+
+/* ---- Responsive ------------------------------------------ */
+@media (max-width: 900px) {
+  .contact-main__grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .contact-main-section {
-    padding: 40px 0 60px;
+  .contact-aside {
+    position: static;
   }
 
-  .contact-right-side {
-    gap: 30px;
+  .contact-aside__intro {
+    max-width: none;
   }
 
-  .form-group-modern {
-    gap: 10px;
-  }
-
-  .submit-button-modern {
-    padding: 10px 20px;
-    font-size: 11px;
-    gap: 8px;
-  }
-
-  .options-container {
-    grid-template-columns: 1fr;
-  }
-
-  .datetime-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .locations-map-contact {
-    height: 50vh;
+  .contact-direct {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-3) var(--sp-6);
   }
 }
 
-@media (max-width: 480px) {
-  .hero-title-modern {
-    font-size: clamp(1.2rem, 8vw, 2rem);
+@media (max-width: 560px) {
+  .option-row,
+  .option-row--three,
+  .field-row {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .option-box {
-    padding: 14px 16px;
-    font-size: 14px;
-  }
-
-  .datetime-input {
-    font-size: 14px;
-  }
-  
-  .datetime-help {
-    font-size: 12px;
-  }
-
-  .locations-map-contact {
-    height: 40vh;
+  .contact-submit {
+    align-self: stretch;
+    justify-content: center;
   }
 }

@@ -1,0 +1,184 @@
+/* ============================================================
+   GRILLA DE OBRA
+   Mosaico a sangre: las fotos se tocan entre sí y ocupan todo el
+   ancho. La información entra por encima, no compite con la imagen.
+   ============================================================ */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+}
+
+.work-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--surface-2);
+  color: #ffffff;
+  isolation: isolate;
+}
+
+.work-tile__media {
+  position: absolute;
+  inset: 0;
+}
+
+.work-tile__media img {
+  transition: transform 1000ms var(--ease-out);
+}
+
+.work-tile:hover .work-tile__media img,
+.work-tile:focus-visible .work-tile__media img {
+  transform: scale(1.05);
+}
+
+/* Velo que se cierra al pasar por encima */
+.work-tile__veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 9, 12, 0.6);
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.work-tile:hover .work-tile__veil,
+.work-tile:focus-visible .work-tile__veil {
+  opacity: 1;
+}
+
+.work-tile__index {
+  position: absolute;
+  top: var(--sp-4);
+  left: var(--sp-5);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-emph);
+}
+
+.work-tile:hover .work-tile__index,
+.work-tile:focus-visible .work-tile__index {
+  opacity: 1;
+  transform: none;
+}
+
+.work-tile__body {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 100%;
+  padding: var(--sp-6);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-3) var(--ease-emph);
+}
+
+.work-tile:hover .work-tile__body,
+.work-tile:focus-visible .work-tile__body {
+  opacity: 1;
+  transform: none;
+}
+
+.work-tile__type {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--vira-blue);
+  line-height: 1.5;
+}
+
+.work-tile__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+}
+
+/* Una línea de identidad debajo del nombre */
+.work-tile__name::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin: var(--sp-3) auto 0;
+  background: var(--vira-blue);
+  transform: scaleX(0);
+  transition: transform var(--dur-3) var(--ease-emph) 80ms;
+}
+
+.work-tile:hover .work-tile__name::after,
+.work-tile:focus-visible .work-tile__name::after {
+  transform: scaleX(1);
+}
+
+.work-tile__specs {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ------------------------------------------------------------
+   Sin hover (táctil): la información se muestra siempre, sobre
+   un degradado al pie. La grilla tiene que ser usable con el dedo.
+   ------------------------------------------------------------ */
+@media (hover: none) {
+  .work-tile__veil {
+    opacity: 1;
+    background: linear-gradient(180deg, rgba(6, 9, 12, 0) 42%, rgba(6, 9, 12, 0.88) 100%);
+  }
+
+  .work-tile__body {
+    height: auto;
+    justify-content: flex-end;
+    align-items: flex-start;
+    text-align: left;
+    padding: var(--sp-5);
+    opacity: 1;
+    transform: none;
+  }
+
+  .work-tile__name::after {
+    margin-inline: 0;
+    transform: scaleX(1);
+  }
+
+  .work-tile__index {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Responsive ------------------------------------------ */
+@media (max-width: 1024px) {
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .work-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .work-tile {
+    aspect-ratio: 4 / 3;
+  }
+}

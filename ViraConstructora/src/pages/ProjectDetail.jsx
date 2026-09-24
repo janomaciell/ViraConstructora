@@ -1,741 +1,340 @@
-"use client"
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 
-import { useParams, Link } from "react-router-dom"
-import { useState, useEffect } from "react"
-import WhatsAppButton from "../components/WhatsAppButton"
-import "./ProjectDetail.css"
+import SmartImage from '../components/ui/SmartImage'
+import ArrowIcon from '../components/ui/ArrowIcon'
+import Isotype from '../components/ui/Isotype'
+import { useLanguage } from '../i18n/language-context'
+import useScrollReveal from '../hooks/useScrollReveal'
+import useLockBodyScroll from '../hooks/useLockBodyScroll'
+import { projectsById, localizeProject } from '../data/projects'
+import { imageUrl, SIZES } from '../lib/media'
+import { fillTemplate, whatsappUrl } from '../lib/contact'
+import { canonicalUrl } from '../lib/site'
+import './ProjectDetail.css'
+
+const WhatsAppIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+  </svg>
+)
 
 const ProjectDetail = () => {
-  const { id } = useParams() // id debe coincidir con el id del proyecto
-  const [currentImage, setCurrentImage] = useState(0)
-  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const { id } = useParams()
+  const { t, lang } = useLanguage()
+  const [lightboxIndex, setLightboxIndex] = useState(null)
 
-  // Base de datos completa de proyectos (expandida con info real)
-  const projectsData = {
-    "ancla-i": {
-      title: "ANCLA I",
-      subtitle: "Proyecto integral con vistas privilegiadas",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "180",
-        bedrooms: "4",
-        bathrooms: "3",
-        garage: "2 autos",
-        lot: "500 M²"
-      },
-      description: "ANCLA I es un desarrollo completo que combina proyecto arquitectónico, dirección técnica y construcción de alta calidad. Con 180 m² distribuidos en espacios amplios y funcionales, esta vivienda destaca por su integración con el entorno costero y terminaciones premium.",
-      features: [
-        "Diseño contemporáneo con 4 dormitorios",
-        "3 baños completos en suite",
-        "Áreas sociales abiertas al exterior",
-        "Construcción antisísmica y ecológica",
-        "Terminaciones de lujo",
-        "Jardín integrado",
-        "Cochera cubierta"
-      ],
-      gallery: [
-        "/img/ANCLA/BAÑO.jpg",
-        "/img/ANCLA/COCINA Y LIVING.jpg",
-        "/img/ANCLA/COCINA.jpg",
-        "/img/ANCLA/CONTRA FACHADA.jpg",
-        "/img/ANCLA/DORMI 2.jpg",
-        "/img/ANCLA/DORMITORIO 1.jpg",
-        "/img/ANCLA/DORMITORIO 3.jpg",
-        "/img/ANCLA/FACHADA 1.jpg",
-        "/img/ANCLA/FACHADA 2.jpg",
-        "/img/ANCLA/GALERIA.jpg",
-        "/img/ANCLA/SALA DE ESTAR.jpg",
+  const project = useMemo(
+    () => localizeProject(projectsById[id], lang),
+    [id, lang],
+  )
 
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "vulcano-i": {
-      title: "VULCANO I",
-      subtitle: "Eficiencia y modernidad en espacios compactos",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "145",
-        bedrooms: "3",
-        bathrooms: "2",
-        garage: "1 auto",
-        lot: "380 M²"
-      },
-      description: "VULCANO I ofrece un desarrollo integral de 145 m², optimizado para la vida costera. Incluye proyecto, dirección y construcción con énfasis en la durabilidad y el confort, ideal para familias pequeñas.",
-      features: [
-        "3 dormitorios funcionales",
-        "2 baños modernos",
-        "Cocina integrada y living amplio",
-        "Materiales resistentes al clima costero",
-        "Aislación térmica avanzada",
-        "Terraza semi-cubierta",
-        "Eficiencia energética"
-      ],
-      gallery: [
-        "/img/VULCANO/contra-fachada vulcano.jpg",
-        "/img/VULCANO/COCINA.jpg",
-        "/img/VULCANO/cuarto 1 vulcano.jpg",
-        "/img/VULCANO/cuarto 2 vulcano.jpg",
-        "/img/VULCANO/fachada vulcano 2.jpg",
-        "/img/VULCANO/fachada vulcano.jpg",
-        "/img/VULCANO/galeria vulcano.jpg",
-        "/img/VULCANO/interior vulcano.jpg",
-        "/img/VULCANO/Panorama.jpg"
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "chape-i": {
-      title: "CHAPE I",
-      subtitle: "Diseño funcional para el hogar ideal",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "155",
-        bedrooms: "3",
-        bathrooms: "3",
-        garage: "1 auto",
-        lot: "400 M²"
-      },
-      description: "CHAPE I es un proyecto de 155 m² que integra diseño, dirección y construcción para crear un espacio habitable y moderno. Enfocado en la comodidad diaria con terminaciones de alta gama.",
-      features: [
-        "3 dormitorios con baño en suite",
-        "Espacios multifuncionales",
-        "Cocina equipada de diseño",
-        "Pisos de porcelanato importado",
-        "Ventilación natural optimizada",
-        "Área exterior con parrilla",
-        "Domótica básica"
-      ],
-      gallery: [
-        "/img/CHAPE/CHAPE 1.jpg",
-        "/img/CHAPE/chape 2.jpg",
-        "/img/CHAPE/chape 3.jpg",
-        "/img/CHAPE/CHAPE BCOCINA.jpg",
-        "/img/CHAPE/chape dormi 2.jpg",
-        "/img/CHAPE/chape dormitorio.jpg",
-        "/img/CHAPE/chape living.jpg",
-        "/img/CHAPE/chape 5.jpg",
-        "/img/CHAPE/galeria chape.jpg",
-        "/img/CHAPE/planta chape 1.jpg"
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "dafnea-i": {
-      title: "DAFNEA I",
-      subtitle: "Arquitectura contemporánea en evolución",
-      type: "PROYECTO Y DIRECCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "155",
-        bedrooms: "3",
-        bathrooms: "3",
-        garage: "1 auto",
-        lot: "420 M²"
-      },
-      description: "DAFNEA I enfoca en proyecto y dirección de obra para una vivienda de 155 m² con diseño innovador. Prioriza la sostenibilidad y la integración ambiental.",
-      features: [
-        "3 dormitorios luminosos",
-        "3 baños con hidromasaje",
-        "Diseño bioclimático",
-        "Paneles solares integrados",
-        "Espacios flexibles",
-        "Jardín vertical",
-        "Iluminación LED eficiente"
-      ],
-      gallery: [
-        "/img/DAFNEA/Dafnea1.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "dedalo-i": {
-      title: "DEDALO I",
-      subtitle: "Funcionalidad en cada rincón",
-      type: "PROYECTO Y DIRECCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "140",
-        bedrooms: "3",
-        bathrooms: "3",
-        garage: "1 auto",
-        lot: "350 M²"
-      },
-      description: "DEDALO I es un proyecto y dirección de 140 m² diseñado para maximizar el uso del espacio en un entorno costero, con énfasis en la practicidad y el estilo minimalista.",
-      features: [
-        "3 dormitorios compactos",
-        "3 baños ergonómicos",
-        "Layout optimizado",
-        "Almacenamiento inteligente",
-        "Ventanas panorámicas",
-        "Cochera techada",
-        "Área de lavado integrada"
-      ],
-      gallery: [
-        "/img/DEDALO1/DEDALO I.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
-    },
-    "dedalo-ii": {
-      title: "DEDALO II",
-      subtitle: "Construcción de calidad superior",
-      type: "CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "155",
-        bedrooms: "3",
-        bathrooms: "3",
-        garage: "2 autos",
-        lot: "450 M²"
-      },
-      description: "DEDALO II se centra en la fase de construcción de una vivienda de 155 m², utilizando técnicas avanzadas para garantizar durabilidad y estética moderna.",
-      features: [
-        "Estructura reforzada",
-        "3 dormitorios aislados acústicamente",
-        "3 baños con grifería premium",
-        "Pisos flotantes",
-        "Impermeabilización total",
-        "Instalaciones eléctricas certificadas",
-        "Acabados en madera natural"
-      ],
-      gallery: [
-        "/img/DEDALO2/DEDALO II.jpg",
-        "/img/DEDALO2/DEDALO II (1).jpg",
-        "/img/DEDALO2/COCINA-COMEDOR DEDALO II.jpg",
-        "/img/DEDALO2/FAHCADA DEDALO II.jpg",
-        "/img/DEDALO2/CONTRAFAHCADA DEDALO II.jpg",
-        "/img/DEDALO2/GALERIA DEDALO II.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "positive-house-xii": {
-      title: "POSITIVE HOUSE XII",
-      subtitle: "Sustentabilidad en arquitectura residencial",
-      type: "CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "150",
-        bedrooms: "3",
-        bathrooms: "3",
-        garage: "1 auto",
-        lot: "400 M²"
-      },
-      description: "POSITIVE HOUSE XII es una construcción de 150 m² enfocada en principios sustentables, con materiales ecológicos y diseño pasivo para reducir el impacto ambiental.",
-      features: [
-        "3 dormitorios eco-friendly",
-        "3 baños con ahorro de agua",
-        "Techo verde integrado",
-        "Energía solar fotovoltaica",
-        "Aislamiento natural",
-        "Recolección de lluvia",
-        "Mobiliario reciclado"
-      ],
-      gallery: [
-        "/img/PH-XII/PH XII.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "positive-house-xiii": {
-      title: "POSITIVE HOUSE XIII",
-      subtitle: "Eficiencia energética en diseño compacto",
-      type: "CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "130",
-        bedrooms: "3",
-        bathrooms: "2",
-        garage: "1 auto",
-        lot: "350 M²"
-      },
-      description: "POSITIVE HOUSE XIII construye 130 m² con enfoque en eficiencia, utilizando tecnologías de bajo consumo para una vida cómoda y económica.",
-      features: [
-        "3 dormitorios bien distribuidos",
-        "2 baños funcionales",
-        "Electrodomésticos de bajo consumo",
-        "Iluminación LED en toda la casa",
-        "Ventanas de doble vidrio",
-        "Termotanque solar",
-        "Diseño compacto y práctico"
-      ],
-      gallery: [
+  const gallery = project?.gallery ?? []
+  const isOpen = lightboxIndex !== null
 
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "barrio-coodopin": {
-      title: "BARRIO CODOOPIN",
-      subtitle: "Desarrollo comunitario con visión integral",
-      type: "DIRECCION DE OBRA",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "1280",
-        bedrooms: "18 viviendas",
-        bathrooms: "variable",
-        garage: "variable",
-        lot: "5000 M²"
-      },
-      description: "BARRIO CODOOPIN es un proyecto de dirección de obra para un desarrollo residencial de 18 viviendas,             fomentando la comunidad y el bienestar integral.",
-      features: [
-        "Variedad de tipologías habitacionales",
-        "Áreas comunes diseñadas para socializar",
-        "Espacios verdes y recreativos",
-        "Caminos peatonales seguros",
-        "Infraestructura moderna",
-        "Sistemas de seguridad integrados",
-        "Gestión eficiente de recursos"
-      ],
-      gallery: [
-        "/img/COODOPIN/CODOOPIN.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "Cementos Avellaneda", category: "Materiales base" },
-        { name: "Durlock", category: "Construcción en seco" }
-      ]
-    },
-    "niza-i": {
-      title: "NIZA I",
-      subtitle: "Proyecto multifamiliar con diseño contemporáneo",
-      type: "PROYECTO",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "350",
-        bedrooms: "6 unidades funcionales",
-        bathrooms: "variable",
-        garage: "variable",
-        lot: "800 M²"
-      },
-      description: "NIZA I es un proyecto de desarrollo multifamiliar que incluye 6 unidades funcionales, combinando diseño contemporáneo con funcionalidad para diversos estilos de vida.",
-      features: [
-        "Unidades de 1, 2 y 3 dormitorios",
-        "Diseño modular y flexible",
-        "Áreas comunes atractivas",
-        "Cocinas equipadas",
-        "Balcones privados",
-        "Espacios verdes integrados",
-        "Acceso controlado"
-      ],
-      gallery: [
+  useScrollReveal([id, lang])
+  useLockBodyScroll(isOpen)
 
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
-    },
-    "garzas-i": {
-      title: "GARZAS I",
-      subtitle: "Amplitud y confort en diseño moderno",
-      type: "CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "230",
-        bedrooms: "3",
-        bathrooms: "2",
-        garage: "2 autos",
-        lot: "600 M²"
-      },
-      description: "GARZAS I es una construcción de 230 m² que destaca por sus espacios amplios y luminosos. Diseñada para familias que buscan confort y funcionalidad, con terminaciones de primera calidad y ambientes integrados.",
-      features: [
-        "3 dormitorios amplios con vestidores",
-        "2 baños completos con hidromasaje",
-        "Living comedor integrado de gran amplitud",
-        "Cocina moderna con isla central",
-        "Galería cubierta con parrilla",
-        "Jardín con sistema de riego automatizado",
-        "Cochera doble techada",
-        "Pisos de porcelanato en toda la casa"
-      ],
-      gallery: [
-        "/img/GARZAS/GARZAS.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "progreso-y-biarritz": {
-      title: "PROGRESO Y BIARRITZ",
-      subtitle: "Desarrollo multifamiliar de alto estándar",
-      type: "PROYECTO Y FINAL DE OBRA",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "435",
-        bedrooms: "7 unidades",
-        bathrooms: "variable",
-        garage: "7 cocheras",
-        lot: "900 M²"
-      },
-      description: "PROGRESO Y BIARRITZ es un desarrollo integral de 435 m² que incluye proyecto completo y finalización de obra para 7 unidades funcionales. Combina diseño contemporáneo con distribuciones eficientes para crear espacios habitables de calidad.",
-      features: [
-        "7 unidades funcionales independientes",
-        "Diseño contemporáneo y minimalista",
-        "Áreas comunes de uso compartido",
-        "Sistema de acceso con videoportero",
-        "Cocheras individuales cubiertas",
-        "Instalaciones de gas y agua individuales",
-        "Pre-instalación de aires acondicionados",
-        "Espacios verdes comunitarios"
-      ],
-      gallery: [
-        "/img/PROGRESO-Y-BIARRITZ/PROGRESO.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "espartillo-i": {
-      title: "ESPARTILLO I",
-      subtitle: "Elegancia costera con vistas panorámicas",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "235",
-        bedrooms: "4",
-        bathrooms: "3",
-        garage: "2 autos",
-        lot: "700 M²"
-      },
-      description: "ESPARTILLO I es un proyecto integral de 235 m² que combina diseño, dirección y construcción en una vivienda de lujo costera. Con 4 dormitorios y amplios espacios sociales, esta casa está pensada para disfrutar de la vida junto al mar con máximo confort.",
-      features: [
-        "4 dormitorios en suite con vestidores",
-        "3 baños completos de diseño",
-        "Living comedor de doble altura",
-        "Cocina integrada con office",
-        "Deck exterior con piscina",
-        "Quincho cubierto con parrilla",
-        "Cochera doble con portón automático",
-        "Sistema de domótica integrado"
-      ],
-      gallery: [
-        "/img/ESPARTILLO/ESPARTILLO.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "corbeta-agradable-i": {
-      title: "CORBETA AGRADABLE I",
-      subtitle: "Diseño compacto y funcional",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "90",
-        bedrooms: "2",
-        bathrooms: "1",
-        garage: "1 auto",
-        lot: "300 M²"
-      },
-      description: "CORBETA AGRADABLE I es un proyecto compacto de 90 m² ideal para parejas o pequeñas familias. Incluye diseño completo, dirección y construcción, optimizando cada metro cuadrado con soluciones inteligentes y diseño eficiente.",
-      features: [
-        "2 dormitorios con placares empotrados",
-        "1 baño completo moderno",
-        "Living comedor integrado",
-        "Cocina americana equipada",
-        "Patio con espacio para parrilla",
-        "Cochera cubierta",
-        "Terminaciones de calidad",
-        "Bajo costo de mantenimiento"
-      ],
-      gallery: [
-        "/img/CORBETA-AGRADABLE1/CORBETA AGRADABLE .jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "silfides-i": {
-      title: "SILFIDES I",
-      subtitle: "Modernidad y espacios abiertos",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "150",
-        bedrooms: "4",
-        bathrooms: "3",
-        garage: "1 auto",
-        lot: "450 M²"
-      },
-      description: "SILFIDES I es un proyecto de 150 m² que prioriza los espacios abiertos y la conexión interior-exterior. Con 4 dormitorios y 3 baños, ofrece un equilibrio perfecto entre privacidad y áreas sociales amplias.",
-      features: [
-        "4 dormitorios distribuidos estratégicamente",
-        "3 baños completos modernos",
-        "Living comedor con grandes ventanales",
-        "Cocina abierta al comedor",
-        "Galería semicubierta",
-        "Jardín con césped natural",
-        "Cochera con espacio de guardado",
-        "Iluminación LED en toda la casa"
-      ],
-      gallery: [
+  const close = useCallback(() => setLightboxIndex(null), [])
+  const prev = useCallback(
+    () => setLightboxIndex((index) => (index === 0 ? gallery.length - 1 : index - 1)),
+    [gallery.length],
+  )
+  const next = useCallback(
+    () => setLightboxIndex((index) => (index === gallery.length - 1 ? 0 : index + 1)),
+    [gallery.length],
+  )
 
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      },
-      partners: [
-        { name: "FV", category: "Sanitarios" }
-      ]
-    },
-    "zorzal-i": {
-      title: "ZORZAL I",
-      subtitle: "Arquitectura contemporánea en armonía",
-      type: "PROYECTO, DIRECCION Y CONSTRUCCION",
-      location: "Pinamar, Buenos Aires",
-      year: "2023",
-      status: "Completado",
-      specs: {
-        area: "120",
-        bedrooms: "3",
-        bathrooms: "2",
-        garage: "1 auto",
-        lot: "380 M²"
-      },
-      description: "ZORZAL I es un desarrollo de 120 m² con arquitectura contemporánea que se integra perfectamente al entorno. Proyecto completo que incluye diseño, dirección y construcción con enfoque en la sustentabilidad y el confort.",
-      features: [
-        "3 dormitorios con ventilación cruzada",
-        "2 baños con grifería de primera línea",
-        "Living comedor con salida al jardín",
-        "Cocina funcional equipada",
-        "Terraza semicubierta",
-        "Jardín de bajo mantenimiento",
-        "Cochera techada",
-        "Materiales resistentes al clima costero"
-      ],
-      gallery: [
-        "/img/ZORZAL/ZORZAL.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      }
-    },
-    "colon-i": {
-      title: "COLON I",
-      subtitle: "Funcionalidad y eficiencia en cada detalle",
-      type: "PROYECTO",
-      location: "Pinamar, Buenos Aires",
-      year: "2024",
-      status: "Completado",
-      specs: {
-        area: "120",
-        bedrooms: "3",
-        bathrooms: "2",
-        garage: "1 auto",
-        lot: "350 M²"
-      },
-      description: "COLON I es un proyecto arquitectónico de 120 m² enfocado en la funcionalidad y la eficiencia espacial. Diseñado con criterios modernos de distribución y optimización de recursos para una vivienda práctica y confortable.",
-      features: [
-        "3 dormitorios con diseño inteligente",
-        "2 baños optimizados",
-        "Distribución eficiente de espacios",
-        "Cocina integrada al comedor",
-        "Área de servicio independiente",
-        "Patio con espacio verde",
-        "Cochera con acceso directo",
-        "Diseño de bajo consumo energético"
-      ],
-      gallery: [
-        "/img/COLON1/COLON.jpg",
-      ],
-      team: {
-        architect: "Estudio VIRA Arquitectos",
-        builder: "VIRA Constructora",
-        landscape: "Verde Diseño Paisajístico"
-      },
-      partners: []
-    }
-  }
-
-  const project = projectsData[id]
-
+  // El lightbox se maneja con teclado: Escape y flechas
   useEffect(() => {
-    // Resetear imagen actual al cambiar de proyecto
-    setCurrentImage(0)
-  }, [id])
+    if (!isOpen) return undefined
+
+    const onKey = (event) => {
+      if (event.key === 'Escape') close()
+      if (event.key === 'ArrowLeft') prev()
+      if (event.key === 'ArrowRight') next()
+    }
+
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen, close, prev, next])
 
   if (!project) {
     return (
-      <div className="project-detail-page">
-        <h2>Proyecto no encontrado</h2>
-        <Link to="/proyectos" className="back-link">Volver a Proyectos</Link>
+      <div className="detail-missing">
+        <Isotype size={72} />
+        <h1 className="detail-missing__title">{t.projectDetail.notFound}</h1>
+        <Link to="/proyectos" className="btn">
+          <span>{t.projectDetail.back}</span>
+          <ArrowIcon />
+        </Link>
       </div>
     )
   }
 
-  const openGallery = (index) => {
-    setCurrentImage(index)
-    setIsGalleryOpen(true)
-  }
+  const specs = [
+    { label: t.projectDetail.area, value: `${project.specs.area} m²` },
+    { label: t.projectDetail.bedrooms, value: project.specs.bedrooms },
+    { label: t.projectDetail.bathrooms, value: project.specs.bathrooms },
+    { label: t.projectDetail.garage, value: project.specs.garage },
+    { label: t.projectDetail.lot, value: project.specs.lot },
+  ].filter((spec) => spec.value)
 
-  const closeGallery = () => {
-    setIsGalleryOpen(false)
-  }
+  /* Consulta por WhatsApp con los datos de esta propiedad ya escritos */
+  const enquiryLink = whatsappUrl(
+    fillTemplate(t.projectDetail.enquiryMessage, {
+      title: project.title,
+      summary: project.summary,
+      location: project.location,
+      url: canonicalUrl(`proyectos/${project.id}`),
+    }),
+  )
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev === 0 ? project.gallery.length - 1 : prev - 1))
-  }
-
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev === project.gallery.length - 1 ? 0 : prev + 1))
-  }
+  const meta = [
+    { label: t.projectDetail.type, value: project.type },
+    { label: t.projectDetail.location, value: project.location },
+    { label: t.projectDetail.year, value: project.year },
+    { label: t.projectDetail.status, value: project.status },
+  ].filter((item) => item.value)
 
   return (
-    <div className="project-detail-page">
-      <header className="project-header">
-        <h1 className="project-title">{project.title}</h1>
-        <p className="project-subtitle">{project.subtitle}</p>
-        <Link to="/proyectos" className="back-link">Volver a Proyectos</Link>
-      </header>
+    <div className="detail-page">
+      {/* Portada */}
+      <section className="detail-hero">
+        <SmartImage
+          src={project.image || gallery[0]}
+          alt={project.title}
+          className="detail-hero__media"
+          sizes={SIZES.full}
+          priority
+        />
+        <span className="detail-hero__scrim" aria-hidden="true" />
 
-      <section className="project-info-section">
-        <div className="project-info">
-          <p><strong>Tipo:</strong> {project.type}</p>
-          <p><strong>Ubicación:</strong> {project.location}</p>
-          <p><strong>Año:</strong> {project.year}</p>
-          <p><strong>Estado:</strong> {project.status}</p>
+        <div className="shell shell--wide detail-hero__inner">
+          <Link to="/proyectos" className="detail-back">
+            <ArrowIcon size={16} />
+            <span>{t.projectDetail.back}</span>
+          </Link>
+
+          <span className="eyebrow">{project.type}</span>
+          <h1 className="detail-hero__title">{project.title}</h1>
+          <p className="detail-hero__subtitle">{project.subtitle}</p>
+          <p className="detail-hero__meta">
+            {[project.location, project.year].filter(Boolean).join(' · ')}
+          </p>
         </div>
-        <div className="project-specs">
-          <p><strong>Superficie:</strong> {project.specs.area} m²</p>
-          <p><strong>Dormitorios:</strong> {project.specs.bedrooms}</p>
-          <p><strong>Baños:</strong> {project.specs.bathrooms}</p>
-          <p><strong>Garage:</strong> {project.specs.garage}</p>
-          <p><strong>Terreno:</strong> {project.specs.lot} m²</p>
-        </div>
+
+        <span className="detail-hero__bar" aria-hidden="true" />
       </section>
 
-      <section className="project-description-section">
-        <h2>Descripción</h2>
-        <p>{project.description}</p>
-      </section>
+      {/* Ficha del proyecto: el relato y los datos, juntos */}
+      <section className="section section--ink detail-brief">
+        <div className="shell shell--wide detail-brief__grid">
+          <div className="detail-brief__story">
+            <h2 className="detail-brief__title" data-reveal="up">
+              {t.projectDetail.descriptionTitle}
+            </h2>
+            <p className="detail-brief__text" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+              {project.description}
+            </p>
 
-      <section className="project-features-section">
-        <h2>Características Destacadas</h2>
-        <ul>
-          {project.features.map((feature, index) => (
-            <li key={index}>{feature}</li>
-          ))}
-        </ul>
-      </section>
+            <ul className="detail-brief__tags" data-reveal="up" style={{ '--reveal-delay': '160ms' }}>
+              {meta.map((item) => (
+                <li key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                </li>
+              ))}
+            </ul>
 
-      <section className="project-gallery-section">
-        <h2>Galería de Imágenes</h2>
-        <div className="gallery-grid">
-          {project.gallery.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`${project.title} - Imagen ${index + 1}`}
-              className="gallery-thumbnail"
-              onClick={() => openGallery(index)}
-            />
-          ))}
-        </div>
-      </section>
-
-      {isGalleryOpen && (
-        <div className="lightbox-overlay" onClick={closeGallery}>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <button className="lightbox-close" onClick={closeGallery}>&times;</button>
-            <button className="lightbox-prev" onClick={prevImage}>&lt;</button>
-            <img
-              src={project.gallery[currentImage]}
-              alt={`${project.title} - Imagen ${currentImage + 1}`}
-              className="lightbox-image"
-            />
-            <button className="lightbox-next" onClick={nextImage}>&gt;</button>
+            <a
+              href={enquiryLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--solid detail-enquire"
+              data-reveal="up"
+              style={{ '--reveal-delay': '220ms' }}
+            >
+              <WhatsAppIcon />
+              <span>{t.projectDetail.enquire}</span>
+            </a>
           </div>
+
+          <dl className="detail-data">
+            {specs.map((spec, index) => (
+              <div
+                key={spec.label}
+                className="detail-data__item"
+                data-reveal="up"
+                style={{ '--reveal-delay': `${index * 60}ms` }}
+              >
+                <dt>{spec.label}</dt>
+                <dd>{spec.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
+      </section>
+
+      {/* Características */}
+      <section className="section detail-features-section">
+        <div className="shell shell--wide">
+          <h2 className="detail-section-title" data-reveal="up">
+            {t.projectDetail.featuresTitle}
+          </h2>
+
+          <ul className="detail-features">
+            {project.features.map((feature, index) => (
+              <li
+                key={feature}
+                data-reveal="up"
+                style={{ '--reveal-delay': `${(index % 4) * 60}ms` }}
+              >
+                <Isotype size={13} />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* Galería */}
+      {gallery.length > 0 && (
+        <section className="section section--surface detail-gallery">
+          <div className="shell shell--wide">
+            <header className="detail-gallery__head">
+              <h2 className="detail-section-title" data-reveal="up">
+                {t.projectDetail.galleryTitle}
+              </h2>
+              <span className="detail-gallery__count" data-reveal="fade">
+                {String(gallery.length).padStart(2, '0')}
+              </span>
+            </header>
+
+            <div className="detail-gallery__grid">
+              {gallery.map((image, index) => (
+                <button
+                  key={`${image}-${index}`}
+                  type="button"
+                  className="gallery-item"
+                  onClick={() => setLightboxIndex(index)}
+                  aria-label={`${t.projectDetail.openImage} — ${t.projectDetail.imageOf
+                    .replace('{current}', String(index + 1))
+                    .replace('{total}', String(gallery.length))}`}
+                  data-reveal="curtain"
+                  style={{ '--reveal-delay': `${(index % 3) * 80}ms` }}
+                >
+                  <SmartImage
+                    src={image}
+                    alt={`${project.title} — ${index + 1}`}
+                    className="gallery-item__media"
+                    sizes={SIZES.third}
+                    ratio="4 / 3"
+                    zoom
+                  />
+                  <span className="gallery-item__mark" aria-hidden="true">
+                    <ArrowIcon size={16} />
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
 
-      <section className="project-team-section">
-        <h2>Equipo del Proyecto</h2>
-        <p><strong>Arquitectura:</strong> {project.team.architect}</p>
-        <p><strong>Constructora:</strong> {project.team.builder}</p>
-        <p><strong>Diseño de Paisajismo:</strong> {project.team.landscape}</p>
+      {/* Equipo */}
+      <section className="section section--ink detail-team">
+        <div className="shell shell--wide">
+          <h2 className="detail-section-title" data-reveal="up">{t.projectDetail.teamTitle}</h2>
+
+          <dl className="detail-team__list">
+            <div data-reveal="up">
+              <dt>{t.projectDetail.architect}</dt>
+              <dd>{project.team.architect}</dd>
+            </div>
+            <div data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+              <dt>{t.projectDetail.builder}</dt>
+              <dd>{project.team.builder}</dd>
+            </div>
+            <div data-reveal="up" style={{ '--reveal-delay': '160ms' }}>
+              <dt>{t.projectDetail.landscape}</dt>
+              <dd>{project.team.landscape}</dd>
+            </div>
+          </dl>
+        </div>
       </section>
 
-      {/* Sección de Socios y Proveedores eliminada según requerimiento */}
+      <section className="section section--brand">
+        <div className="shell cta-block">
+          <h2 className="cta-block__title" data-reveal="up">{t.projects.ctaTitle}</h2>
+          <p className="cta-block__text" data-reveal="up" style={{ '--reveal-delay': '80ms' }}>
+            {t.projects.ctaText}
+          </p>
+          <div data-reveal="up" style={{ '--reveal-delay': '160ms' }}>
+            <Link to="/contacto" className="btn btn--ink">
+              <span>{t.projects.ctaButton}</span>
+              <ArrowIcon />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-      <WhatsAppButton />
+      {/* Lightbox */}
+      {isOpen && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={project.title}
+          onClick={close}
+        >
+          <button
+            type="button"
+            className="lightbox__close"
+            onClick={close}
+            aria-label={t.projectDetail.close}
+          >
+            <span />
+            <span />
+          </button>
+
+          <button
+            type="button"
+            className="lightbox__nav lightbox__nav--prev"
+            onClick={(event) => {
+              event.stopPropagation()
+              prev()
+            }}
+            aria-label={t.projectDetail.prev}
+          >
+            <ArrowIcon size={22} />
+          </button>
+
+          <figure className="lightbox__figure" onClick={(event) => event.stopPropagation()}>
+            <img
+              src={imageUrl(gallery[lightboxIndex], { width: 1920 })}
+              alt={`${project.title} — ${lightboxIndex + 1}`}
+            />
+            <figcaption className="lightbox__caption">
+              {t.projectDetail.imageOf
+                .replace('{current}', String(lightboxIndex + 1))
+                .replace('{total}', String(gallery.length))}
+            </figcaption>
+          </figure>
+
+          <button
+            type="button"
+            className="lightbox__nav lightbox__nav--next"
+            onClick={(event) => {
+              event.stopPropagation()
+              next()
+            }}
+            aria-label={t.projectDetail.next}
+          >
+            <ArrowIcon size={22} />
+          </button>
+        </div>
+      )}
     </div>
   )
 }

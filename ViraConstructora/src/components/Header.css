@@ -1,245 +1,392 @@
-.header {
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.site-header {
+  --header-fg: var(--foreground);
+  --header-line: var(--border);
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background-color: transparent;
+  inset: 0 0 auto 0;
+  z-index: var(--z-header);
+  color: var(--header-fg);
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    backdrop-filter var(--dur-2) var(--ease-out);
+  border-bottom: var(--bw) solid transparent;
+}
+
+/* Sobre media a pantalla completa: todo en blanco, sin fondo */
+.site-header[data-tone='media'] {
+  --header-fg: #ffffff;
+  --header-line: rgba(255, 255, 255, 0.3);
+}
+
+/* Al scrollear el header se posa sobre una superficie sólida */
+.site-header[data-scrolled='true'] {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom-color: var(--border);
+}
+
+.site-header[data-menu='open'] {
+  background: transparent;
   backdrop-filter: none;
-  transition: all 0.4s ease;
-  padding: 25px 0;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
 }
 
-.header.scrolled {
-  background-color: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-  padding: 18px 0;
-}
-
-/* Header sólido para página Contact */
-body:has(.contact-page-modern) .header {
-  background-color: #ffffff !important;
-  backdrop-filter: none !important;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-}
-
-.header-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
+.site-header__inner {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
+  gap: var(--sp-5);
+  max-width: 1720px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  height: var(--header-h);
+  transition: height var(--dur-2) var(--ease-out);
 }
 
-.logo {
+.site-header[data-scrolled='true'] .site-header__inner {
+  height: var(--header-h-sm);
+}
+
+/* ---- Marca ---------------------------------------------- */
+.site-header__brand {
   display: flex;
   align-items: center;
-  text-decoration: none;
-  transition: opacity 0.3s ease;
+  flex: none;
+  transition: opacity var(--t-micro);
 }
 
-.logo:hover {
-  opacity: 0.8;
+.site-header__brand:hover {
+  opacity: 0.72;
 }
 
-.logo-image {
-  width: 300px;
-  height: 130px;
-  object-fit: contain;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
+/* El logo se dimensiona por ALTURA: así nunca puede exceder la barra
+   ni quedar recortado, sea cual sea el ancho de la ventana. */
+.site-header__brand img {
+  height: clamp(34px, 3.6vw, 46px);
+  width: auto;
+  max-width: none;
 }
 
-/* Cuando está scrolled, cambia a la imagen a color */
-.header.scrolled .logo-image {
-  content: url('/img/ViraColor.png');
-}
+/* El tamaño del logo NO cambia al scrollear: es el punto de aterrizaje
+   del logo del hero y tiene que ser un blanco fijo. */
 
-
-.nav ul {
-  display: flex;
-  list-style: none;
-  gap: 45px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav a {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--white);
-  transition: all 0.3s ease;
-  position: relative;
-  padding-bottom: 5px;
-  text-decoration: none;
-}
-
-.header.scrolled .nav a {
-  color: var(--black);
-}
-
-/* Elementos de navegación en Contact */
-body:has(.contact-page-modern) .header .nav a {
-  color: #000000 !important;
-}
-
-.nav a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--white);
-  transition: width 0.3s ease;
-}
-
-.header.scrolled .nav a::after {
-  background-color: var(--primary-color);
-}
-
-.nav a:hover::after,
-.nav a.active::after {
-  width: 100%;
-}
-
-.nav a:hover {
-  opacity: 0.8;
-}
-
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none; /* transparente por defecto */
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  z-index: 1001;
-  transition: all 0.3s ease;
-}
-
-.mobile-menu-btn span {
-  width: 28px;
-  height: 2px;
-  background-color: var(--white); /* líneas blancas por defecto */
-  transition: all 0.3s ease;
-  display: block;
-}
-
-/* Cuando el header tiene la clase scrolled (global, pero con !important para override) */
-.header.scrolled .mobile-menu-btn {
-  background-color: #ffffff !important; /* Fondo blanco en scroll (usando hex directo por si var no está definida) */
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.header.scrolled .mobile-menu-btn span {
-  background-color: #000000 !important; /* Líneas negras en scroll (hex directo) */
-}
-
-/* Botón móvil en Contact */
-body:has(.contact-page-modern) .header .mobile-menu-btn {
-  background-color: #ffffff !important;
-  padding: 8px;
-  border-radius: 4px;
-}
-
-body:has(.contact-page-modern) .header .mobile-menu-btn span {
-  background-color: #000000 !important;
-}
-
-/* Animación de apertura del menú (mantiene colores según estado scrolled) */
-.mobile-menu-btn.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
-}
-
-.mobile-menu-btn.active span:nth-child(2) {
+/* Mientras el hero del Home tiene el logo, el header no muestra el suyo:
+   hay un solo logo en pantalla en todo momento. El intercambio ocurre
+   cuando ambos ya coinciden en posición y tamaño, así que no se nota. */
+:root[data-hero-logo='hero'] .site-header__brand {
   opacity: 0;
+  visibility: hidden;
 }
 
-.mobile-menu-btn.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
+.site-header__brand {
+  transition: opacity 140ms linear, visibility 0s;
 }
 
-/* MOBILE - Estilos específicos para asegurar override en responsive */
-@media (max-width: 968px) {
-  .header-container {
-    padding: 0 25px;
-  }
+/* ---- Navegación desktop ---------------------------------- */
+.site-header__nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--sp-4), 2.4vw, var(--sp-7));
+}
 
+.site-header__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-block: var(--sp-2);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-nav);
+  text-transform: uppercase;
+  color: inherit;
+  transition: color var(--t-state);
+}
 
-  .mobile-menu-btn {
-    display: flex;
-    background: none !important; /* transparente por defecto, con !important para consistencia */
-  }
+/* El isotipo entra como indicador del ítem activo */
+.site-header__link-mark {
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(1px) scale(0.6);
+  transition:
+    width var(--dur-2) var(--ease-emph),
+    opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-emph);
+}
 
-  /* Override específico para scrolled en mobile */
-  .header.scrolled .mobile-menu-btn {
-    background-color: #ffffff !important; /* Fondo blanco en scroll */
-    padding: 8px;
-    border-radius: 4px;
-  }
+.site-header__link.is-active .site-header__link-mark,
+.site-header__link:hover .site-header__link-mark {
+  width: 13px;
+  opacity: 1;
+  transform: translateY(1px) scale(1);
+}
 
-  .header.scrolled .mobile-menu-btn span {
-    background-color: #000000 !important; /* Líneas negras en scroll */
-  }
+.site-header__link span {
+  position: relative;
+}
 
-  .nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 350px;
-    height: 100vh;
-    background-color: var(--white);
-    transition: right 0.4s ease;
-    padding-top: 100px;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
-  }
+.site-header__link span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background: var(--vira-blue);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-2) var(--ease-emph);
+}
 
-  .nav.open {
-    right: 0;
-  }
+.site-header__link:hover span::after,
+.site-header__link.is-active span::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
-  .nav ul {
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-  }
+.site-header__link.is-active,
+.site-header__link:hover {
+  color: var(--vira-blue);
+}
 
-  .nav li {
-    border-bottom: 1px solid #e0e0e0;
-  }
+.site-header[data-tone='media'] .site-header__link.is-active,
+.site-header[data-tone='media'] .site-header__link:hover {
+  color: #ffffff;
+}
 
-  .nav a {
-    display: block;
-    padding: 22px 30px;
-    font-size: 15px;
-    color: var(--black);
-  }
+/* ---- Acciones -------------------------------------------- */
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex: none;
+}
 
-  .nav a::after {
+/* ---- Botón de menú --------------------------------------- */
+.menu-button {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: var(--bw) solid var(--header-line);
+  border-radius: var(--radius-1);
+  transition: border-color var(--t-state);
+}
+
+.menu-button:hover {
+  border-color: var(--vira-blue);
+}
+
+.menu-button span {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transform: translateX(-50%);
+  transition:
+    transform var(--dur-2) var(--ease-emph),
+    width var(--dur-2) var(--ease-emph);
+}
+
+.menu-button span:nth-child(1) { top: 15px; }
+.menu-button span:nth-child(2) { top: 23px; width: 12px; }
+
+.site-header[data-menu='open'] .menu-button span:nth-child(1) {
+  transform: translateX(-50%) translateY(4px) rotate(45deg);
+}
+
+.site-header[data-menu='open'] .menu-button span:nth-child(2) {
+  width: 18px;
+  transform: translateX(-50%) translateY(-4px) rotate(-45deg);
+}
+
+/* ---- Barra de progreso de lectura ------------------------ */
+.site-header__progress {
+  display: block;
+  height: 2px;
+  background: var(--vira-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: opacity var(--dur-2) var(--ease-out);
+  will-change: transform;
+}
+
+.site-header[data-scrolled='true'] .site-header__progress {
+  opacity: 1;
+}
+
+/* ============================================================
+   MENÚ OVERLAY (mobile / tablet)
+   Cortina que barre desde abajo + entrada escalonada de los ítems
+   ============================================================ */
+
+.site-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--sp-7);
+  padding: calc(var(--header-h) + var(--sp-7)) var(--gutter) var(--sp-8);
+  background: var(--background);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition:
+    clip-path var(--dur-3) var(--ease-in-out),
+    visibility 0s linear var(--dur-3);
+}
+
+.site-menu[data-open='true'] {
+  clip-path: inset(0 0 0 0);
+  visibility: visible;
+  transition:
+    clip-path var(--dur-3) var(--ease-in-out),
+    visibility 0s;
+}
+
+/* Bloque de identidad: una franja #7AA6D0 al pie del overlay */
+.site-menu::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--primary-block);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-emph) 160ms;
+}
+
+.site-menu[data-open='true']::after {
+  transform: scaleX(1);
+}
+
+.site-menu__nav li {
+  border-top: var(--bw) solid var(--border);
+}
+
+.site-menu__nav li:last-child {
+  border-bottom: var(--bw) solid var(--border);
+}
+
+.site-menu__nav li,
+.site-menu__foot {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-3) var(--ease-out),
+    transform var(--dur-3) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+.site-menu[data-open='true'] .site-menu__nav li,
+.site-menu[data-open='true'] .site-menu__foot {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(180ms + var(--i, 0) * 60ms);
+}
+
+.site-menu__link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-4);
+  padding-block: clamp(var(--sp-3), 2.2vh, var(--sp-5));
+  color: var(--foreground);
+  transition: color var(--t-state), padding-left var(--t-state);
+}
+
+.site-menu__link:hover,
+.site-menu__link.is-active {
+  color: var(--primary);
+  padding-left: var(--sp-3);
+}
+
+.site-menu__index {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.16em;
+  color: var(--primary);
+  flex: none;
+}
+
+.site-menu__label {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 3.75rem);
+  line-height: 0.95;
+  letter-spacing: var(--ls-display);
+  text-transform: uppercase;
+}
+
+.site-menu__mark {
+  margin-left: auto;
+  align-self: center;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity var(--t-state), transform var(--dur-2) var(--ease-emph);
+}
+
+.site-menu__link:hover .site-menu__mark,
+.site-menu__link.is-active .site-menu__mark {
+  opacity: 1;
+  transform: none;
+}
+
+.site-menu__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3) var(--sp-6);
+}
+
+.site-menu__contact {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--muted);
+  transition: color var(--t-state);
+}
+
+.site-menu__contact:hover {
+  color: var(--primary);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1080px) {
+  .site-header__nav {
     display: none;
   }
 
-  .nav a:hover,
-  .nav a.active {
-    background-color: #f5f5f5;
-    color: var(--primary-color);
+  .menu-button {
+    display: block;
   }
 }
 
-@media (max-width: 480px) {
-
-  .logo-image {
-    width: 100px;
-    height: 65px;
+@media (max-width: 420px) {
+  .site-header__actions {
+    gap: var(--sp-2);
   }
-  
+
+  .lang-toggle__option {
+    min-width: 34px;
+  }
 }
 
+@media (min-width: 1081px) {
+  .site-menu {
+    display: none;
+  }
+}

@@ -1,0 +1,16 @@
+.route-fallback {
+  display: grid;
+  place-items: center;
+  min-height: 70vh;
+  background: var(--background);
+  color: var(--primary);
+}
+
+.route-fallback__mark {
+  animation: route-fallback-pulse 1.4s var(--ease-in-out) infinite;
+}
+
+@keyframes route-fallback-pulse {
+  0%, 100% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-6px); }
+}

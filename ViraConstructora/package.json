@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "media:upload": "./scripts/upload-media.sh",
+    "media:check": "node scripts/check-media.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
