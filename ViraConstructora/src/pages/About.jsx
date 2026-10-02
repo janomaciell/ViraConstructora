@@ -6,11 +6,13 @@ import ArrowIcon from '../components/ui/ArrowIcon'
 import Isotype from '../components/ui/Isotype'
 import { useLanguage } from '../i18n/language-context'
 import useScrollReveal from '../hooks/useScrollReveal'
+import useSeo from '../hooks/useSeo'
 import { SIZES } from '../lib/media'
 import './About.css'
 
 const About = () => {
   const { t, lang } = useLanguage()
+  useSeo({ ...t.seo.about, path: 'nosotros' }, [lang])
   useScrollReveal([lang])
 
   return (

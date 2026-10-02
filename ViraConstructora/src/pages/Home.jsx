@@ -11,6 +11,7 @@ import WorkGrid from '../components/WorkGrid'
 
 import { useLanguage } from '../i18n/language-context'
 import useScrollReveal from '../hooks/useScrollReveal'
+import useSeo from '../hooks/useSeo'
 import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
 import { featuredProjects, localizeProject } from '../data/projects'
 import { SIZES } from '../lib/media'
@@ -36,6 +37,7 @@ const Home = () => {
   const ctaRef = useRef(null)
   const cueRef = useRef(null)
 
+  useSeo({ ...t.seo.home, path: '' }, [lang])
   useScrollReveal([lang])
 
   /* ----------------------------------------------------------

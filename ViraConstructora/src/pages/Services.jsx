@@ -7,6 +7,7 @@ import ArrowIcon from '../components/ui/ArrowIcon'
 import Isotype from '../components/ui/Isotype'
 import { useLanguage } from '../i18n/language-context'
 import useScrollReveal from '../hooks/useScrollReveal'
+import useSeo from '../hooks/useSeo'
 import { services as allServices, localizeService } from '../data/services'
 import { SIZES } from '../lib/media'
 import './Services.css'
@@ -19,6 +20,7 @@ const Services = () => {
     [lang],
   )
 
+  useSeo({ ...t.seo.services, path: 'servicios' }, [lang])
   useScrollReveal([lang])
 
   return (

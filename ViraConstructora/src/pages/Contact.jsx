@@ -7,6 +7,7 @@ import { assetUrl, posterUrl } from '../lib/media'
 import { getVideoMeta } from '../data/media-manifest'
 import { useLanguage } from '../i18n/language-context'
 import useScrollReveal from '../hooks/useScrollReveal'
+import useSeo from '../hooks/useSeo'
 import './Contact.css'
 
 // 🔥 INICIALIZAR EmailJS con tu Public Key
@@ -32,6 +33,7 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState(null)
 
   const { t, lang } = useLanguage()
+  useSeo({ ...t.seo.contact, path: 'contacto' }, [lang])
   useScrollReveal([lang, step])
 
   const handleLandResponse = (response) => {

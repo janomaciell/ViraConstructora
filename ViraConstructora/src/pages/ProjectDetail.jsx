@@ -6,11 +6,13 @@ import ArrowIcon from '../components/ui/ArrowIcon'
 import Isotype from '../components/ui/Isotype'
 import { useLanguage } from '../i18n/language-context'
 import useScrollReveal from '../hooks/useScrollReveal'
+import useSeo from '../hooks/useSeo'
 import useLockBodyScroll from '../hooks/useLockBodyScroll'
 import { projectsById, localizeProject } from '../data/projects'
 import { imageUrl, SIZES } from '../lib/media'
 import { fillTemplate, whatsappUrl } from '../lib/contact'
-import { canonicalUrl } from '../lib/site'
+import { canonicalUrl, SITE_URL } from '../lib/site'
+import { resumir } from '../lib/seo'
 import './ProjectDetail.css'
 
 const WhatsAppIcon = () => (
@@ -31,6 +33,45 @@ const ProjectDetail = () => {
 
   const gallery = project?.gallery ?? []
   const isOpen = lightboxIndex !== null
+
+  /* Metadatos propios de la ficha: sin esto, las 19 fichas comparten
+     título y canonical con la home y Google no las indexa. */
+  const absoluta = (url = '') =>
+    url.startsWith('http') ? url : `${SITE_URL}/${url.replace(/^\//, '')}`
+
+  useSeo(
+    project
+      ? {
+          title: fillTemplate(t.seo.projectDetail.title, {
+            title: project.title,
+            type: project.type,
+          }),
+          description: resumir(project.description),
+          path: `proyectos/${project.id}`,
+          image: absoluta(imageUrl(project.image || project.gallery?.[0], { width: 1200 })),
+          type: 'article',
+          structuredData: {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: t.nav.projects,
+                item: canonicalUrl('proyectos'),
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: project.title,
+                item: canonicalUrl(`proyectos/${project.id}`),
+              },
+            ],
+          },
+        }
+      : { ...t.seo.notFound, path: `proyectos/${id}` },
+    [id, lang, project],
+  )
 
   useScrollReveal([id, lang])
   useLockBodyScroll(isOpen)

@@ -22,6 +22,38 @@ export const translations = {
       brand: 'VIRA Constructora',
     },
 
+    /* Metadatos para buscadores. No son textos de la página: son el
+       título y la descripción con los que cada URL aparece en Google. */
+    seo: {
+      home: {
+        title: 'VIRA Constructora | Construcción y Desarrollo Inmobiliario en Pinamar | +4 Años de Experiencia',
+        description: 'VIRA Constructora: Especialistas en construcción y desarrollo inmobiliario en Pinamar. 47 viviendas construidas, 4.370 m² desarrollados. Proyectos llave en mano, arquitectura moderna y calidad garantizada.',
+      },
+      projects: {
+        title: 'Proyectos en Pinamar | VIRA Constructora',
+        description: 'Obras de VIRA Constructora en Pinamar y la costa atlántica: viviendas, unidades funcionales y desarrollos en pozo. Proyecto, dirección de obra y construcción.',
+      },
+      services: {
+        title: 'Servicios: arquitectura, dirección y construcción | VIRA Constructora',
+        description: 'Arquitectura y diseño, gestoría de permisos, administración de obra, seguridad y construcción llave en mano en Pinamar. Soluciones integrales de principio a fin.',
+      },
+      about: {
+        title: 'Nosotros | VIRA Constructora en Pinamar',
+        description: 'Equipo interdisciplinario dedicado a la construcción y el desarrollo de viviendas en el partido de Pinamar. +9 años de trayectoria, 47 viviendas y 4.370 m².',
+      },
+      contact: {
+        title: 'Contacto y videollamada | VIRA Constructora',
+        description: 'Agendá una videollamada con VIRA Constructora. Constitución 1386 y Totoras, Pinamar, Buenos Aires. Respondé dos preguntas y elegí tu horario.',
+      },
+      projectDetail: {
+        title: '{title} · {type} en Pinamar | VIRA Constructora',
+      },
+      notFound: {
+        title: 'Proyecto no encontrado | VIRA Constructora',
+        description: 'El proyecto que buscás no está disponible. Mirá todas las obras de VIRA Constructora en Pinamar.',
+      },
+    },
+
     nav: {
       home: 'HOME',
       projects: 'PROYECTOS',
@@ -252,6 +284,37 @@ export const translations = {
       scroll: 'Scroll',
       loading: 'Loading',
       brand: 'VIRA Constructora',
+    },
+
+    /* Search engine metadata, not page copy. */
+    seo: {
+      home: {
+        title: 'VIRA Constructora | Construction and Real Estate Development in Pinamar',
+        description: 'VIRA Constructora: specialists in construction and real estate development in Pinamar. 47 homes built, 4,370 m² developed. Turnkey projects and modern architecture.',
+      },
+      projects: {
+        title: 'Projects in Pinamar | VIRA Constructora',
+        description: 'Work by VIRA Constructora in Pinamar and the Atlantic coast: homes, functional units and off-plan developments. Design, site management and construction.',
+      },
+      services: {
+        title: 'Services: architecture, site management and construction | VIRA Constructora',
+        description: 'Architecture and design, permits, site administration, safety and turnkey construction in Pinamar. End-to-end solutions from start to finish.',
+      },
+      about: {
+        title: 'About us | VIRA Constructora in Pinamar',
+        description: 'An interdisciplinary team dedicated to building and developing homes across the Pinamar district. Over 9 years of experience, 47 homes and 4,370 m².',
+      },
+      contact: {
+        title: 'Contact and video call | VIRA Constructora',
+        description: 'Schedule a video call with VIRA Constructora. Constitución 1386 and Totoras, Pinamar, Buenos Aires. Answer two questions and pick your time slot.',
+      },
+      projectDetail: {
+        title: '{title} · {type} in Pinamar | VIRA Constructora',
+      },
+      notFound: {
+        title: 'Project not found | VIRA Constructora',
+        description: 'The project you are looking for is not available. See all the work by VIRA Constructora in Pinamar.',
+      },
     },
 
     nav: {

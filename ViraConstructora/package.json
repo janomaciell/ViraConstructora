@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/build-sitemap.mjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "r2:upload": "./scripts/upload-media.sh",
-    "r2:check": "node scripts/check-media.mjs"
+    "r2:check": "node scripts/check-media.mjs",
+    "sitemap": "node scripts/build-sitemap.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

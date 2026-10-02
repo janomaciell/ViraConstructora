@@ -6,6 +6,7 @@ import ArrowIcon from '../components/ui/ArrowIcon'
 import WorkGrid from '../components/WorkGrid'
 import { useLanguage } from '../i18n/language-context'
 import useScrollReveal from '../hooks/useScrollReveal'
+import useSeo from '../hooks/useSeo'
 import { projects as allProjects, localizeProject } from '../data/projects'
 import './Projects.css'
 
@@ -19,6 +20,7 @@ const Projects = () => {
     [lang],
   )
 
+  useSeo({ ...t.seo.projects, path: 'proyectos' }, [lang])
   useScrollReveal([lang])
 
   return (

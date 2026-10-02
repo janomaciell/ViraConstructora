@@ -1,6 +1,6 @@
 {
   "framework": "vite",
-  "buildCommand": "vite build && rm -rf dist/img",
+  "buildCommand": "npm run build && rm -rf dist/img",
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "rewrites": [
