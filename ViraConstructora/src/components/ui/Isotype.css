@@ -3,10 +3,11 @@
   width: var(--isotype-size, 24px);
   height: calc(var(--isotype-size, 24px) * 0.807); /* 436 × 352 */
   background-color: currentColor;
-  /* La URL la define main.jsx para que también pueda salir por Cloudflare;
-     el valor de reserva mantiene el isotipo si el script no llegó a correr. */
-  -webkit-mask-image: var(--isotype-url, url('/img/brand/isotipo.png'));
-  mask-image: var(--isotype-url, url('/img/brand/isotipo.png'));
+  /* Se sirve desde el propio sitio a propósito: `mask-image` exige CORS
+     cuando viene de otro dominio, y desde R2 el navegador lo bloquea.
+     Pesa 11 KB y se cachea; el resto de los medios sí sale por Cloudflare. */
+  -webkit-mask-image: url('/img/brand/isotipo.png');
+  mask-image: url('/img/brand/isotipo.png');
   -webkit-mask-size: contain;
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;

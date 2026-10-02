@@ -91,12 +91,15 @@ if (!base) {
   process.exit()
 }
 
-console.log(`\nControlando ${base} ...`)
+/* Sólo `img/` vive en R2. El favicon se sigue sirviendo desde el sitio. */
+const remotos = assets.filter((asset) => asset.startsWith('img/'))
+
+console.log(`\nControlando ${remotos.length} archivos en ${base} ...`)
 const notUploaded = []
 let checked = 0
 
 await Promise.all(
-  assets.map(async (asset) => {
+  remotos.map(async (asset) => {
     const url = `${base}/${asset.split('/').map(encodeURIComponent).join('/')}`
     try {
       const response = await fetch(url, { method: 'HEAD' })

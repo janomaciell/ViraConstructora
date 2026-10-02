@@ -37,7 +37,7 @@ de activarlo, porque cambian.
 ## 2. Puesta en marcha desde el panel de Cloudflare
 
 Son **113 archivos, 70,2 MB, en 18 carpetas**. Para controlar que no falte
-nada, tenés el inventario exacto con `npm run media:check`.
+nada, tenés el inventario exacto con `npm run r2:check`.
 
 ### 2.1 Crear el bucket
 
@@ -60,7 +60,7 @@ ViraConstructora/public/img
 > `ANCLA/01.jpg` y el sitio no las encuentra.
 
 Si el navegador no te deja elegir carpetas, creá primero las 18 carpetas a
-mano (los nombres están en la tabla de `npm run media:check`) y subí los
+mano (los nombres están en la tabla de `npm run r2:check`) y subí los
 archivos de cada una.
 
 ### 2.3 Darle una URL pública
@@ -101,7 +101,7 @@ cambio es reversible borrando la variable.
 ### 2.6 Comprobar que no falte nada
 
 ```bash
-npm run media:check -- https://media.viraconstructora.com
+npm run r2:check -- https://media.viraconstructora.com
 ```
 
 Recorre las 113 referencias del sitio y te dice cuáles no responden.
@@ -115,15 +115,15 @@ Cloudflare → **Rules → Cache Rules**, para `media.viraconstructora.com/*`:
 Los archivos no cambian de nombre, así que si reemplazás una foto hay que
 purgar esa URL.
 
-### Alternativa por consola
-
-Si alguna vez querés automatizarlo:
+### Subida por consola (la vía elegida)
 
 ```bash
-npx wrangler login
-npx wrangler r2 bucket create vira-media
-npm run media:upload
+npx wrangler login     # una sola vez, autoriza por navegador
+npm run r2:upload      # sube los 111 archivos a vira-media
 ```
+
+Sube en paralelo, informa cada archivo y, si alguno falla, lo lista al
+final. Volver a correrlo reintenta: sobrescribe sin problema.
 
 ---
 
@@ -140,6 +140,22 @@ ViraConstructora/public/img
 Hacelo **sólo después** de confirmar que todo responde desde Cloudflare:
 si las variables no están cargadas, el sitio busca las imágenes en
 `/public` y quedarían rotas.
+
+---
+
+## 3 bis. Qué NO sale por Cloudflare, y por qué
+
+Dos archivos se siguen sirviendo desde el propio sitio, a propósito:
+
+| Archivo | Motivo |
+|---|---|
+| `favicon.png` | Los navegadores lo piden a la raíz del dominio. |
+| `img/brand/isotipo.png` | Se usa como `mask-image` en CSS. A diferencia de un `<img>`, **una máscara exige CORS** cuando viene de otro dominio, y el navegador la bloquea. Pesa 11 KB. |
+
+Si algún día querés que el isotipo también salga de R2, hay que cargarle
+al bucket una política de CORS que permita `GET` desde el dominio del
+sitio (**R2 → bucket → Settings → CORS Policy**). No vale la pena por
+11 KB, pero queda anotado.
 
 ---
 

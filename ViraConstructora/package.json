@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "media:upload": "./scripts/upload-media.sh",
-    "media:check": "node scripts/check-media.mjs"
+    "r2:upload": "./scripts/upload-media.sh",
+    "r2:check": "node scripts/check-media.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -28,6 +28,7 @@
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
     "terser": "^5.44.0",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "wrangler": "^4.147.0"
   }
 }
