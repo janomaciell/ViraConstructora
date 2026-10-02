@@ -11,8 +11,10 @@ yarn-error.log*
 *.log
 
 # Las imágenes y los videos se sirven desde Cloudflare R2 (ver docs/MEDIA.md).
-# Quedan en el repo para desarrollo, pero no viajan al deploy: son 70 MB.
-# OJO: esto exige que VITE_MEDIA_BASE_URL esté cargada en TODOS los entornos
-# de Vercel (Production, Preview y Development). Sin esa variable, el sitio
-# busca las imágenes en /img y no están.
+#
+# OJO: este archivo SÓLO lo lee el CLI de Vercel. Con el deploy conectado a
+# GitHub, Vercel clona el repo entero y lo ignora. Lo que de verdad saca las
+# imágenes del sitio publicado es el buildCommand de vercel.json, que borra
+# dist/img después de compilar. Esta línea queda por si algún día se despliega
+# con el CLI.
 public/img
