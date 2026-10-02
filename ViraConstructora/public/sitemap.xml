@@ -9,7 +9,7 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/ANCLA/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/ANCLA/01.jpg</image:loc>
       <image:title>VIRA Constructora - Proyecto ANCLA I</image:title>
       <image:caption>Proyecto ANCLA I - Construcción moderna en Pinamar</image:caption>
     </image:image>
@@ -51,7 +51,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/ANCLA/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/ANCLA/01.jpg</image:loc>
       <image:title>ANCLA I - Proyecto Integral</image:title>
     </image:image>
   </url>
@@ -62,7 +62,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/VULCANO/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/VULCANO/01.jpg</image:loc>
       <image:title>VULCANO I - Desarrollo Moderno</image:title>
     </image:image>
   </url>
@@ -73,7 +73,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/CHAPE/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/CHAPE/01.jpg</image:loc>
       <image:title>CHAPE I - Construcción Premium</image:title>
     </image:image>
   </url>
@@ -84,7 +84,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/DAFNEA/02.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/DAFNEA/02.jpg</image:loc>
       <image:title>DAFNEA I - Arquitectura Contemporánea</image:title>
     </image:image>
   </url>
@@ -95,7 +95,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/DEDALO1/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/DEDALO1/01.jpg</image:loc>
       <image:title>DEDALO I - Diseño Funcional</image:title>
     </image:image>
   </url>
@@ -106,7 +106,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/DEDALO2/05.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/DEDALO2/05.jpg</image:loc>
       <image:title>DEDALO II - Construcción de Calidad</image:title>
     </image:image>
   </url>
@@ -117,7 +117,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/PH-XII/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/PH-XII/01.jpg</image:loc>
       <image:title>POSITIVE HOUSE XII - Sustentabilidad</image:title>
     </image:image>
   </url>
@@ -128,7 +128,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/COODOPIN/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/COODOPIN/01.jpg</image:loc>
       <image:title>BARRIO CODOOPIN - Desarrollo Comunitario</image:title>
     </image:image>
   </url>
@@ -139,7 +139,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/GARZAS/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/GARZAS/01.jpg</image:loc>
       <image:title>GARZAS I - Amplitud y Confort</image:title>
     </image:image>
   </url>
@@ -150,7 +150,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/PROGRESO-Y-BIARRITZ/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/PROGRESO-Y-BIARRITZ/01.jpg</image:loc>
       <image:title>PROGRESO Y BIARRITZ - Desarrollo Multifamiliar</image:title>
     </image:image>
   </url>
@@ -161,7 +161,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/ESPARTILLO/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/ESPARTILLO/01.jpg</image:loc>
       <image:title>ESPARTILLO I - Elegancia Costera</image:title>
     </image:image>
   </url>
@@ -172,7 +172,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/CORBETA-AGRADABLE1/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/CORBETA-AGRADABLE1/01.jpg</image:loc>
       <image:title>CORBETA AGRADABLE I - Diseño Compacto</image:title>
     </image:image>
   </url>
@@ -183,7 +183,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/ZORZAL/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/ZORZAL/01.jpg</image:loc>
       <image:title>ZORZAL I - Arquitectura Contemporánea</image:title>
     </image:image>
   </url>
@@ -194,7 +194,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.viraconstructora.com/img/COLON1/01.jpg</image:loc>
+      <image:loc>https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/COLON1/01.jpg</image:loc>
       <image:title>COLON I - Funcionalidad y Eficiencia</image:title>
     </image:image>
   </url>

@@ -34,7 +34,7 @@
     <meta property="og:url" content="https://www.viraconstructora.com" />
     <meta property="og:site_name" content="VIRA Constructora" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:image" content="https://www.viraconstructora.com/img/ANCLA/01.jpg" />
+    <meta property="og:image" content="https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/ANCLA/01.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="VIRA Constructora - Proyecto ANCLA I en Pinamar" />
@@ -43,7 +43,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="VIRA Constructora | Construcción y Desarrollo Inmobiliario en Pinamar" />
     <meta name="twitter:description" content="Especialistas en construcción y desarrollo inmobiliario en Pinamar. 47 viviendas construidas, 4.370 m² desarrollados." />
-    <meta name="twitter:image" content="https://www.viraconstructora.com/img/ANCLA/01.jpg" />
+    <meta name="twitter:image" content="https://pub-a0da133012af4c53a02e1d7b16015986.r2.dev/img/ANCLA/01.jpg" />
     <meta name="twitter:image:alt" content="VIRA Constructora - Proyecto ANCLA I en Pinamar" />
     
     <!-- Structured Data JSON-LD -->
@@ -116,8 +116,8 @@
     <!-- Favicon: el ISOTIPO de VIRA, no el logotipo completo -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <link rel="icon" type="image/png" sizes="256x256" href="/img/brand/isotipo.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="/img/brand/isotipo-512.png" />
+    <link rel="icon" type="image/png" sizes="256x256" href="/brand/isotipo.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/brand/isotipo-512.png" />
     <link rel="mask-icon" href="/favicon.png" color="#7AA6D0" />
     
     <!-- Tipografía del sistema: ANTON (display) + MONTSERRAT (texto) -->
@@ -183,10 +183,16 @@
           var dark = stored === 'dark' ||
             (stored !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches)
           if (location.pathname === '/') {
+            // Vite reemplaza %VITE_MEDIA_BASE_URL% al compilar. Si la variable
+            // no existe, deja el texto tal cual: por eso se descarta si empieza con %.
+            var media = '%VITE_MEDIA_BASE_URL%'
+            if (media.charAt(0) === '%') media = ''
+            media = media.replace(/\/$/, '')
+
             var preload = document.createElement('link')
             preload.rel = 'preload'
             preload.as = 'image'
-            preload.href = '/img/brand/' + (dark ? 'vira-blanco' : 'vira-color') + '-800.png'
+            preload.href = media + '/img/brand/' + (dark ? 'vira-blanco' : 'vira-color') + '-800.png'
             preload.setAttribute('fetchpriority', 'high')
             document.head.appendChild(preload)
           }

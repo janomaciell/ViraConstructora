@@ -9,3 +9,10 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 *.log
+
+# Las imágenes y los videos se sirven desde Cloudflare R2 (ver docs/MEDIA.md).
+# Quedan en el repo para desarrollo, pero no viajan al deploy: son 70 MB.
+# OJO: esto exige que VITE_MEDIA_BASE_URL esté cargada en TODOS los entornos
+# de Vercel (Production, Preview y Development). Sin esa variable, el sitio
+# busca las imágenes en /img y no están.
+public/img

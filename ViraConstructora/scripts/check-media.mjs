@@ -17,8 +17,6 @@ const PUBLIC = path.join(ROOT, 'public')
 
 /* Assets que no salen de los archivos de datos */
 const BRAND = [
-  'img/brand/isotipo.png',
-  'img/brand/isotipo-512.png',
   'img/brand/vira-color-400.png',
   'img/brand/vira-color-800.png',
   'img/brand/vira-blanco-400.png',
@@ -51,6 +49,19 @@ for (const asset of assets) {
   const file = path.join(PUBLIC, asset)
   if (fs.existsSync(file)) bytes += fs.statSync(file).size
   else missing.push(asset)
+}
+
+/* URLs absolutas incrustadas en index.html y sitemap.xml (og:image,
+   twitter:image y el sitemap de imágenes de Google). Si el dominio de
+   medios cambia, hay que actualizarlas: por eso se controlan acá. */
+const absolutas = new Set()
+for (const archivo of ['index.html', 'public/sitemap.xml']) {
+  const file = path.join(ROOT, archivo)
+  if (!fs.existsSync(file)) continue
+  const texto = fs.readFileSync(file, 'utf8')
+  for (const url of texto.match(/https?:\/\/[^"'<>\s]+\/img\/[^"'<>\s]+/g) || []) {
+    absolutas.add(url)
+  }
 }
 
 const mb = (n) => `${(n / 1024 / 1024).toFixed(1)} MB`
@@ -110,6 +121,17 @@ await Promise.all(
     checked += 1
   }),
 )
+
+/* Las URLs de SEO tienen que vivir en el mismo origen que el resto */
+const seoFuera = [...absolutas].filter((url) => !url.startsWith(base))
+if (seoFuera.length) {
+  console.error(`\nURLs de SEO que NO apuntan a ${base} (${seoFuera.length}):`)
+  seoFuera.slice(0, 5).forEach((url) => console.error(`  ${url}`))
+  console.error('  Están en index.html y public/sitemap.xml')
+  process.exitCode = 1
+} else if (absolutas.size) {
+  console.log(`SEO y redes: ${absolutas.size} URLs apuntan al origen correcto.`)
+}
 
 console.log(`Comprobados: ${checked}`)
 if (notUploaded.length) {
